@@ -1,0 +1,135 @@
+.mo-fire {
+  width: 50px;
+  height: auto;
+  position: absolute;
+  right: -15;
+  top: -25;
+  z-index: 200;
+}
+
+.mo-fire svg {
+  width: 70%;
+  height: auto;
+  position: relative;
+  z-index: 200;
+}
+
+.flame {
+  z-index: 200;
+  -webkit-animation-name: flamefly;
+          animation-name: flamefly;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  opacity: 0;
+  -webkit-transform-origin: 50% 50% 0;
+          transform-origin: 50% 50% 0;
+}
+
+.flame.one {
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+  -webkit-animation-duration: 3s;
+          animation-duration: 3s;
+}
+
+.flame3.two {
+  -webkit-animation-duration: 5s;
+          animation-duration: 5s;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+
+.flame-main {
+  -webkit-animation-name: flameWobble;
+          animation-name: flameWobble;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+.flame-main.one {
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: 2s;
+          animation-delay: 2s;
+}
+
+.flame-main.two {
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+
+.flame-main.three {
+  -webkit-animation-duration: 1.1s;
+          animation-duration: 1.1s;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+
+.flame-main.four {
+  -webkit-animation-duration: 1.2s;
+          animation-duration: 1.2s;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+
+.flame-main.five {
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+
+@-webkit-keyframes flameWobble {
+  50% {
+    -webkit-transform: scale(1, 1.2) translate(0, -20px) rotate(-2deg);
+            transform: scale(1, 1.2) translate(0, -20px) rotate(-2deg);
+  }
+}
+
+@keyframes flameWobble {
+  50% {
+    -webkit-transform: scale(1, 1.2) translate(0, -20px) rotate(-2deg);
+            transform: scale(1, 1.2) translate(0, -20px) rotate(-2deg);
+  }
+}
+
+@-webkit-keyframes flamefly {
+  0% {
+    -webkit-transform: translate(0) rotate(180deg);
+            transform: translate(0) rotate(180deg);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translate(-30px, -200px) rotate(180deg);
+            transform: translate(-30px, -200px) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes flamefly {
+  0% {
+    -webkit-transform: translate(0) rotate(180deg);
+            transform: translate(0) rotate(180deg);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translate(-30px, -200px) rotate(180deg);
+            transform: translate(-30px, -200px) rotate(180deg);
+    opacity: 0;
+  }
+}
+/*# sourceMappingURL=svg_fire.css.map */

@@ -1,0 +1,210 @@
+{% extends '../products/base.html' %}
+
+{% block content %}
+
+<div class="cart__main__title">
+
+    {% include './blocks/space20.html' %}
+    <div class="nice__title2__left">
+        Корзина 
+    </div>
+</div>
+
+
+{% include './blocks/space20.html' %}
+
+<div class="cart__main">
+
+<div class="cart__container">
+    <div class="cart__container__products">
+
+        {% for item in cart.item_set.all  %}
+            {% include './blocks/checkout_item.html' %}
+        {% endfor %}
+        
+    </div>
+
+
+    <div class="cart__container__checkout">
+        <div class="cart__container__checkout__content">
+        <a class="cart__checkout__button"
+        href="{% url 'cart:offer' %}">
+                <span>
+                Перейти к оформлению
+                </span>
+        </a>
+        <span id="checkout_sub_text">
+            Доступные способы доставки и методы оплаты можно выбрать при оформлении заказа
+        </span>
+        <div class="your__cart__block">
+            <span class="your__cart__block__title">
+                Ваша Корзина
+            </span>
+            <span class="your__cart__block__value">
+                Общее кол-во: {{ cart.item_set.count }}
+            </span>
+        </div>
+        <div class="your__cart__block">
+            <span class="your__cart__block__title2">
+                Товары (2)
+            </span>
+            <span class="your__cart__block__value2">
+                {{ cart.get_total }} &#8381;
+            </span>
+        </div>
+        <div class="your__cart__block">
+            <span class="your__cart__block__title2">
+                Скидка
+            </span>
+            <span class="your__cart__block__value3">
+                <span id="total_discount_block">
+                {{ total_discount }}
+                </span>
+                &#8381;
+            </span>
+        </div>
+        <div class="your__cart__block">
+            <span class="your__cart__block__title3">
+                Общая стоимость
+            </span>
+            <span class="your__cart__block__value4">
+                {{ cart.get_total }} &#8381;
+            </span>
+        </div>
+    
+        
+        
+        </div>
+        
+    </div>
+
+</div>
+
+</div>
+
+{% include './blocks/empty_cart.html' %}
+
+<script>
+    checkEmpty()
+    $(".main__site__wrapper__main").addClass("bg1")
+    
+    $(".item_btn_deletefromcart").click(function() {
+        console.log('clicked to delete')
+        var item_id = $(this).attr("value")
+        $.ajax({
+            url: "{% url 'cart:delete_from_cart_ajax' %}",
+            data: {
+                'item_id': item_id
+            },
+            success: function(data) {
+                console.log(data)
+                var current_item = $(".cart__container__products__item#" +
+                item_id)
+                console.log(current_item)
+                $(current_item).remove()
+                updateCartInfo()
+                checkEmpty()
+                updateCartTotal()
+            }
+        });
+    });
+
+    function updateCartInfo() {
+        $.ajax({
+            url: "{% url 'cart:update_cart_info_ajax' %}",
+            data: {
+
+            },
+            success: function(data) {
+                console.log(data)
+                cart_total = data['cart_total']
+                cart_quantity = data['cart_quantity']
+                total_discount = data['total_discount']
+                $(".your__cart__block__value").html(cart_quantity)
+                $(".your__cart__block__value4").html(cart_total)
+                $(".your__cart__block__value2").html(cart_total)
+                $("#total_discount_block").html(total_discount)
+            }
+        })
+    }
+
+    function checkEmpty() {
+        var pr_cont = $(".cart__container__products")
+        var cont_length = pr_cont.children().length
+        if (cont_length == 0) {
+            console.log('container is null')
+            $(".cart__main").addClass("hide")
+            $(".empty__cart__container").addClass("show")
+        }
+    }
+
+    $(".cart__removequ").click(function() {
+        var item_id = $(this).attr("value")
+        //console.log(item_id)
+        $.ajax({
+            url: "{% url 'cart:remove_quantity_ajax' %}",
+            data: {
+                'item_id': item_id,
+            },
+            success: function(data) {
+                var is_removed = data['is_removed']
+                if (is_removed == 'yes') {
+                  var current_item = $(".cart__container__products__item#" +
+                  item_id)
+                  console.log(current_item)
+                  $(current_item).remove()  
+                  updateCartTotal()
+                }
+                else {
+                   var item_quantity = data['item_quantity']
+                   $(".cart__container__products__item__count__main__value#itemqu"+item_id).html(item_quantity)
+                    var has_sale = data['has_sale']
+                    if (has_sale == 'yes') {
+                        var item_price = data['item_price']
+                        console.log(item_price)
+                        var item_sale = data['item_sale']
+                        var item_discount_val = data['item_discount_val']
+                        $(".cart__container__products__item__price__sale#saleval"+item_id).html(item_sale)
+                        $(".cart__price__reg1#reg1price"+item_id).html(item_price)
+                        $(".discount__valueset#discval"+item_id).html(item_discount_val)
+                    } else {
+                        var item_price = data['item_price']
+                        $(".cart__container__products__item__price__sale#regval2"+item_id).html(item_price)
+                    }
+                }
+                checkEmpty()
+                updateCartInfo()
+            }
+        })
+    })
+    $(".item__addqu").click(function() {
+        var item_id = $(this).attr("value")
+        $.ajax({
+            url: "{% url 'cart:add_quantity_ajax' %}",
+            data: {
+                'item_id': item_id,
+            },
+            success: function(data) {
+                var has_sale = data['has_sale']
+                var item_quantity = data['item_quantity']
+                $(".cart__container__products__item__count__main__value#itemqu"+item_id).html(item_quantity)
+                if (has_sale == 'yes') {
+                    var item_price = data['item_price']
+                    var item_sale = data['item_sale']
+                    var item_discount_val = data['item_discount_val']
+                    $(".cart__container__products__item__price__sale#saleval"+item_id).html(item_sale)
+                    $(".cart__price__reg1#reg1price"+item_id).html(item_price)
+                    $(".discount__valueset#discval"+item_id).html(item_discount_val)
+                } else {
+                    var item_price = data['item_price']
+                    $(".cart__container__products__item__price__sale#regval2"+item_id).html(item_price)
+                }
+                updateCartInfo()
+            },
+            
+        });
+    })
+</script>
+
+
+{% endblock content %}

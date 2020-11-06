@@ -1,0 +1,66 @@
+{% load products_extras %}
+<div class="product__item">
+    <div class="product__item__image">
+
+        {% if product.has_sale %}
+        {% include './svg_fire.html' %}
+        <div class="product__item__sale_hint">
+            <span>
+                - {{ product.discount_perc }} %
+            </span>
+        </div>
+        {% endif %}
+
+        <a href="{% url 'products:product' product.id %}">
+        {% modify_imgsrc product.imgsrc as imgsrc %}
+        <img src="{{ imgsrc }}" alt="">
+        </a>
+    </div>
+
+    <div class="product__item__info">
+
+        <div class="product__item__price">
+        
+        {% if product.has_sale %}
+        
+            <span class="product__item__price__sale"> 
+                {{ product.sale_price }} Р
+            </span>
+            <span class="product__item__price__regular">
+                {{ product.price }}
+            </span>
+            {% else %}
+            <span class="product__item__price__regular2"> 
+                {{ product.price }} Р
+            </span>
+        {% endif %}
+        </div>
+        <a class="product__item__name"
+        href="{% url 'products:product' product.id %}">
+            {{ product.name }}
+        </a>
+        <div class="product__item__addcart
+        product__addtocart__global"
+        value="{{ product.id }}">
+        {% is_in_cart product.id cart as in_cart %} 
+            {% if in_cart %}
+            <span class="in__cart__buttonstyle">
+            Удалить с корзины
+            </span>
+            {% else %}
+                <span class="not__incart__buttonstyle">
+                    В корзину
+                </span>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+

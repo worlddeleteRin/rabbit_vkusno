@@ -1,0 +1,72 @@
+{% extends '../products/base.html' %}
+
+{% block content %}
+
+{% include './blocks/space20.html' %}
+
+<div class="nice__title2__left">
+    Избранные товары
+</div>
+
+
+<div class="favorite__main__block">
+
+
+
+{% comment %} {% for item in fav_items.all  %}
+
+{{ item.pr_id }}
+
+{% endfor %}
+{{ fav_items }} {% endcomment %}
+
+{% include './blocks/space20.html' %}
+
+<div class="products__list__wrapper
+favorite_items">
+
+    {% for product in fav_items  %}
+        {% include '../products/blocks/product_single.html' %}
+    {% endfor %}
+
+</div>
+
+
+{% include './blocks/space20.html' %}
+
+
+
+
+{% include './blocks/space20.html' %}
+
+<div class="continue__shopping">
+    <a id="continue__shopping"
+    href="{% url 'products:index' %}">
+        Продолжить покупки
+    </a>
+</div>
+
+</div>
+
+<div class="favorite__empty__block">
+
+{% include './blocks/favorite_empty.html' %}
+
+</div>
+
+
+<script>
+    checkFavoriteEmpty()
+    function checkFavoriteEmpty() {
+        var item = $(".favorite_items").children().length
+
+        if (item ==  0) {
+            $(".favorite__empty__block").addClass("show")
+            $(".favorite__main__block").addClass("hide")
+        }
+    }
+</script>
+
+
+
+{% endblock content %}

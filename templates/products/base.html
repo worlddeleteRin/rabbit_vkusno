@@ -1,0 +1,181 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Fabrik</title>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <script src="{% static 'plugins/jquery.magnific-popup.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'plugins/magnific-popup.css' %}">
+
+    <script src="https://kit.fontawesome.com/bca16a3855.js" crossorigin="anonymous"></script>
+    <link href='https://css.gg/css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'slick/slick.css'%}">
+    <link rel="stylesheet" href="{% static 'slick/slick-theme.css'%}">
+
+    <link rel="stylesheet" href="{% static 'js/owlcarousel/owl.carousel.css'%}">
+    <link rel="stylesheet" href="{% static 'js/owlcarousel/owl.theme.default.css'%}">
+
+
+    
+
+</head>
+<body>
+
+    {% block main_header %}
+    <div class="main__header__block__wrapper">
+
+    <div class="main__header__block">
+        {% include './header.html' %}
+    </div>
+    {% endblock main_header %}
+
+    </div>
+
+    <div class="main__site__wrapper__main">
+
+
+        <div class="main__site__wrapper">
+            {% block content %}
+
+            {% endblock content %}
+             
+        </div>
+
+       
+
+    </div>
+
+    {% include './footer.html' %}
+
+    {% include './blocks/popup_form.html' %}
+
+
+    
+    <script src="{% static 'slick/slick.js' %}"></script>
+
+    <script src="{% static 'js/owlcarousel/owl.carousel.js' %}"></script>
+
+    <script>
+
+window.onscroll = function() {
+  checkStickyHeader()
+}
+
+function checkStickyHeader() {
+  console.log(window.pageYOffset)
+  if (window.pageYOffset > 500) {
+      $(".main__header__block").addClass("sticky")
+      $(".header__second__logo").addClass("hide")
+  } else {
+      $(".main__header__block").removeClass("sticky")
+      $(".header__second__logo").removeClass("hide")
+  }
+}
+
+
+
+$(".main__header__phone__callme").click(function() {
+        current_form = $("#main__popup")
+        showModal(current_form)
+    })
+
+$(".pform__wrap__close").click(function() {
+    closeModal()
+})
+$(".pform__wrap__wrapper").click(function() {
+    closeModal()
+})
+
+
+function updateCartTotal() {
+  $.ajax({
+    url: "{% url 'cart:update_cart_total_ajax' %}",
+    data: {
+      'someinfo': 'someinfo',
+    },
+    success: function(data) {
+      var total = data['cart_total']
+        $(".count__label").html(total)
+    }
+  })
+}
+
+        $(".product__addtocart__global").click(function() {
+            addProductToCart(this)
+            // ajax ends here
+        });
+        
+        function changeButtonCart(in_cart, item) {
+            if (in_cart == 'yes') {
+                console.log(item.children())
+                item.html("<span class='in__cart__buttonstyle'> Удалить с корзины</span>")
+            } else {
+                item.html("<span class='not__incart__buttonstyle'>В корзину</span>")
+            }
+        }
+
+        function addProductToCart(product_block) {
+            current_item = $(product_block)
+            var current_pr_id = $(product_block).attr("value")
+            // ajax start here
+            $.ajax({
+                url: "{% url 'cart:add_item_ajax' %}",
+                data: {
+                    'product_id': current_pr_id,
+                },
+                success: function(data) {
+                    var in_cart = data['in_cart']
+                        changeButtonCart(in_cart, current_item)
+                        updateCartTotal()
+                }
+            });
+        }
+        function addProductToCart2(product_block) {
+            current_item = $(product_block)
+            var current_pr_id = $(product_block).attr("value")
+            // ajax start here
+            $.ajax({
+                url: "{% url 'cart:add_item_ajax' %}",
+                data: {
+                    'product_id': current_pr_id,
+                },
+                success: function(data) {
+                    var in_cart = data['in_cart']
+                    var quantity = data['quantity']
+                    updateCartTotal()
+                        // changeButtonCart(in_cart, current_item)
+                }
+            });
+        }
+        
+        function openMobileMenu() {
+            $(".header__popup__mobile").addClass("show")
+            $(".header__popub__mobile__close").addClass("show")
+            $("body").addClass("hidden")
+        }
+        function closeMobileMenu() {
+            $(".header__popup__mobile").removeClass("show")
+            $(".header__popub__mobile__close").removeClass("show")
+            $("body").removeClass("hidden")
+        }
+        
+        $(".check__block").click(function() {
+            $("#map_loc_block").removeClass("show")
+            $("#map_delivery_block").removeClass("show")
+            $(".check__block").removeClass("active")
+            $(this).addClass('active')
+            map = $(this).attr("value")
+            $(map).addClass("show")
+        })
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<div>
+    {{ current_cat.slug }} <br>
+    {{ current_cat.name }} <br
+</div>
+
+<div>
+    {% for product in products  %}
+        <div>
+        ------------------- <br>
+            {{ product.name }} {{ product.price }} 
+            <br>
+            {% for attr in product.attribute_set.all  %}
+                {{ attr.name }}
+                {% for attritem in attr.attributeitem_set.all  %}
+                   | {{ attritem.name }} | 
+                {% endfor %} <br>
+            {% endfor %}
+            {% comment %} {% for attr in product.attributes.all %}
+                {{ attr.attr.name }}  {{ attr.name }} 
+            {% endfor %} {% endcomment %}
+            {% comment %} {% for attr in product.attributes.all  %}
+                {{ attr.name }} 
+                {% for attr_item in attr.attributeitem_set.all  %}
+                    {{ attr_item.name }} 
+                {% endfor %}  <br>
+            {% endfor %} {% endcomment %}
+        ------------------- <br>
+        </div>
+    {% endfor %}
+</div>

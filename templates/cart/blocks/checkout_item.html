@@ -1,0 +1,97 @@
+{% load products_extras %}
+<div class="cart__container__products__item"
+id="{{ item.id }}">
+            
+    <div class="cart__container__products__item__info__container">
+        {% modify_imgsrc item.imgsrc as imgsrc %}
+        <img class="cart__container__products__item__img"
+    src="{{ imgsrc }}">
+        <div class="cart__container__products__item__info">
+            <div class="cart__container__products__item__info__name">
+                <a href="{% url 'products:product' item.pr_id %}">
+                    {{ item.name }}
+                </a>
+            </div>
+            <div class="cart__container__products__item__info__btns">
+            
+                
+                <div class="cart__container__products__item__btn"
+                id="divide__delete"
+                style="color: #808d9a;">
+                |
+                </div>
+                <div class="cart__container__products__item__btn
+                item__btn__cart item_btn_deletefromcart"
+                id="item_btn_deletefromcart"
+                value="{{ item.id }}">
+                    <span>
+                    Удалить
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="cart__container__products__item__second__container">
+
+    
+    
+    <div class="cart__container__products__item__price">
+
+        {% if item.has_sale %}
+        
+        <div class="cart__container__products__item__price__sale"
+        id="saleval{{item.id}}">
+            {{ item.product_sale_price }} &#8381;
+        </div>
+        <div class="cart__container__products__item__price__regular">
+            <span class="cart__price__reg1"
+            id="reg1price{{item.id}}">
+                {{ item.product_price }} &#8381;
+            </span>
+            <div class="cart__container__products__item__price__regular__disc">
+                Скидка 
+                <span class="discount__valueset"
+                id="discval{{item.id}}">
+                {{ item.discount_val }}
+                </span>
+                 &#8381;
+            </div>
+        </div>
+            {% else %}
+            <div class="cart__container__products__item__price__sale"
+            id="regval2{{item.id}}">
+            {{ item.product_price }} &#8381;
+            </div>
+        {% endif %}
+
+        
+    </div>
+    <div class="cart__container__products__item__count">
+        <div class="cart__container__products__item__count__main">
+        
+            <div class="cart__container__products__item__count__main__btn">
+                <i class="gg-remove-r
+                cart__removequ"
+                value="{{ item.id }}"></i>
+            </div>
+            <div class="cart__container__products__item__count__main__value"
+            id="itemqu{{item.id}}">
+                {{ item.quantity }}
+            </div>
+            <div class="cart__container__products__item__count__main__btn">
+                <i class="gg-add-r item__addqu" 
+                value="{{ item.id }}"></i>
+            </div>
+
+        </div>
+    </div>
+
+
+    </div>
+
+
+
+</div>

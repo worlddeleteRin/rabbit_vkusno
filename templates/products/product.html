@@ -1,0 +1,332 @@
+{% extends './base.html' %}
+{% load static %}
+{% load products_extras %}
+
+{% block content %}
+
+<div class="product__page"> 
+
+    {% modify_imgsrc product.imgsrc as imgsrc %}
+    
+    <div class="product__main__container">
+        <div class="product__main__container__subimages">
+            <img src="{{ imgsrc }}" alt=""
+            class="product__subimages__item">
+        </div>
+        <div class="product__main__container__img">
+            <img src="{{ imgsrc }}" alt=""
+            class="product__mainimage__item">
+        </div>
+        <div class="product__main__container__subimages__mobile">
+            <img src="{{ imgsrc }}" alt=""
+            class="product__subimages__item">
+        </div>
+        <div class="product__main__container__second">
+                <div class="hints__block">
+                    {% if product.has_sale  %}
+                    <div class="sale__block__hint">
+                        <span>
+                            -{{ product.discount_perc }}%
+                        </span>
+                    </div>
+                    {% endif %}
+                    <!-- <div class="popular__block__hint">
+                        <span>
+                            Популярный
+                        </span>
+                    </div> -->
+                </div>
+                    <div class="product__page__name">
+                    <span>
+                        {{ product.name }}
+                    </span>
+                </div>
+                <!-- <div class="product__main__container__second__find">
+                    <span id="find_block">
+                        Нашли дешевле?
+                    </span>
+                </div> -->
+                <div class="product__main__container__second__priceblock">
+                    {% if product.has_sale %}
+                    
+                    <span class="product__main__container__second__sale">
+                        950 &#8381;
+                    </span>
+                    <span class="product__main__container__second__old">
+                        {{ product.price }} &#8381;
+                    </span>
+                    {% else %}
+                        <span class="product__main__container__second__price">
+                        950 &#8381;
+                    </span>
+                    {% endif %}
+                </div>
+                
+                <div class="product__economy">
+                {% if product.has_sale %}
+                    <span>
+                        Экономия 1240 &#8381;
+                    </span>
+                    {% endif %}
+                </div>
+                
+                <!-- <div class="product__sub__item">
+                    <div>
+                    <i class="gg-bell"></i>
+                    <span id="notifprice_block">
+                        Узнать о снижении цены
+                    </span>
+                    </div>
+                </div> -->
+                <div class="product__main__container__second__addcart
+                product__not__in__cart">
+                    <span class="product__page__addcart"
+                    id="product__addcart__button" value="{{ product.id }}">
+                        Добавить в корзину
+                    </span>
+                    <!-- <div class="product__page__favorite">
+                        <i class="far fa-heart"></i>
+                    </div> -->
+                </div>
+                <div class="product__main__container__second__addcart
+                product__in__cart">
+                    <div class="product__page__added">
+                        <div id="product_go_to_cart">
+                        <span class="product__page__added__first">
+                            В корзине 
+                            <span id="quantity_in_cart">
+                                1
+                            </span>
+                             шт.
+                            
+                        </span> <br>
+                        <span class="product__page__added__second"> 
+                            Перейти
+                        </span>
+                        </div>
+                    </div>
+                        <div class="product__page__added__more">
+                            <span id="add_quantity_button"
+                            value="{{ product.id }}">
+                                +1 шт.
+                            </span>
+                        </div>
+                    <!-- <div class="product__page__favorite">
+                        <i class="far fa-heart"></i>
+                    </div> -->
+                </div>
+
+                <div class="product__description__block">
+                    <div class="nice__title1">
+                        Описание
+                    </div>
+                    <div class="product__description__block__desc">
+                        {{ product.description }}
+                    </div>
+                </div>
+
+
+            </div>
+            
+    </div>
+
+    
+
+
+
+<!--     
+    <div class="product__page__features">
+        <div class="nice__title1">
+            Характеристики
+        </div>
+        <div class="product__page__features__block">
+            <div class="product__page__features__item">
+                <div class="product__page__features__item__first">
+                    <span>
+                        Гарантия
+                    </span>
+                </div>
+                <div class="product__page__features__item__second">
+                    <span>
+                        1 год
+                    </span>
+                </div>
+            </div>
+            <div class="product__page__features__item">
+                <div class="product__page__features__item__first">
+                    <span>
+                        Материал раковины:
+                    </span>
+                </div>
+                <div class="product__page__features__item__second">
+                    <span>
+                        Керамика
+                    </span>
+                </div>
+            </div>
+            <div class="product__page__features__item">
+                <div class="product__page__features__item__first">
+                    <span>
+                        Какой-то длинный аттрибут
+                    </span>
+                </div>
+                <div class="product__page__features__item__second">
+                    <span>
+                        какое-то длинное значение
+                    </span>
+                </div>
+            </div>
+            <div class="product__page__features__item">
+                <div class="product__page__features__item__first">
+                    <span>
+                        Какой-то длинный аттрибут
+                    </span>
+                </div>
+                <div class="product__page__features__item__second">
+                    <span>
+                        какое-то длинное значение
+                    </span>
+                </div>
+            </div>
+            <div class="product__page__features__item">
+                <div class="product__page__features__item__first">
+                    <span>
+                        Какой-то длинный аттрибут
+                    </span>
+                </div>
+                <div class="product__page__features__item__second">
+                    <span>
+                        какое-то длинное значение
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include './blocks/popup_price.html' %}
+    {% include './blocks/popup_find_price.html' %} -->
+    
+</div>
+
+
+
+
+
+<script>
+function checkProductInCart(product_id) {
+            $.ajax({
+                url: "{% url 'cart:check_in_cart_ajax' %}",
+                data: {
+                    'product_id': product_id,
+                },
+                success: function(data) {
+                    var in_cart = data['in_cart']
+                    console.log(in_cart)
+                    if (in_cart == 'yes') {
+                        var quantity = data['quantity']
+                        showInCart()
+                        $("#quantity_in_cart").html(quantity)
+                    }
+                }
+            })
+        }
+    checkProductInCart($(product__addcart__button).attr("value"))
+
+    var images_items = []
+    
+    var all_images = $(".product__main__container__subimages").children()
+    
+    for(i = 0; i < all_images.length; i++) {
+        console.log($(all_images[i]).attr("src"))
+        current_src = $(all_images[i]).attr("src")
+        console.log('current src is', current_src)
+        var dict_images = {
+            src: current_src
+        }
+        console.log('dict images is ', dict_images)
+        images_items.push(dict_images)
+    }
+    console.log(images_items)
+    $('.product__subimages__item').click(function() {
+        $(".product__subimages__item").removeClass("active")
+        $(this).addClass("active")
+        //window.alert($(this).attr("src"))
+        var current_src = $(this).attr("src")
+        $(".product__mainimage__item").attr("src", current_src)
+    }) 
+
+    $(".product__mainimage__item").click(function() {
+        // var all_images = $(".product__main__container__subimages").children()
+        // console.log(all_images.length)
+        // var dict_images = {}
+        // for(i = 0; i < all_images.length; i++) {
+
+        //     console.log($(all_images[i]).attr("src"))
+        //     current_src = $(all_images[i]).attr("src")
+        //     dict_images.src = current_src
+        // }
+        // console.log(dict_images)
+    })
+
+   
+
+    $('.product__mainimage__item').magnificPopup({
+    
+    items: images_items,
+    gallery: {
+      enabled: true
+    },
+    type: 'image'
+    // other options
+    });
+
+
+    $("#notifprice_block").click(function() {
+        current_form = $("#price_modal")
+        showModal(current_form)
+    })
+    $("#find_block").click(function() {
+        current_form = $("#find_price_modal")
+        showModal(current_form)
+    })
+
+    $(".pform__wrap__close").click(function() {
+        closeModal()
+    })
+    $(".pform__wrap__wrapper").click(function() {
+        closeModal()
+    })
+
+    $("#product__addcart__button").click(function() {
+        addProductToCart2(this)
+        showInCart()
+    })
+
+    function showInCart() {
+        $(".product__not__in__cart").addClass("hide")
+        $(".product__in__cart").addClass("show")
+    }
+
+    $("#add_quantity_button").click(function() {
+        var item_id = $(this).attr("value")
+        $.ajax({
+            url: "{% url 'cart:add_quantity_ajax' %}",
+            data: {
+                'from_prpage': 'yes',
+                'item_id': item_id,
+            },
+            success: function(data) {
+                console.log(data)
+                checkProductInCart(item_id)
+            }
+        });
+    })
+
+    $('#product_go_to_cart').click(function() {
+        window.location = "{% url 'cart:index' %}"
+    })
+
+    
+
+</script>
+
+{% endblock content %}

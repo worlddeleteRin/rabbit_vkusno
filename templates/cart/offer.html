@@ -1,0 +1,244 @@
+{% extends '../products/base.html' %}
+{% load products_extras %}
+
+{% block content %}
+
+<div class="cart__main__title">
+
+    {% include './blocks/space20.html' %}
+    <div class="nice__title2__left">
+        Оформление заказа
+    </div>
+
+</div>
+
+<div class="offer__page__container">
+    <div class="offer__page__block1">
+        <div class="offer__page__block1__sub">
+            <div class="offer__page__block1__sub__title">
+                <span>
+                    Контактные данные
+                </span>
+            </div>
+            <div class="offer__page__block1__sub__content">
+
+                <div class="offer__page__block1__sub__content__form">
+                
+                <input type="text"
+                placeholder="Имя и Фамилия"
+                autocomplete="off"
+                class="cart__input"
+                name="person_name">
+                <input type="text"
+                placeholder="Телефон"
+                autocomplete="off"
+                class="cart__input"
+                name="person_phone">
+                <!-- <input type="text"
+                placeholder="Почта"
+                autocomplete="off"
+                class="cart__input"> -->
+                </div>
+
+            </div>
+
+
+            <div class="offer__page__block1__sub__title">
+                <span>
+                    Способ доставки
+                </span>
+            </div>
+
+            <div class="delivery__block__main">
+                <div class="delivery__block__main__card
+                delivery__method"
+                value="курьер"
+                data-toogle="#cart_input_cura">
+                    <span>
+                        Курьером 
+                    </span>
+                </div>
+                <div class="delivery__block__main__card
+                delivery__method"
+                value="самовывоз"
+                data-toogle="#cart_input_own">
+                    <span>
+                        Самовывоз 
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="delivery__subinfo__container">
+
+            <input type="text"
+                placeholder="Адрес доставки (улица, дом, квартира)"
+                autocomplete="off"
+                class="cart__input"
+                id="cart_input_cura"
+                name="delivery_address">
+            <span
+            id="cart_input_own">
+                Адрес самовывоза: г. Ялта, Кастрополь, Кипарисная улица, 1к15 
+            </span>
+            </div>
+
+
+            <div class="offer__page__block1__sub__title">
+                <span>
+                    Способ оплаты
+                </span>
+            </div>
+
+            <div class="delivery__block__main">
+                <div class="delivery__block__main__card
+                payment__method"
+                value="наличные">
+                    <span>
+                        Наличными 
+                    </span>
+                </div>
+                <div class="delivery__block__main__card
+                payment__method"
+                value="безнал">
+                    <span>
+                        Безналичный расчет
+                    </span>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="offer__page__block2">
+        <div class="offer__page__block2__content">
+            <div class="offer__page__block2__content__item">
+                <div class="offer__page__block2__content__item__first">
+                    <span class="your__cart__block__title">
+                        Ваш заказ
+                    </span>
+                </div>
+                <div class="offer__page__block2__content__item__second">
+                    <a class="offer__cart__back"
+                    href="{% url 'cart:index' %}">
+                        Редактировать
+                    </a>
+                </div>
+            </div>
+
+            {% for item in cart.item_set.all  %}
+
+            <div class="offer__page__block2__content__item">
+
+                <div class="offer__page__block2__content__item__first">
+                
+                    <div class="offer__page__block2__content__item__prinfo">
+                        {% modify_imgsrc item.imgsrc as imgsrc %}
+                        <img src="{{ imgsrc }}" alt="">
+                        <div class="offer__page__block2__content__item__prinfo__second">
+                            <a class="offer__page__block2__content__item__prinfo__second__name"
+                            href="{% url 'products:product' item.pr_id %}">
+                                {{ item.name }}
+                            </a>
+                            <span class="offer__page__block2__content__item__prinfo__second__name">
+                                {{ item.quantity }} шт.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="offer__page__block2__content__item__second">
+                    <span>
+                        {{ item.price }}
+                    </span>
+                </div>
+
+            </div>
+
+            {% endfor %}
+<!-- 
+        <div class="offer__page__block2__content__item">
+            <div class="offer__page__block2__content__item__first">
+                <span class="your__cart__block__title2">
+                    Баллов за покупку
+                </span>
+            </div>
+            <div class="offer__page__block2__content__item__second">
+                <span class="your__cart__block__value3">
+                    +581
+                </span>
+            </div>
+        </div> -->
+        {% include './blocks/space20.html' %}
+        <div class="offer__page__block2__content__item">
+            <div class="offer__page__block2__content__item__first">
+                <span class="your__cart__block__title3">
+                    Итого
+                </span>
+            </div>
+            <div class="offer__page__block2__content__item__second">
+                <span class="your__cart__block__value4">
+                    {{ cart.get_total }} Р
+                </span>
+            </div>
+        </div>
+
+        <div class="">
+            <a class="cart__checkout__button">
+                <span>
+                    Разместить заказ
+                </span>
+            </a>
+        </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(".main__site__wrapper__main").addClass("bg1")
+
+    $('.delivery__method').click(function() {
+        setDeliveryActive(this)
+    })
+
+    $(".payment__method").click(function() {
+        setPaymentActive(this)
+    })
+
+    $(".cart__checkout__button").click(function() {
+        var name = $("input[name='person_name']").val()
+        var phone = $("input[name='person_phone']").val()
+        var delivery = $(".delivery__method.active").attr("value")
+        var payment = $(".payment__method.active").attr("value")
+        console.log(delivery)
+        if (delivery == 'courier') {
+            var address = $("input[name='delivery_address']").val()
+        } else {
+            var address = 'Самовывоз'
+        }
+        
+        
+        $.ajax({
+            url: "{% url 'cart:create_order_ajax' %}",
+            data: {
+                'name': name,
+                'phone': phone,
+                'delivery': delivery,
+                'address': address,
+                'payment': payment,
+            },
+            success: function(data) {
+                created = data['order_created']
+                if (created == 'yes') {
+                    window.location = "{% url 'cart:order_created' %}"
+                }
+            }
+        })
+        
+    })
+
+</script>
+
+{% endblock content %}

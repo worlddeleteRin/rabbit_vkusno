@@ -1,0 +1,115 @@
+.main__footer {
+  background-color: #fa5523;
+  margin-top: 20px;
+}
+
+.footer__container {
+  max-width: 1000px;
+  margin: 0px auto;
+  padding: 32 30 0 30;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  color: white;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.footer__container__block {
+  display: block;
+  margin: 0 10 30 0;
+}
+
+.footer__container__block__title {
+  margin: 20 0;
+  text-transform: uppercase;
+  font-size: 22px;
+  font-family: "gpro-text-light";
+}
+
+.footer__container__block__menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.footer__container__block__menu a {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: white;
+  font-family: "gpro-text-light";
+  font-weight: 1200;
+  margin: 5 0;
+}
+
+.footer__container__block__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 5 0;
+}
+
+.footer__container__block__info i {
+  color: white;
+  font-size: 20px;
+}
+
+.footer__container__block__info__tel {
+  text-decoration: none;
+  color: white;
+  font-size: 22px;
+  margin: 0 10;
+}
+
+.footer__container__block__info span {
+  color: white;
+  font-size: 18px;
+  margin: 0 10;
+  font-family: "gpro-text-light";
+}
+
+.footer__container__block__info__mail {
+  color: white;
+  text-decoration: none;
+  margin: 0 10;
+  font-family: "gpro-text-light";
+}
+
+.footer__container__block__socials {
+  text-align: center;
+}
+
+.footer__container__block__social {
+  color: white;
+  border-radius: 50px;
+  font-size: 25px;
+  text-decoration: none;
+}
+
+.partner__img {
+  width: 200px;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media (max-width: 864px) {
+  .footer__container {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .footer__container__block__title {
+    text-align: center;
+  }
+}
+/*# sourceMappingURL=footer.css.map */

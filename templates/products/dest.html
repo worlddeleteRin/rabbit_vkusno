@@ -1,0 +1,20 @@
+<div>
+    {{ current_cat.slug }} <br>
+    {{ current_cat.name }} <br>
+    {{ current_dest }}
+</div>
+
+<div>
+    {% for product in products  %}
+        <div>
+        ------------------- <br>
+            {{ product.name }} {{ product.price }} <br>
+            {% for dest in product.destination.all  %}
+                <span style="color: green;">
+                    {{ dest.name }}
+                </span>
+            {% endfor %}
+        ------------------- <br>
+        </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,26 @@
+{% extends '../products/base.html' %}
+
+{% block content %}
+    <div class="order__created__container">
+        <i class="gg-check created__check">
+        </i>
+        <div class="order__created__container__title">
+            Ваш заказ размещен!
+        </div>
+        <div class="order__created__container__subtitle">
+            В ближайшее время с вами свяжется менеджер.
+        </div>
+        <div class="order__created__container__link">
+            <a href="{% url 'products:index' %}">
+                <span class="order__created__container__button">
+                    Продолжить покупки
+                </span>
+            </a>
+            <!-- <a href="#">
+                <span class="order__created__container__button">
+                    Личный кабинет
+                </span>
+            </a> -->
+        </div>
+    </div>
+{% endblock content %}

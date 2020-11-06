@@ -1,0 +1,86 @@
+{% load static %}
+<div class="main__footer">
+    <div class="footer__container">
+        <div class="footer__container__block">
+            <div class="footer__container__block__title">
+                меню
+            </div>
+            <div class="footer__container__block__menu">
+                <a
+            href="{% url 'products:index' %}#delivery__menu__title"
+            class="">
+                Меню доставки
+            </a>
+            <a href="{% url 'products:stock' %}">
+                Акции
+            </a>
+            <a
+            href="{% url 'products:index' %}#delivery_info_main">
+                Доставка и оплата
+            </a>
+            <a
+            href="{% url 'products:index' %}#contact_info_main">
+                Контакты
+            </a>
+            </div>
+        </div>
+        <!-- contact block -->
+        <div class="footer__container__block">
+            <div class="footer__container__block__title">
+                сделать заказ
+            </div>
+            <div class="footer__container__block__info">
+                <i class="fa fa-phone-alt"></i>
+                <a href="tel:+79781151415"
+                class="footer__container__block__info__tel">
+                    +7(978) 116-14-15
+                </a>
+            </div>
+            <div class="footer__container__block__info">
+                <i class="fa fa-clock"></i>
+                <span>
+                    пн-пт: 12:00 - 00:00
+                </span>
+            </div>
+            <div class="footer__container__block__info">
+                <i class="fa fa-clock"></i>
+                <span>
+                    сб-вс: 11:00 – 00:00
+                </span>
+            </div>
+            <div class="footer__container__block__info">
+                <i class="fa fa-envelope"></i>
+                <a href="mailto:worlddelete0@yandex.ru"
+                class="footer__container__block__info__mail">
+                    Написать руководителю
+                </a>
+            </div>
+        </div>
+        <!-- end contact block -->
+        <!-- social block -->
+        <div class="footer__container__block
+        footer__container__block__socials">
+            <div class="footer__container__block__title">
+                мы в соцсетях
+            </div>
+            <a class="footer__container__block__social"
+            href="#">
+                <i class="fa fa-vk"></i>
+            </a>
+            <a class="footer__container__block__social"
+            href="#">
+                <i class="fa fa-instagram"></i>
+            </a>
+        </div>
+        <!-- end social block -->
+        <!-- partner block -->
+        <div class="footer__container__block">
+            <div class="footer__container__block__title">
+                Наши партнеры
+            </div>
+            <img src="{% static 'images/partners.jpeg' %}" alt=""
+            class="partner__img">
+        </div>
+        <!-- end partner block -->
+    </div>
+</div>

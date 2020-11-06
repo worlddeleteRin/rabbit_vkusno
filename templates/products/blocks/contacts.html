@@ -1,0 +1,49 @@
+{% load static %}
+    <div class="cart__main__title">
+
+        {% include './space20.html' %}
+        <div class="nice__title__center3"
+        id="contact_info_main">
+            <span>
+            Контакты
+            </span>
+        </div>
+    </div>
+
+<div class="contact__container">
+    <div class="contact__container__title">
+        Сделать заказ вы всегда можете по нашему номеру телефона:
+        <div class="contact__container__phone">
+            <a href="tel:+79781161415">
+            +7(978) 116-14-15
+            </a>
+        </div>
+    </div>
+    
+        {% include './space20.html' %}
+</div>
+
+<div class="contact__map">
+    <div class="check__blocks">
+        <div class="check__block active"
+        value="#map_loc_block">
+            <span>
+            Адрес доставки
+            </span>
+        </div>
+        <div class="check__block"
+        value="#map_delivery_block">
+            <span>
+            Зона доставки
+            </span>
+        </div>
+    </div>
+
+    {% include './space20.html' %}
+    <div id="map_loc_block" class="show">
+        <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps?utm_medium=mapframe&utm_source=maps&scroll=false" style="color:#eee;font-size:12px;position:absolute;top:0px;"></a><a href="https://yandex.ru/maps/977/republic-of-crimea/house/kiparisnaya_ulitsa_1k15/Z0oYfg5nTUQCQFpufXhxdX5mYA==/?ll=33.897728%2C44.403853&utm_medium=mapframe&utm_source=maps&z=16.89" style="color:#eee;font-size:12px;position:absolute;top:14px;"></a><iframe src="https://yandex.ru/map-widget/v1/-/CCUAIHXcxD" width="100%" height="450" frameborder="0" allowfullscreen="false" style="position:relative;"></iframe></div>
+    </div>
+    <div id="map_delivery_block">
+        <img src="{% static 'images/map_cover.png' %}" alt="">
+    </div>
+</div>  

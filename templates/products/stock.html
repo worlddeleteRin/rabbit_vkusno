@@ -1,0 +1,37 @@
+{% extends './base.html' %}
+{% block content %}
+    {% if stocks %}
+    <div class="stock__cards">
+        {% for stock in stocks  %}
+            {% include './blocks/stock_card.html' %}
+        {% endfor %}
+    </div>
+    {% else %}
+        {% include './blocks/space20.html' %}
+        <div class="empty__cart__container show">
+
+        <div class="favorite__empty"
+        id="cart_empty_block">
+        {% include './blocks/space20.html' %}
+        {% include './blocks/space20.html' %}
+            <span>
+                На данный момент акций нет
+            </span>
+            <p></p>
+            {% comment %} Добавьте товар, чтобы он здесь отобразился. {% endcomment %}
+            {% include './blocks/space20.html' %}
+            {% include './blocks/space20.html' %}
+            <div class="continue__shopping">
+                <a id="continue__shopping"
+                href="{% url 'products:index' %}">
+                    Продолжить покупки
+                </a>
+            </div>
+            {% include './blocks/space20.html' %}
+            {% include './blocks/space20.html' %}
+            {% include './blocks/space20.html' %}
+        </div>
+
+        </div>
+    {% endif %}
+{% endblock content %}

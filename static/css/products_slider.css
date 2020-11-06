@@ -1,0 +1,33 @@
+.products__slider__wrapper {
+  position: relative;
+  max-height: 440px;
+}
+
+.products__slider__main {
+  height: 430px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.prev_pr {
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  transform: scale(1.3);
+}
+
+.next_pr {
+  cursor: pointer;
+  right: 0;
+  position: absolute;
+  top: 50%;
+  transform: scale(1.3);
+}
+
+.main_slider_arrow2 {
+  color: #fa5523;
+}

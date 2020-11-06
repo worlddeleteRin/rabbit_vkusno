@@ -1,0 +1,23 @@
+<div class="empty__cart__container">
+
+<div class="favorite__empty"
+id="cart_empty_block">
+    <span>
+        Товаров в корзине не найдено. 
+    </span>
+    <p></p>
+    Добавьте товар, чтобы он здесь отобразился.
+    {% include './space20.html' %}
+    {% include './space20.html' %}
+    <div class="continue__shopping">
+        <a id="continue__shopping"
+        href="{% url 'products:index' %}">
+            Продолжить покупки
+        </a>
+    </div>
+    {% include './space20.html' %}
+    {% include './space20.html' %}
+    {% include './space20.html' %}
+</div>
+
+</div>
