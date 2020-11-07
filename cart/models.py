@@ -21,7 +21,10 @@ class Cart(models.Model):
     def get_total(self):
         total = 0
         for item in self.item_set.all():
-            total += item.price * item.quantity
+            if item.has_sale():
+                total += item.sale_price * item.quantity
+            else:
+                total += item.price * item.quantity
         return total
     def items_in_cart(self):
         return len(self.item_set.all())
