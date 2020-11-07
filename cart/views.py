@@ -9,6 +9,10 @@ from django.core.files.storage import default_storage
 from food_fabrik.settings import * 
 from products.models import * 
 
+from django.core.mail import send_mail
+from django.conf import settings
+from django.core import serializers
+
 
 
 def get_session_key(request):
@@ -261,12 +265,32 @@ def create_order_ajax(request):
         payment = payment,
     )
     new_order.save()
+    cart_items_mail = []
+    order_price_mail = 0
+
     for item in cart.item_set.all():
         new_order.item_set.add(item)
         cart.item_set.remove(item)
+        if item.has_sale():
+            price = item.sale_price
+        else:
+            price = item.price
+        order_price_mail += price
+        cart_items_mail.append([item.name, item.quantity, price])
+
+    send_mail(
+    'Новый заказ на сайте!',
+    'Имя: {} .Номер: {} '.format(name, phone) + 
+    str(cart_items_mail) + ' Сумма заказа: {}'.format(order_price_mail) +
+    ' Адрес доставки: {}'.format(address) +
+    ' Способ доставки: {}'.format(delivery) + 
+    ' Способ оплаты: {}'.format(payment), 
+    settings.EMAIL_HOST_USER,
+    ['worlddelete0@mail.ru'],
+    )
 
     return JsonResponse({
-        'order_created': 'yes'
+        'order_created': 'yes',
     }, status = 200)
 
 

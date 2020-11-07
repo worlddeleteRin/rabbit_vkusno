@@ -158,6 +158,19 @@
     justify-content: center;
     justify-items: center;
 }
+.error__message {
+    display: none;
+    margin: 10 0;
+    span {
+        border-radius: 7px;
+        color: white;
+        background-color: red;
+        padding: 5 10;
+    }
+}
+.error__message.show {
+    display: flex;  
+}
 
 
 body {

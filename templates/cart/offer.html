@@ -21,11 +21,15 @@
                 </span>
             </div>
             <div class="offer__page__block1__sub__content">
-
+                <div class="error__message"
+                id="error_name_phone">
+                    <span>
+                    Введите ваше имя и телефон
+                    </span>
+                </div>
                 <div class="offer__page__block1__sub__content__form">
-                
                 <input type="text"
-                placeholder="Имя и Фамилия"
+                placeholder="Имя"
                 autocomplete="off"
                 class="cart__input"
                 name="person_name">
@@ -48,7 +52,12 @@
                     Способ доставки
                 </span>
             </div>
-
+            <div class="error__message"
+                id="error_delivery">
+                    <span>
+                    Выберите способ доставки
+                    </span>
+                </div>
             <div class="delivery__block__main">
                 <div class="delivery__block__main__card
                 delivery__method"
@@ -89,6 +98,12 @@
                     Способ оплаты
                 </span>
             </div>
+            <div class="error__message"
+                id="error_payment">
+                    <span>
+                    Выберите способ оплаты
+                    </span>
+                </div>
 
             <div class="delivery__block__main">
                 <div class="delivery__block__main__card
@@ -208,18 +223,56 @@
     })
 
     $(".cart__checkout__button").click(function() {
+        $('#error_name_phone').removeClass("show")
+        $('#error_delivery').removeClass("show")
+        $('#error_payment').removeClass("show")
         var name = $("input[name='person_name']").val()
         var phone = $("input[name='person_phone']").val()
         var delivery = $(".delivery__method.active").attr("value")
         var payment = $(".payment__method.active").attr("value")
         console.log(delivery)
-        if (delivery == 'courier') {
+        if (delivery == 'курьер') {
             var address = $("input[name='delivery_address']").val()
         } else {
             var address = 'Самовывоз'
         }
-        
-        
+
+        var error_id
+        var can_make_order = 'yes'
+        if (name.length == 0) {
+            $('#error_name_phone').addClass("show")
+            error_id = '#error_name_phone'
+            can_make_order = 'no'
+        }
+        if (phone.length == 0) {
+            $('#error_name_phone').addClass("show")
+            error_id = '#error_name_phone'
+            can_make_order = 'no'
+        }
+        if (delivery === undefined) {
+            $('#error_delivery').addClass("show")
+            error_id = '#error_delivery'
+            can_make_order = 'no'
+        }
+        if (address.length == 0) {
+            $('#error_delivery').addClass("show")
+            error_id = '#error_delivery'
+            can_make_order = 'no'
+        }
+        if (payment === undefined) {
+            $('#error_payment').addClass("show")
+            error_id = '#error_payment'
+            can_make_order = 'no'
+        }
+        if (error_id != undefined) {
+        $([document.documentElement, document.body]).animate({
+        scrollTop: $(error_id).offset().top - 100
+    }, 1000);
+        }
+
+
+        if (can_make_order == 'yes') {
+
         $.ajax({
             url: "{% url 'cart:create_order_ajax' %}",
             data: {
@@ -235,7 +288,9 @@
                     window.location = "{% url 'cart:order_created' %}"
                 }
             }
-        })
+        });
+
+        }
         
     })
 

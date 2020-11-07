@@ -119,6 +119,16 @@ USE_L10N = True
 USE_TZ = True
 
 
+
+# mail settings
+
+
+
+
+
+# end mail settings
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
@@ -127,4 +137,22 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 VENV_PATH = os.path.dirname(BASE_DIR)
 STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
+
+
+# EMAIL_HOST = 'smtp.yandex.ru'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = "worlddelete0@yandex.ru"
+# EMAIL_HOST_PASSWORD = "Worldhack0"
+# EMAIL_USE_SSL = True
+
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = "worlddelete0@mail.ru"
+EMAIL_HOST_PASSWORD = "Worldhack0Rin"
+EMAIL_USE_TLS = True
+
+
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
