@@ -1,11 +1,11 @@
 <!-- {% include './blocks/h_first.html' %} -->
-
+{% load static %}
 
 
 <div class="main__header__second__mobile__logo">
     <a class="header__second__logo mobile__logo"
     href="{% url 'products:index' %}">
-        <img src="https://placehold.it/250x100" alt="">
+        <img src="{% static 'images/logo1.png' %}" alt="">
     </a>
 
     <!-- <div class="header__second__search">
@@ -26,7 +26,7 @@
 <div class="main__header__second">
     <a class="header__second__logo logo__big"
     href="{% url 'products:index' %}">
-        <img src="https://placehold.it/250x100" alt="">
+        <img src="{% static 'images/logo1.png' %}" alt="">
     </a>
 
     <div class="header__second__catalog">

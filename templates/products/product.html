@@ -50,7 +50,7 @@
                     {% if product.has_sale %}
                     
                     <span class="product__main__container__second__sale">
-                        950 &#8381;
+                        {{ product.sale_price }} &#8381;
                     </span>
                     <span class="product__main__container__second__old">
                         {{ product.price }} &#8381;
@@ -65,7 +65,7 @@
                 <div class="product__economy">
                 {% if product.has_sale %}
                     <span>
-                        Экономия 1240 &#8381;
+                        Экономия {{ product.discount_val }} &#8381;
                     </span>
                     {% endif %}
                 </div>
