@@ -22,10 +22,6 @@
   text-align: center;
   position: relative;
   margin: 0px auto;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  display: flex;
   min-height: 235px;
   height: 235px;
   max-width: 300px;
@@ -33,7 +29,7 @@
 .product__item__image img {
   object-fit: contain;
   overflow: hidden;
-  height: 90%;
+  height: 100%;
   width: 90%;
 }
 .product__item__price {

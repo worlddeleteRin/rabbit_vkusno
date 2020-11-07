@@ -34,10 +34,10 @@
         text-align: center;
         position: relative;
         margin: 0px auto;
-        align-items: center;
-        align-content: center;
-        justify-content: center;
-        display: flex;
+        // align-items: center;
+        // align-content: center;
+        // justify-content: center;
+        // display: flex;
         // border: 1px solid red;
         min-height: 235px;
         height: 235px;
@@ -45,7 +45,7 @@
         img {
             object-fit: contain;
             overflow: hidden;
-            height: 90%;
+            height: 100%;
             width: 90%;
         }
     }
