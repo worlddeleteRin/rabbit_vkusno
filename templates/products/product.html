@@ -116,6 +116,8 @@
                     </div> -->
                 </div>
 
+                {% if product.description != 'nan' %}
+
                 <div class="product__description__block">
                     <div class="nice__title1">
                         Описание
@@ -124,6 +126,8 @@
                         {{ product.description }}
                     </div>
                 </div>
+
+                {% endif %}
 
 
             </div>
