@@ -2177,10 +2177,6 @@ body.hidden {
     display: flex;
   }
 
-  .main__header__second {
-    border-bottom: 1px solid whitesmoke;
-  }
-
   .logo__big {
     display: none;
   }
