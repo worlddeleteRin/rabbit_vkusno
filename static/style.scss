@@ -237,7 +237,7 @@ body.hidden {
     width: 96%;
     top: 0;
     position: fixed;
-    height: 60px;
+    height: 70px;
     min-height: 50px;
     box-shadow: 0px 10px 21px -17px rgba(0,0,0,0.75);
 }
@@ -533,7 +533,7 @@ body.hidden {
         display: flex;
     }
     .main__header__second {
-        padding: 4px 5px 10px 0px;
+        // padding: 4px 5px 10px 0px;
         border-bottom: 1px solid whitesmoke;
     }
     .logo__big {
