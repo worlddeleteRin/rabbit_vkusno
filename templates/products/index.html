@@ -12,8 +12,7 @@
 
    {% include './blocks/categories.html' %}
 
-
-   {% comment %} <div class="hot__container">
+      {% comment %} <div class="hot__container">
       <div class="cart__main__title">
 
          {% include './blocks/space20.html' %}
@@ -32,10 +31,10 @@
       {% endfor %}
       </div>
 
-   </div>
+   </div> {% endcomment %}
 
 
-   {% include './blocks/space20.html' %} {% endcomment %}
+   {% comment %} {% include './blocks/space20.html' %}  {% endcomment %}
 
    {% for category in categories %}
    <div class="cart__main__title">

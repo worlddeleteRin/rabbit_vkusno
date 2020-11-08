@@ -286,7 +286,7 @@ def create_order_ajax(request):
     ' Способ доставки: {}'.format(delivery) + 
     ' Способ оплаты: {}'.format(payment), 
     settings.EMAIL_HOST_USER,
-    ['worlddelete0@mail.ru', 'fudfabrik@gmail.com' ],
+    ['worlddelete0@mail.ru'],
     # 'fudfabrik@gmail.com'
     )
 
