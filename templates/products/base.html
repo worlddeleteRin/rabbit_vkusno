@@ -10,7 +10,11 @@
     <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
 
-    <script src="{% static 'plugins/jquery.magnific-popup.js' %}"></script>
+    <script src="{% static 'js/wayp/noframework.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/wayp/sticky.min.js' %}"></script>
+
+
+
     <link rel="stylesheet" href="{% static 'plugins/magnific-popup.css' %}">
 
     <script src="https://kit.fontawesome.com/bca16a3855.js" crossorigin="anonymous"></script>
@@ -64,20 +68,24 @@
 
     <script>
 
-window.onscroll = function() {
-  checkStickyHeader()
-}
+var sticky = new Waypoint.Sticky({
+    element: $('.main__header__block'), // Add in your CSS selector sticky target
+    // direction: 'down right',
+  })
 
-function checkStickyHeader() {
-  console.log(window.pageYOffset)
-  if (window.pageYOffset > 500) {
-      $(".main__header__block").addClass("sticky")
-      $(".header__second__logo").addClass("hide")
-  } else {
-      $(".main__header__block").removeClass("sticky")
-      $(".header__second__logo").removeClass("hide")
-  }
-}
+// window.onscroll = function() {
+// }
+
+// function checkStickyHeader() {
+//   console.log(window.pageYOffset)
+//   if (window.pageYOffset > 500) {
+//     //   $(".main__header__block").addClass("sticky")
+//     //   $(".header__second__logo").addClass("hide")
+//   } else {
+//     //   $(".main__header__block").removeClass("sticky")
+//     //   $(".header__second__logo").removeClass("hide")
+//   }
+// }
 
 
 

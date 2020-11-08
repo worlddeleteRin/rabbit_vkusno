@@ -1,14 +1,8 @@
 .categories__main__content {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .category__card {
@@ -22,24 +16,17 @@
   background-color: white;
   text-align: center;
   margin: 9;
-  -webkit-box-shadow: 0px 0px 14px -8px rgba(0, 0, 0, 0.65);
-          box-shadow: 0px 0px 14px -8px rgba(0, 0, 0, 0.65);
-  -webkit-transition: all 0.3s;
+  box-shadow: 0px 0px 14px -8px #fa5523;
   transition: all 0.3s;
 }
-
 .category__card:hover {
-  -webkit-transform: translateY(-10px);
-          transform: translateY(-10px);
+  transform: translateY(-10px);
 }
-
 .category__card__image img {
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   width: 90%;
   height: 150px;
 }
-
 .category__card__title {
   margin: 30 10 0 10;
   text-transform: uppercase;
@@ -54,4 +41,3 @@
     max-width: 500px;
   }
 }
-/*# sourceMappingURL=categories.css.map */

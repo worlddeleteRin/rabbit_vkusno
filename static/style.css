@@ -115,7 +115,7 @@
   transition: all 0.2s;
 }
 .product__item__addcart span:hover {
-  background-color: #004ed6;
+  background-color: red;
 }
 
 @media (max-width: 555px) {
@@ -324,7 +324,7 @@
   transition: all 0.2s;
 }
 .pform__container__form .pform__button:hover {
-  background-color: #004ed6;
+  background-color: red;
 }
 
 @media (max-width: 900px) {
@@ -493,7 +493,7 @@
   transition: all 0.2s;
 }
 .product__page .product__main__container__second__addcart .product__page__addcart:hover {
-  background-color: #004ed6;
+  background-color: red;
 }
 @media (max-width: 1200px) {
   .product__page .product__main__container__second__addcart .product__page__addcart {
@@ -691,7 +691,7 @@
   border-bottom-left-radius: 0px;
 }
 .product__page__added__more span:hover {
-  background-color: #004ed6;
+  background-color: red;
 }
 @media (max-width: 887px) {
   .product__page__added__more span {
@@ -862,7 +862,7 @@
   transition: all 0.2s;
 }
 .continue__shopping #continue__shopping:hover {
-  background-color: #004ed6;
+  background-color: red;
 }
 
 .favorite__empty {
@@ -1051,10 +1051,10 @@
   transition: all 0.2s;
 }
 .cart__container__products__item__count__main__btn i:hover {
-  background-color: #004ed6;
+  background-color: red;
   color: white;
   transform: scale(1.1);
-  border: 2px solid #004ed6;
+  border: 2px solid red;
 }
 
 .cart__price__reg1 {
@@ -1417,7 +1417,7 @@
   background-color: white;
   text-align: center;
   margin: 9;
-  box-shadow: 0px 0px 14px -8px rgba(0, 0, 0, 0.65);
+  box-shadow: 0px 0px 14px -8px #fa5523;
   transition: all 0.3s;
 }
 .category__card:hover {
@@ -1736,16 +1736,17 @@
 }
 
 .space__10 {
+  visibility: hidden;
   display: flex;
   margin: 10 0;
 }
 
 .main__header__block__wrapper {
-  display: flex;
+  margin: 0px auto;
   align-items: center;
   align-content: center;
   justify-content: center;
-  width: 100%;
+  width: 95%;
   background-color: white;
 }
 
@@ -1906,7 +1907,7 @@ body.hidden {
   }
 }
 
-.main__header__block.sticky {
+.main__header__block.stuck {
   display: flex;
   width: 96%;
   top: 0;
@@ -1914,6 +1915,9 @@ body.hidden {
   height: 70px;
   min-height: 50px;
   box-shadow: 0px 10px 21px -17px rgba(0, 0, 0, 0.75);
+}
+.main__header__block.stuck .header__second__logo {
+  display: none;
 }
 
 .header__second__logo.hide {
@@ -2044,7 +2048,7 @@ body.hidden {
   transition: all 0.3s;
 }
 .input_submit:hover {
-  background-color: #004ed6;
+  background-color: red;
 }
 
 .header__second__icons {

@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  
+
   $(".page__main__slider").owlCarousel({
     items: 1,
     singleItem: true,
