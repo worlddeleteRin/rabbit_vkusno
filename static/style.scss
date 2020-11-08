@@ -244,8 +244,9 @@ body.hidden {
 .main__header__block.stuck {
     margin: 0px auto;
     display: flex;
-    width: 96%;
+    width: 100%;
     top: 0;
+    left: 0;
     position: fixed;
     height: 70px;
     min-height: 50px;
