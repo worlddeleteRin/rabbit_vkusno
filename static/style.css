@@ -1908,6 +1908,7 @@ body.hidden {
 }
 
 .main__header__block.stuck {
+  margin: 0px auto;
   display: flex;
   width: 96%;
   top: 0;
