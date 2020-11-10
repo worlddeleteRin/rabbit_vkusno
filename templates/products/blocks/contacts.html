@@ -41,12 +41,99 @@
 
     {% include './space20.html' %}
     <div id="map_loc_block" class="show">
-        {% comment %} <div style="position:relative;overflow:hidden;"> {% endcomment %}
+        <div id="map" style="width: 100%; height: 400px">
+        </div>
+        {% comment %} <div style="position:relative;overflow:hidden;">
         <a href="https://yandex.ru/maps?utm_medium=mapframe&utm_source=maps&scroll=false" style="color:#eee;font-size:12px;position:absolute;top:0px;"></a><a href="https://yandex.ru/maps/977/republic-of-crimea/house/kiparisnaya_ulitsa_1k15/Z0oYfg5nTUQCQFpufXhxdX5mYA==/?ll=33.897728%2C44.403853&utm_medium=mapframe&utm_source=maps&z=16.89" style="color:#eee;font-size:12px;position:absolute;top:14px;"></a>
         <embed src="https://yandex.ru/map-widget/v1/-/CCUAIHXcxD" width="100%" height="450" frameborder="0" allowfullscreen="false" style="position:relative;"></embed>
         {% comment %} </div> {% endcomment %}
     </div>
     <div id="map_delivery_block">
-        <img src="{% static 'images/map_cover.png' %}" alt="">
+        <div id="map2" style="width: 100%; height: 400px">
+        </div>
     </div>
 </div>  
+
+<script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+<script>
+
+    ymaps.ready(init);
+    ymaps.ready(init2);
+
+        function init () {
+            var myMap = new ymaps.Map("map", {
+                // Координаты центра карты
+                center: [44.40841721918498,33.88673639591143],
+                // Масштаб карты
+                zoom: 17,
+                // Выключаем все управление картой
+                controls: []
+            }); 
+                    
+            var myGeoObjects = [];
+            
+            // Указываем координаты метки
+            myGeoObjects = new ymaps.Placemark([44.40841721918498,33.88673639591143],{
+                            balloonContentBody: 'БЦ \'Минская Плаза\'',
+                            },{
+                            iconLayout: 'default#image',
+                            // Путь до нашей картинки
+                            iconImageHref: "{% static 'images/logo1.png' %}", 
+                            // Размеры иконки
+                            iconImageSize: [90, 70],
+                            // Смещение верхнего угла относительно основания иконки
+                            iconImageOffset: [-35, -35]
+            });
+                        
+            var clusterer = new ymaps.Clusterer({
+                clusterDisableClickZoom: false,
+                clusterOpenBalloonOnClick: false,
+            });
+            
+            clusterer.add(myGeoObjects);
+            myMap.geoObjects.add(clusterer);
+            // Отключим zoom
+            myMap.behaviors.disable('scrollZoom');
+
+        }
+
+        function init2 () {
+            var myMap = new ymaps.Map("map2", {
+                // Координаты центра карты
+                center: [44.40841721918498,33.88673639591143],
+                // Масштаб карты
+                zoom: 14,
+                // Выключаем все управление картой
+                controls: []
+            }); 
+                    
+            var myGeoObjects = [];
+            
+            // Указываем координаты метки
+            myGeoObjects = new ymaps.Placemark([44.40841721918498,33.88673639591143],{
+                            balloonContentBody: 'БЦ \'Минская Плаза\'',
+                            },{
+                            iconLayout: 'default#image',
+                            // Путь до нашей картинки
+                            iconImageHref: "{% static 'images/logo1.png' %}", 
+                            // Размеры иконки
+                            iconImageSize: [90, 70],
+                            // Смещение верхнего угла относительно основания иконки
+                            iconImageOffset: [-35, -35]
+            });
+                        
+            var clusterer = new ymaps.Clusterer({
+                clusterDisableClickZoom: false,
+                clusterOpenBalloonOnClick: false,
+            });
+            
+            clusterer.add(myGeoObjects);
+            myMap.geoObjects.add(clusterer);
+            // Отключим zoom
+            myMap.behaviors.disable('scrollZoom');
+
+        }
+
+</script>
+
+
