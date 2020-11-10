@@ -17,23 +17,6 @@ $(document).ready(function() {
     autoplayTimeout: 5000,
     // autoplayHoverPause: true,
   })
-  
-    // $('.page__main__slider').slick({
-    //     //slide: 'div',
-    //     slidesToScroll: 1,
-    //     slidesToShow: 1,
-    //     mobileFirst: true,
-    //     //dots: true,
-    //     infinite: true,
-    //     cssEase: 'ease',
-    //     swipe: true,
-    //     arrows: true,
-    //     autoplay: true,
-    //     autoplayspeed: 1000,
-    //     lazyLoad: 'ondemand',
-    //     prevArrow: $('#prev_main'),
-    //     nextArrow: $('#next_main'),
-    // });
 });
 
 $(document).ready(function() {
