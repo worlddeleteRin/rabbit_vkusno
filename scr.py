@@ -25,6 +25,7 @@ def create_products():
             name = item['name'],
             price = item['price'],
             sale_price = sale_price,
+            ves = item['ves'],
             description = item['description'],
             imgsrc = item['imgsrc'],
         )

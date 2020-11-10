@@ -27,6 +27,7 @@ class Product(models.Model):
     name = models.CharField(default = '', max_length = 300)
     price = models.IntegerField(default = 0)
     sale_price = models.IntegerField(default = 0,)
+    ves = models.CharField(default = '', max_length = 300)
     description = models.CharField(default = '', max_length = 2000)
     # imgsrc = models.ImageField(upload_to='static/images', blank = True, null = True)
     imgsrc = models.ImageField(upload_to="static/images/products", default = '')
