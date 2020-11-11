@@ -100,7 +100,8 @@
         function init2 () {
             var myMap = new ymaps.Map("map2", {
                 // Координаты центра карты
-                center: [44.40841721918498,33.88673639591143],
+                // center: [44.40841721918498,33.88673639591143],
+                center: [61.766513, 34.344165],
                 // Масштаб карты
                 zoom: 14,
                 // Выключаем все управление картой
@@ -145,7 +146,7 @@
             myMap.geoObjects.add(clusterer);
             // myMap.geoObjects.add(polygon);
             // console.log(polygon)
-            ymaps.geoXml.load('data.xml')
+            ymaps.geoXml.load("{% static 'map.xml' %}")
                 .then(function (res) {
                     // Добавление геообъектов на карту.
                     myMap.geoObjects.add(res.geoObjects);
