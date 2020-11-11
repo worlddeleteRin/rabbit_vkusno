@@ -47,19 +47,22 @@
         href="{% url 'products:product' product.id %}">
             {{ product.name }}
         </a>
-        <div class="product__item__addcart
-        product__addtocart__global"
-        value="{{ product.id }}">
-        {% is_in_cart product.id cart as in_cart %} 
-            {% if in_cart %}
-            <span class="in__cart__buttonstyle">
-            Удалить с корзины
-            </span>
-            {% else %}
-                <span class="not__incart__buttonstyle">
-                    В корзину
+        <div style="margin: 40 0;
+        text-align: center;">
+            <span class="product__item__addcart
+            product__addtocart__global"
+            value="{{ product.id }}">
+            {% is_in_cart product.id cart as in_cart %} 
+                {% if in_cart %}
+                <span class="in__cart__buttonstyle">
+                Удалить с корзины
                 </span>
-            {% endif %}
+                {% else %}
+                    <span class="not__incart__buttonstyle">
+                        В корзину
+                    </span>
+                {% endif %}
+            </span>
         </div>
     </div>
 
