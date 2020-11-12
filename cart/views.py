@@ -277,18 +277,20 @@ def create_order_ajax(request):
             price = item.price
         order_price_mail += price
         cart_items_mail.append([item.name, item.quantity, price])
-
-    send_mail(
-    'Новый заказ на сайте!',
-    'Имя: {} .Номер: {} '.format(name, phone) + 
-    str(cart_items_mail) + ' Сумма заказа: {}'.format(order_price_mail) +
-    ' Адрес доставки: {}'.format(address) +
-    ' Способ доставки: {}'.format(delivery) + 
-    ' Способ оплаты: {}'.format(payment), 
-    settings.EMAIL_HOST_USER,
-    ['worlddelete0@mail.ru'],
-    # 'fudfabrik@gmail.com'
-    )
+    try:
+        send_mail(
+        'Новый заказ на сайте!',
+        'Имя: {} .Номер: {} '.format(name, phone) + 
+        str(cart_items_mail) + ' Сумма заказа: {}'.format(order_price_mail) +
+        ' Адрес доставки: {}'.format(address) +
+        ' Способ доставки: {}'.format(delivery) + 
+        ' Способ оплаты: {}'.format(payment), 
+        settings.EMAIL_HOST_USER,
+        ['worlddelete0@mail.ru'],
+        # 'fudfabrik@gmail.com'
+        )
+    except:
+        pass
 
     return JsonResponse({
         'order_created': 'yes',
