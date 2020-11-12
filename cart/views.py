@@ -247,6 +247,7 @@ def update_cart_total_ajax(request):
 
 
 def create_order_ajax(request):
+    session_key = get_session_key(request)
     cart = get_or_create_cart(request)
     cart_total = cart.items_in_cart()
 

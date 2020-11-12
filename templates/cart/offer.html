@@ -285,7 +285,7 @@
             success: function(data) {
                 created = data['order_created']
                 if (created == 'yes') {
-                    window.location = "{% url 'cart:order_created' %}"
+                    document.location.href = "{% url 'cart:order_created' %}"
                 }
             }
         });
