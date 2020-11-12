@@ -295,7 +295,8 @@ def create_order_ajax(request):
             settings.EMAIL_HOST_USER,
             [
             'worlddelete0@mail.ru', 
-            'fudfabrik@gmail.com'
+            'fudfabrik@gmail.com',
+            '161085ap@mail.ru',
             # 'worlddelete0@yandex.ru',
             ],
             # 'fudfabrik@gmail.com'
