@@ -9,7 +9,7 @@ from django.core.files.storage import default_storage
 from food_fabrik.settings import * 
 from products.models import * 
 
-# from django.core.mail import send_mail
+from django.core.mail import send_mail
 from django.conf import settings
 from django.core import serializers
 
