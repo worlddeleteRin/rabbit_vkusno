@@ -146,13 +146,13 @@ STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
 # EMAIL_USE_SSL = True
 
 
-EMAIL_HOST = 'smtp.mail.ru'
-EMAIL_PORT = 2525
-EMAIL_HOST_USER = "worlddelete0@mail.ru"
-EMAIL_HOST_PASSWORD = "Worldhack0Rin"
-EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.mail.ru'
+# EMAIL_PORT = 2525
+# EMAIL_HOST_USER = "worlddelete0@mail.ru"
+# EMAIL_HOST_PASSWORD = "Worldhack0Rin"
+# EMAIL_USE_TLS = True
 
 
-SERVER_EMAIL = EMAIL_HOST_USER
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# SERVER_EMAIL = EMAIL_HOST_USER
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
