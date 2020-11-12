@@ -250,11 +250,11 @@ def create_order_ajax(request):
     cart = get_or_create_cart(request)
     cart_total = cart.items_in_cart()
 
-    name = request.GET['name']
-    phone = request.GET['phone']
-    delivery = request.GET['delivery']
-    address = request.GET['address']
-    payment = request.GET['payment']
+    name = urllib.parse.unquote(request.GET['name'])
+    phone = urllib.parse.unquote(request.GET['phone'])
+    delivery = urllib.parse.unquote(request.GET['delivery'])
+    address = urllib.parse.unquote(request.GET['address'])
+    payment = urllib.parse.unquote(request.GET['payment'])
     print(delivery)
 
     new_order = Order(
