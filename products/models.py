@@ -66,7 +66,7 @@ class Stock(models.Model):
     name = models.CharField(default = '', max_length = 300)
     description = models.CharField(default = '', max_length = 2000)
     imgsrc = models.ImageField(upload_to="static/images/products")
-    
+
 def deleteall():
     pr = Product.objects.all()
     # dest = Destination.objects.all()

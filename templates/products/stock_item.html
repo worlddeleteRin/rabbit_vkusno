@@ -1,0 +1,18 @@
+{% extends './base.html' %}
+{% load static %}
+{% load products_extras %}
+
+{% block content %}
+
+    <div class="stock__item__container">
+        <div class="stock__item__img">
+            {% modify_imgsrc stock.imgsrc as imgsrc %}
+            <img src="{{ imgsrc }}" alt="">
+        </div>
+        <div class="stock__item__desc">
+            <span>
+                {{ stock.description }}
+            </span>
+        </div>
+    </div>
+{% endblock content %}

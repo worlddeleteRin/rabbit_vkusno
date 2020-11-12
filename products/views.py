@@ -94,6 +94,17 @@ def stock(request):
         'cart': cart,
         'stocks': stocks,
     })
+def stock_item(request, stock_id):
+    session_key = get_session_key(request)
+    cart = get_or_create_cart(request)
+    current_stock = Stock.objects.get(
+        id = stock_id
+    )
+    print('stock id is :', current_stock.id)
+    return render(request, 'products/stock_item.html', {
+        'cart': cart,
+        'stock': current_stock,
+    })
 
 
 
