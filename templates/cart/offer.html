@@ -162,9 +162,15 @@
                     </div>
                 </div>
                 <div class="offer__page__block2__content__item__second">
-                    <span>
-                        {{ item.price }}
-                    </span>
+                    {% if item.has_sale %}
+                        <span>
+                            {{ item.sale_price }}
+                        </span>
+                        {% else %}
+                            <span>
+                                {{ item.price }}
+                            </span>
+                    {% endif %}
                 </div>
 
             </div>
