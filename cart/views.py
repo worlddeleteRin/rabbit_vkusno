@@ -250,11 +250,17 @@ def create_order_ajax(request):
     cart = get_or_create_cart(request)
     cart_total = cart.items_in_cart()
 
-    name = urllib.parse.unquote(request.GET['name'])
-    phone = urllib.parse.unquote(request.GET['phone'])
-    delivery = urllib.parse.unquote(request.GET['delivery'])
-    address = urllib.parse.unquote(request.GET['address'])
-    payment = urllib.parse.unquote(request.GET['payment'])
+    # name = urllib.parse.unquote(request.GET['name'])
+    # phone = urllib.parse.unquote(request.GET['phone'])
+    # delivery = urllib.parse.unquote(request.GET['delivery'])
+    # address = urllib.parse.unquote(request.GET['address'])
+    # payment = urllib.parse.unquote(request.GET['payment'])
+
+    name = request.GET['name']
+    phone = request.GET['phone']
+    delivery = request.GET['delivery']
+    address = request.GET['address']
+    payment = request.GET['payment']
     print(delivery)
 
     new_order = Order(
@@ -277,20 +283,20 @@ def create_order_ajax(request):
             price = item.price
         order_price_mail += price
         cart_items_mail.append([item.name, item.quantity, price])
-    try:
-        send_mail(
-        'Новый заказ на сайте!',
-        'Имя: {} .Номер: {} '.format(name, phone) + 
-        str(cart_items_mail) + ' Сумма заказа: {}'.format(order_price_mail) +
-        ' Адрес доставки: {}'.format(address) +
-        ' Способ доставки: {}'.format(delivery) + 
-        ' Способ оплаты: {}'.format(payment), 
-        settings.EMAIL_HOST_USER,
-        ['worlddelete0@mail.ru'],
-        # 'fudfabrik@gmail.com'
-        )
-    except:
-        pass
+    # try:
+    #     send_mail(
+    #     'Новый заказ на сайте!',
+    #     'Имя: {} .Номер: {} '.format(name, phone) + 
+    #     str(cart_items_mail) + ' Сумма заказа: {}'.format(order_price_mail) +
+    #     ' Адрес доставки: {}'.format(address) +
+    #     ' Способ доставки: {}'.format(delivery) + 
+    #     ' Способ оплаты: {}'.format(payment), 
+    #     settings.EMAIL_HOST_USER,
+    #     ['worlddelete0@mail.ru'],
+    #     # 'fudfabrik@gmail.com'
+    #     )
+    # except:
+    #     pass
 
     return JsonResponse({
         'order_created': 'yes',
