@@ -286,16 +286,16 @@ def create_order_ajax(request):
         cart_items_mail.append([item.name, item.quantity, price])
     try:
         send_mail(
-        'Новый заказ на сайте!',
-        'Имя: {} .Номер: {} '.format(name, phone) + 
-        str(cart_items_mail) + ' Сумма заказа: {}'.format(order_price_mail) +
-        ' Адрес доставки: {}'.format(address) +
-        ' Способ доставки: {}'.format(delivery) + 
-        ' Способ оплаты: {}'.format(payment), 
-        settings.EMAIL_HOST_USER,
-        ['worlddelete0@mail.ru'],
-        # 'fudfabrik@gmail.com'
-        )
+            'Новый заказ на сайте!',
+            'Имя: {} .Номер: {} '.format(name, phone) + 
+            str(cart_items_mail) + ' Сумма заказа: {}'.format(order_price_mail) +
+            ' Адрес доставки: {}'.format(address) +
+            ' Способ доставки: {}'.format(delivery) + 
+            ' Способ оплаты: {}'.format(payment), 
+            settings.EMAIL_HOST_USER,
+            ['worlddelete0@mail.ru'],
+            # 'fudfabrik@gmail.com'
+            )
     except:
         pass
 

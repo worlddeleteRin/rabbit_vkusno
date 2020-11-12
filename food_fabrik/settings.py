@@ -139,11 +139,11 @@ VENV_PATH = os.path.dirname(BASE_DIR)
 STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
 
 
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = "worlddelete0@yandex.ru"
-EMAIL_HOST_PASSWORD = "Worldhack0"
-EMAIL_USE_SSL = True
+# EMAIL_HOST = 'smtp.yandex.ru'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = "worlddelete0@yandex.ru"
+# EMAIL_HOST_PASSWORD = "Worldhack0"
+# EMAIL_USE_SSL = True
 
 
 EMAIL_HOST = 'smtp.mail.ru'
