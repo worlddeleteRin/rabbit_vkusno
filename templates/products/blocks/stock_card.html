@@ -2,15 +2,17 @@
 {% load products_extras %}
 
 <div class="stock__card">
-    <div class="stock__card__img">
+    <a class="stock__card__img"
+    href="{% url 'products:stock_item' stock.id %}">
     {% modify_imgsrc stock.imgsrc as imgsrc %}
         <img src="{{ imgsrc }}" alt="">
-    </div>
+    </a>
     <div class="stock__card__container">
         <div class="stock__card__title">
-            <span>
+            <a
+            href="{% url 'products:stock_item' stock.id %}">
                 {{ stock.name }}
-            </span>
+            </a>
         </div>
         <div class="stock__card__desc">
         {% modify_stock_desc stock.description as desc %}

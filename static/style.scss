@@ -203,6 +203,30 @@
 // 	z-index: 999;
 //   }
 
+.loader {
+    /* margin: 0 0 2em; */
+    /* height: 100px; */
+    width: 20%;
+    text-align: center;
+    /* padding: 1em; */
+    /* margin: 0 auto 1em; */
+    // display: inline-block;
+    vertical-align: top;
+    fill: orange;
+    display: none;
+    svg path {
+        fill: black;
+    }
+  }
+  .loader.show {
+    display: inline-block;
+  }
+  .loader.white {
+      svg path {
+        fill: white;
+      }
+  }
+
 body {
     // margin: 0px;
     //  background-color: $bg-nice;

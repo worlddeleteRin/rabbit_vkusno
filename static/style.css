@@ -1898,6 +1898,10 @@
   font-size: 20px;
   text-align: start;
 }
+.stock__card__title a {
+  color: black;
+  text-decoration: none;
+}
 .stock__card__desc {
   height: 60px;
   margin-top: 5px;
@@ -2328,6 +2332,29 @@
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+}
+
+.loader {
+  /* margin: 0 0 2em; */
+  /* height: 100px; */
+  width: 20%;
+  text-align: center;
+  /* padding: 1em; */
+  /* margin: 0 auto 1em; */
+  vertical-align: top;
+  fill: orange;
+  display: none;
+}
+.loader svg path {
+  fill: black;
+}
+
+.loader.show {
+  display: inline-block;
+}
+
+.loader.white svg path {
+  fill: white;
 }
 
 body {

@@ -62,6 +62,8 @@
 
     {% include './blocks/popup_form.html' %}
 
+    
+
 
     
     <script src="{% static 'slick/slick.js' %}"></script>
@@ -88,6 +90,8 @@ var sticky = new Waypoint.Sticky({
 //     //   $(".header__second__logo").removeClass("hide")
 //   }
 // }
+
+
 
 
 
@@ -118,7 +122,14 @@ function updateCartTotal() {
 }
 
         $(".product__addtocart__global").click(function() {
-            addProductToCart(this)
+            showLoader1(this)
+            var this_main = this
+            setTimeout(
+                function() {
+                    addProductToCart(this_main)
+                },
+                500
+            )
             // ajax ends here
         });
         
@@ -184,6 +195,23 @@ function updateCartTotal() {
             map = $(this).attr("value")
             $(map).addClass("show")
         })
+
+        function showLoader1(item) {
+            $.get("{% static 'svg/loader_1.html' %}", function(response) {
+                var loader = response
+                console.log(loader)
+                child = $(item).children('span')
+                if ($(child).hasClass('in__cart__buttonstyle')) {
+                    $(item).children('span').html(loader)
+                    $(".loader").addClass("show")
+                    console.log('it is in cart')
+                } else {
+                    $(item).children('span').html(loader)
+                    $(".loader").addClass("show")
+                    $(".loader").addClass("white")
+                }
+            })
+        }
 
     </script>
 

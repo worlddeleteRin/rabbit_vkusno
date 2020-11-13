@@ -72,7 +72,7 @@ def deleteall():
     # dest = Destination.objects.all()
     ct = Category.objects.all()
     st = Stock.objects.all()
-    st.delete()
+    # st.delete()
     ct.delete()
     # dest.delete()
     pr.delete()
