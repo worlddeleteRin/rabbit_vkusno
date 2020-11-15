@@ -62,7 +62,7 @@
 
     {% include './blocks/popup_form.html' %}
 
-    
+    {% include './blocks/pr_added_dialog.html' %}
 
 
     
@@ -153,8 +153,10 @@ function updateCartTotal() {
                 },
                 success: function(data) {
                     var in_cart = data['in_cart']
-                        changeButtonCart(in_cart, current_item)
-                        updateCartTotal()
+                    var product_name = data['product_name']
+                    changeButtonCart(in_cart, current_item)
+                    updateCartTotal()
+                    showAddedDialog(in_cart, product_name)
                 }
             });
         }
@@ -211,6 +213,27 @@ function updateCartTotal() {
                     $(".loader").addClass("white")
                 }
             })
+        }
+        function showAddedDialog(in_cart, product_name) {
+            if (in_cart == 'yes') {
+                $(".added__dialog").addClass("show")
+                $(".added__dialog").children('div').children('span').html(
+                    product_name + ' теперь в корзине'
+                )
+                setTimeout(function() {
+                 $(".added__dialog").removeClass("show")   
+                }, 2000)
+                
+            } else {
+                $(".added__dialog").addClass("show red")
+                $(".added__dialog").children('div').children('span').html(
+                    product_name + ' удален с корзины'
+                )
+                setTimeout(function() {
+                 $(".added__dialog").removeClass("show")   
+                 $(".added__dialog").removeClass("red")   
+                }, 1200)
+            }
         }
 
     </script>

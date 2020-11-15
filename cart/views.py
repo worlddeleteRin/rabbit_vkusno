@@ -71,6 +71,7 @@ def add_item_ajax(request):
     pr = Product.objects.get(
         id = pr_id,
     )
+    product_name = pr.name
     if (Item.objects.filter(
         cart = cart,
         pr_id = pr.id,
@@ -102,6 +103,7 @@ def add_item_ajax(request):
     return JsonResponse({
         'is_new': is_new,
         'in_cart': in_cart,
+        'product_name': product_name
     }, status = 200 )
 
 def delete_from_cart_ajax(request):
