@@ -1,36 +1,27 @@
 .pform__wrap {
   min-height: 210px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   border-radius: 5px;
   background-color: white;
   left: 50%;
   top: -200%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   position: fixed;
   width: 90%;
   max-width: 750px;
   z-index: 9999999999;
-  -webkit-transition: all 0.4s;
   transition: all 0.4s;
 }
-
 .pform__wrap__close {
   cursor: pointer;
   position: absolute;
   top: 0px;
   right: -70px;
-  -webkit-transform: scale(1.9);
-          transform: scale(1.9);
+  transform: scale(1.9);
   background-color: none;
   color: white;
 }
-
 @media (max-width: 954px) {
   .pform__wrap__close {
     color: black;
@@ -40,29 +31,20 @@
 }
 
 .pform__wrap.show {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   top: 50%;
 }
 
 .pform__container {
-  width: 95%;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  margin: 0px auto;
+  width: 100%;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  margin: 50px 80px;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  /* margin: 50px 80px; */
+  padding: 50 0;
 }
-
 .pform__container__title {
   text-align: center;
   margin-top: 0px;
@@ -70,30 +52,20 @@
   text-transform: uppercase;
   font-family: "gpro-text-bold";
 }
-
 .pform__container__subtitle {
   text-align: center;
   margin-top: 8px;
 }
-
 .pform__container__form {
   margin-left: 10px;
   margin-right: 10px;
   width: 450px;
   max-width: 95%;
   margin-top: 40px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
-
 .pform__container__form .contact__input {
   max-width: 350px;
   width: 90%;
@@ -106,68 +78,45 @@
   font-size: 20px;
   outline: none;
 }
-
-.pform__container__form .contact__input::-webkit-input-placeholder {
-  color: #15393d;
-  font-family: "gpro-text-semilight";
-}
-
-.pform__container__form .contact__input:-ms-input-placeholder {
-  color: #15393d;
-  font-family: "gpro-text-semilight";
-}
-
-.pform__container__form .contact__input::-ms-input-placeholder {
-  color: #15393d;
-  font-family: "gpro-text-semilight";
-}
-
 .pform__container__form .contact__input::placeholder {
   color: #15393d;
   font-family: "gpro-text-semilight";
 }
-
 .pform__container__form .pform__button {
   border-radius: 5px;
   min-width: 50px;
   max-width: 280px;
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   cursor: pointer;
   background-color: #fa5523;
   height: 60px;
   text-align: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   color: white;
   font-family: "gpro-text-medium";
   font-size: 18px;
-  -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
-
 .pform__container__form .pform__button:hover {
-  background-color: #004ed6;
+  background-color: red;
+}
+
+.pform__container.hide {
+  display: none;
 }
 
 @media (max-width: 900px) {
   .pform__container {
-    margin: 60px auto;
+    padding: 25 0;
   }
 }
-
 @media (max-width: 423px) {
   .pform__button {
-    padding: 0px 0px;
+    padding: 10px 0px;
   }
 }
-
 .pform__wrap__wrapper {
   top: 0;
   left: 0;
@@ -176,13 +125,10 @@
   position: fixed;
   z-index: 499;
   background-color: black;
-  opacity: .3;
+  opacity: 0.3;
   display: none;
 }
 
 .pform__wrap__wrapper.show {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
-/*# sourceMappingURL=popup_form.css.map */

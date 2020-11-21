@@ -236,6 +236,35 @@ function updateCartTotal() {
             }
         }
 
+$("#pform_button").click(function() {
+  $(".input__empty__error").removeClass("show")
+  var phone = $("#input_phone").val() 
+  console.log(phone.length)
+  if (phone.length == 0) {
+      console.log('вы ничего не ввели')
+      $(".input__empty__error").addClass("show")
+  } else {
+
+    $.ajax({
+        url: "{% url 'products:callme_mail_ajax' %}",
+        data: {
+            'phone': phone
+        },
+        success: function(response) {
+            $(".pform__container").addClass('hide')
+            $(".pp__container").addClass('show')
+            setTimeout(function() {
+                closeModal()
+            }, 4000)
+        }
+    })
+
+    
+    
+}
+
+})
+
     </script>
 
 </body>

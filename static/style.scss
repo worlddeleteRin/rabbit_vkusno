@@ -265,6 +265,57 @@ body.hidden {
     }
 }
 
+.input__empty__error {
+    display: none;
+    padding: 10 0;
+    text-align: left;
+    span {
+        color: red;
+    }
+}
+.input__empty__error.show {
+    display: flex;
+}
+
+.pp__container {
+    margin: 20 0;
+    margin: 0px auto;
+    display: none;
+    text-align: center;
+    color: black;
+    width: 90%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+.pp__container.show {
+    display: flex;
+}
+.pp__message {
+    padding: 15 0;
+    font-size: 24px;
+    color: $main-color;
+    text-transform: uppercase;
+    font-family: $main-medium;
+} 
+.pp__message__body {
+    color: black;
+    font-size: 20px;
+    font-family: $main-font-light;
+    padding: 0 0 30 0;
+}
+.ppform__wrapper {
+    width: 100%;
+}
+
+.pp__icon {
+    color: $nice-green;
+    font-size: 70px;
+    margin: 20 0;
+}
+
 
 
 

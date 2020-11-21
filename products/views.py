@@ -8,6 +8,9 @@ from django.core.files.storage import default_storage
 from food_fabrik.settings import * 
 from cart.models import * 
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 # Create your views here.
 
@@ -105,6 +108,31 @@ def stock_item(request, stock_id):
         'cart': cart,
         'stock': current_stock,
     })
+
+def callme_mail_ajax(request):
+    user_phone = request.GET['phone']
+    print('user phone is: ', user_phone)
+
+    try:
+        send_mail(
+            'Заявка на обратный звонок!',
+            'Номер телефона: {} '.format(user_phone),
+            settings.EMAIL_HOST_USER,
+            [
+            'worlddelete0@mail.ru', 
+            'fudfabrik@gmail.com',
+            # '161085ap@mail.ru',
+            # 'worlddelete0@yandex.ru',
+            ],
+            # 'fudfabrik@gmail.com'
+            )
+        print('email is sent')
+    except:
+        pass
+    
+    return JsonResponse({
+        'complete': True,
+    }, status = 200)
 
 
 

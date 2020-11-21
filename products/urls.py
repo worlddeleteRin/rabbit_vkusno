@@ -11,4 +11,5 @@ urlpatterns = [
     path('product/<int:product_id>', views.product, name = 'product'),
     path('stock/', views.stock, name = 'stock'),
     path('stock/<int:stock_id>', views.stock_item, name = 'stock_item'),
+    path('callme_mail_ajax/', views.callme_mail_ajax, name = 'callme_mail_ajax'),
 ]

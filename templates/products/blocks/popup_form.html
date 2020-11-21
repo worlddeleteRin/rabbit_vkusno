@@ -1,5 +1,16 @@
 <div class="pform__wrap"
 id="main__popup">
+    <div class="ppform__wrapper">
+        <div class="pp__container">
+            <i class="fa fa-check-circle pp__icon"></i>
+            <div class="pp__message">
+                Заявка принята
+            </div>
+            <div class="pp__message__body">
+                В ближайшее время с вами свяжется менеджер!
+            </div>
+        </div>
+    
     <div class="pform__container">
         <div class="pform__container__title">
             Обратный звонок
@@ -7,18 +18,27 @@ id="main__popup">
         <div class="pform__container__subtitle">
             Оставьте номер телефона, и мы свяжемся с вами!
         </div>
+
+        
         
         <div class="pform__container__form">
+            <div class="input__empty__error">
+                <span>
+                    *Введите ваш номер телефона
+                </span>
+            </div>
             <input type="text"
             name="phone" id="input_phone"
             class="contact__input"
             placeholder="Телефон*"
             autocomplete="off">
             <span class="pform__button"
-            id="#pform_button">
+            id="pform_button">
             Заказать звонок
             </span>
         </div>
+    </div>
+
     </div>
 
     <div class="pform__wrap__close">
@@ -29,4 +49,5 @@ id="main__popup">
 <div class="pform__wrap__wrapper">
 
 </div>
+
 
