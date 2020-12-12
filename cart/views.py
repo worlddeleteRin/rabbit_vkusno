@@ -12,6 +12,8 @@ from products.models import *
 from django.core.mail import send_mail
 from django.conf import settings
 from django.core import serializers
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 
 
@@ -286,14 +288,22 @@ def create_order_ajax(request):
             price = item.price
         order_price_mail += price
         cart_items_mail.append([item.name, item.quantity, price])
+    all_items = new_order.item_set.all()
     try:
+        email_context = {
+            'name': name,
+            'phone': phone,
+            'order_price': order_price_mail,
+            'order_items': all_items,
+            'address': address,
+            'delivery': delivery,
+            'payment': payment,
+        }
+        admin_html_message = render_to_string('cart/blocks/mail_template.html', email_context)
+        admin_html_message_plain = strip_tags(admin_html_message)
         send_mail(
             'Новый заказ на сайте!',
-            'Имя: {} .Номер: {} '.format(name, phone) + 
-            str(cart_items_mail) + ' Сумма заказа: {}'.format(order_price_mail) +
-            ' Адрес доставки: {}'.format(address) +
-            ' Способ доставки: {}'.format(delivery) + 
-            ' Способ оплаты: {}'.format(payment), 
+            admin_html_message_plain,
             settings.EMAIL_HOST_USER,
             [
             'worlddelete0@mail.ru', 
@@ -301,6 +311,7 @@ def create_order_ajax(request):
             '161085ap@mail.ru',
             # 'worlddelete0@yandex.ru',
             ],
+            html_message= admin_html_message,
             # 'fudfabrik@gmail.com'
             )
     except:

@@ -1,0 +1,88 @@
+{% load static %}
+{% load products_extras %}
+
+<h2>
+    Новый заказ!  Сумма заказа: {{ order_price }}.
+</h2>
+
+<div>
+    <table>
+        <tr>
+            <td class="order_mail_td">
+                Статус
+            </td>
+            <td>
+            -->
+                Ожидает подтверждения менеджером
+            </td>
+        </tr>
+        <tr>
+            <td class="order_mail_td">
+                Имя
+            </td>
+            <td>
+            -->
+                {{ name }}
+            </td>
+        </tr>
+        <tr>
+            <td class="order_mail_td">
+                Телефон
+            </td>
+            <td>
+            -->
+                {{ phone }}
+            </td>
+        </tr>
+        <tr>
+            <td class="order_mail_td">
+                Адрес доставки
+            </td>
+            <td>
+            -->
+                {{ address }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Способ доставки:
+            </td>
+            <td>
+            -->
+                {{ delivery }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Способ оплаты:
+            </td>
+            <td>
+            -->
+                {{ payment }}
+            </td>
+        </tr>
+
+    </table>
+    <br> <br>
+    <h3>
+        Состав заказа:
+    </h3>
+    <br>
+    <table>
+        {% for item in order_items %}
+            <tr>
+                <td>
+                    {% modify_imgsrc item.imgsrc as imgsrc %}
+                    <img src="{{ imgsrc }}" alt="">     
+                </td>
+                <td>
+                    {{ item.name }} 
+                </td>
+                <td>
+                    {{ item.quantity }} x 
+                    {{ item.product_get_prices }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>

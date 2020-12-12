@@ -69,6 +69,11 @@ class Item(models.Model):
         return self.price * self.quantity
     def product_sale_price(self):
         return self.sale_price * self.quantity
+    def product_get_price(self):
+        if self.sale_price > 1:
+            return self.sale_price
+        else:
+            return self.price
     def __str__(self):
         return self.name 
 
