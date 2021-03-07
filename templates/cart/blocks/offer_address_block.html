@@ -1,0 +1,13 @@
+{% for address in user.address_set.all %}
+<div class="cart_delivery_authorized_item">
+    <input type="radio"
+    class="cart_delivery_authorized_input"
+    id="delivery_address_auth_{{ address.id }}"
+    name="delivery_address_auth"
+    value="{{ address.id }}">
+    <label class="pointer offer_address_label"
+    for="delivery_address_auth_{{ address.id }}">
+        {{ address.get_full }}
+    </label>
+</div>
+{% endfor %}

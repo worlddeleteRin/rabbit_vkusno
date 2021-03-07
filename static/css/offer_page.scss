@@ -158,7 +158,7 @@
     width: 100%;
 }
 #cart_input_cura.show {
-    display: flex;
+    display: block;
 }
 
 #cart_input_own {
@@ -168,5 +168,5 @@
 }
 
 #cart_input_own.show {
-    display: flex;
+    display: block;
 }

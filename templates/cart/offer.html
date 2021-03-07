@@ -30,10 +30,12 @@
                 <div class="offer__page__block1__sub__content__form">
                 <input type="text"
                 placeholder="Имя"
+                value="{{ user.name }}"
                 autocomplete="off"
                 class="cart__input"
                 name="person_name">
                 <input type="text"
+                value="{{ user.phone }}"
                 placeholder="Телефон"
                 autocomplete="off"
                 class="cart__input"
@@ -80,15 +82,38 @@
 
             <div class="delivery__subinfo__container">
 
-            <input type="text"
-                placeholder="Адрес доставки (улица, дом, квартира)"
-                autocomplete="off"
-                class="cart__input"
-                id="cart_input_cura"
-                name="delivery_address">
+            {% if user %}
+                <div id="cart_input_cura">
+                        <div class="nice_title medium center bold pd15">
+                            <span>
+                                Выберите адрес доставки
+                            </span>
+                        </div>
+                        <div class="cart_delivery_authorized">
+                            {% include './blocks/offer_address_block.html' %}      
+                        </div>
+                        <div class="nice_button pointer noselect center">
+                            <span class="add_address_form_button need_render">
+                                Добавить адрес
+                            </span>
+                        </div>
+                </div>
+                {% else %}
+                    <input type="text"
+                    placeholder="Адрес доставки (улица, дом, квартира)"
+                    autocomplete="off"
+                    class="cart__input"
+                    id="cart_input_cura"
+                    name="delivery_address">
+            {% endif %}
             <span
             id="cart_input_own">
-                Адрес самовывоза: г. Ялта, Кастрополь, Кипарисная улица, 1к15 
+                <div class="nice_title medium center bold pd15">
+                    <span>
+                        Адрес самовывоза:
+                    </span>
+                </div>
+                г. Ялта, Кастрополь, Кипарисная улица, 1к15 
             </span>
             </div>
 
@@ -232,19 +257,51 @@
         $('#error_name_phone').removeClass("show")
         $('#error_delivery').removeClass("show")
         $('#error_payment').removeClass("show")
-        var name = $("input[name='person_name']").val()
-        var phone = $("input[name='person_phone']").val()
-        var delivery = $(".delivery__method.active").attr("value")
-        var payment = $(".payment__method.active").attr("value")
-        console.log(delivery)
-        if (delivery == 'курьер') {
-            var address = $("input[name='delivery_address']").val()
-        } else {
-            var address = 'Самовывоз'
-        }
 
         var error_id
         var can_make_order = 'yes'
+
+
+        var name = $("input[name='person_name']").val()
+        var phone = $("input[name='person_phone']").val()
+        var payment = $(".payment__method.active").attr("value")
+
+        var user = "{{ user.id }}"
+        if (user == false) {
+            var delivery = $(".delivery__method.active").attr("value")
+            if (delivery == 'курьер') {
+            var address = $("input[name='delivery_address']").val()
+            } else {
+                var address = 'Самовывоз'
+            }
+            if (delivery === undefined) {
+            $('#error_delivery').addClass("show")
+            error_id = '#error_delivery'
+            can_make_order = 'no'
+            }
+            if (address.length == 0) {
+            $('#error_delivery').addClass("show")
+            error_id = '#error_delivery'
+            can_make_order = 'no'
+            }
+        } else {
+            var delivery_method = $(".delivery__method.active").attr("value")
+            if (delivery_method == 'курьер') {
+                var delivery = $("input[name='delivery_address_auth']:checked").val()
+                if (delivery === undefined) {
+                $('#error_delivery').addClass("show")
+                error_id = '#error_delivery'
+                can_make_order = 'no'
+                }
+                address = 'need_specify'
+            } else {
+                var delivery = 'Самовывоз'
+                address = ''
+            }
+        }
+        
+
+        
         if (name.length == 0) {
             $('#error_name_phone').addClass("show")
             error_id = '#error_name_phone'
@@ -253,16 +310,6 @@
         if (phone.length == 0) {
             $('#error_name_phone').addClass("show")
             error_id = '#error_name_phone'
-            can_make_order = 'no'
-        }
-        if (delivery === undefined) {
-            $('#error_delivery').addClass("show")
-            error_id = '#error_delivery'
-            can_make_order = 'no'
-        }
-        if (address.length == 0) {
-            $('#error_delivery').addClass("show")
-            error_id = '#error_delivery'
             can_make_order = 'no'
         }
         if (payment === undefined) {
@@ -278,7 +325,7 @@
 
 
         if (can_make_order == 'yes') {
-
+            console.log('can make an order')
         $.ajax({
             url: "{% url 'cart:create_order_ajax' %}",
             data: {

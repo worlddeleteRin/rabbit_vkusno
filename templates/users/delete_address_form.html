@@ -1,0 +1,58 @@
+<div class="pform__wrap"
+id="delete_address_form">
+    <div class="ppform__wrapper">
+        
+    <div class="pform__container">
+        <div class="pform__container__title">
+            Удаление адреса
+        </div>
+        
+        <div class="pd15"></div>
+        <div class="nice_title small center">
+            Вы уверены, что хотите удалить этот адрес?
+        </div>
+        
+            <div class="nice_button2 center pointer noselect pd15">
+                <span class="add_address_button red mglr10
+                del_address_button">
+                    Удалить
+                </span>
+                <span class="add_address_button black mglr10
+                left_address_button">
+                    Оставить
+                </span>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <div class="pform__wrap__close">
+        <i class="gg-close"></i>
+    </div>
+</div>
+
+<div class="pform__wrap__wrapper">
+
+</div>
+
+<script>
+
+    $(".left_address_button").click(function() {
+        closeDeleteAddressForm()
+    })
+    $(".del_address_button").click(function() {
+        var address_id = $("#delete_address_form").attr("value")
+        $.ajax({
+            url: "{% url 'users:address_action_ajax' %}",
+            data: {
+                'action': 'delete',
+                'address_id': address_id,
+            }, success: function(data) {
+                window.location.href = 'address'
+            }
+        })
+    })
+     
+</script>
+

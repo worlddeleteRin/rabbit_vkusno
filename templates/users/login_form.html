@@ -1,0 +1,52 @@
+<h3>Авторизация</h3>
+<div class="login_form">
+    <input type="text" name="phone" id="phone"
+    autocomplete="off">
+    <input type="password" name="password"
+    autocomplete="off">
+    <div class="login_button">
+        <span class="login_button_submit">
+            login
+        </span>
+    </div>
+    <div class="login_status"></div>
+    <div class="restore_password"> 
+        <a href="{% url 'users:restore' %}">
+            Забыл пароль?
+        </a>
+    </div>
+    <div class="no_account">
+        Нет аккаунта? 
+        <a href="{% url 'users:register' %}">
+            Зарегистрироваться
+        </a>
+    </div>
+</div>
+
+<script>
+    $("#phone").mask("7(999) 999-99-99");
+$('.login_button_submit').click(function() {
+    var username = $("input[name='phone']").val()
+    username = username.replaceAll('(','').replaceAll(')','').replaceAll('-','').replaceAll(' ', '')
+    var password = $("input[name='password']").val()
+    if ((username.length > 0) && (password.length > 0)) {
+            $.ajax({
+            url: "{% url 'users:login_ajax' %}",
+            data: {
+                'username': username,
+                'password': password,
+            }, success: function(data) {
+                var msg = data['message']
+                var status = data['success']
+                $(".login_status").html(msg)
+                if (status) {
+                    window.location.href = '/profile/orders'
+                }
+            }
+        })
+    } else {
+        var msg = 'Заполните все поля'
+        $(".login_status").html(msg)
+    }
+}) 
+</script>

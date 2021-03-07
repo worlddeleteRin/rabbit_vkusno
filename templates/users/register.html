@@ -1,0 +1,86 @@
+{% extends '../products/base.html' %}
+
+{% block content %}
+
+
+<div class="register_form">
+        <div class="nice_title pd15">
+            <span>
+                Регистрация
+            </span>
+        </div>
+<div class="login_form">
+    <input class="input_style1"
+    type="text" name="name" placeholder="Имя"
+    autocomplete="off"> <br>
+    <input class="input_style1"
+    type="text" name="phone" id="phone" placeholder="Телефон"
+    autocomplete="off"> <br>
+    <input class="input_style1"
+    type="password" name="password" placeholder="Пароль"
+    autocomplete="off"> <br>
+    <div class="register_code">
+        <input class="input_style1"
+        type="text" name="sms_code" placeholder="Код подтверждения">
+        <br>
+        <span>
+            Отправить код заново
+        </span>
+    </div>
+    <div class="nice_button pointer">
+        <span class="register_button_submit">
+            Завершить
+        </span>
+    </div>
+    <div class="register_status"></div>
+</div>
+
+</div>
+
+
+<script>
+    $("#phone").mask("7(999) 999-99-99");
+$('.register_button_submit').click(function() {
+    var sms_code = $("input[name='sms_code']").val()
+    if ($('.register_code').hasClass('show')) {
+        var type = 'verify_account'
+    } else {
+        var type = 'check_account'
+    }
+    var name = $("input[name='name']").val()
+    var username = $("input[name='phone']").val()
+    username = username.replaceAll('(','').replaceAll(')','').replaceAll('-','').replaceAll(' ', '')
+    var password = $("input[name='password']").val()
+    if ((username.length > 0) && (password.length > 0)) {
+            $.ajax({
+            url: "{% url 'users:register_ajax' %}",
+            data: {
+                'name': name,
+                'username': username,
+                'password': password,
+                'type': type,
+                'user_code': sms_code,
+            }, success: function(data) {
+                var msg = data['message']
+                var status = data['success']
+                if (status) {
+                    //window.location.href = '/profile/orders'
+                    if (type == 'check_account') {
+                        $('.register_code').addClass("show")
+                    }
+                    if (type == 'verify_account') {
+                        window.location.href = '/profile/orders'
+                    }
+                } else {
+                    $(".register_status").html(msg)
+                }
+            }
+        })
+    } else {
+        var msg = 'Заполните все поля'
+        $(".register_status").html(msg)
+    }
+}) 
+</script>
+    
+{% endblock content %}

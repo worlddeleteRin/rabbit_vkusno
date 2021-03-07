@@ -1,0 +1,120 @@
+<div class="pform__wrap"
+id="add_address_form">
+    <div class="ppform__wrapper">
+        
+    <div class="pform__container">
+        <div class="pform__container__title">
+            Добавление адреса
+        </div>
+        
+        <div class="pd15"></div>
+        
+        <div class="">
+            <div class="change_error">
+            </div>
+            <input class="input_style1"
+            type="text"
+            placeholder="Город"
+            name="city"
+            value="Симферополь"
+            disabled="true"
+            autocomplete="off"> <br>
+            <input 
+            type="text"
+            class="input_style1"
+            name="street"
+            placeholder="Улица"
+            autocomplete="off"> <br>
+            <input 
+            type="text"
+            class="input_style1"
+            name="house"
+            placeholder="Дом"
+            autocomplete="off"> <br>
+            <input 
+            type="text"
+            class="input_style1"
+            name="flat"
+            placeholder="Квартира"
+            autocomplete="off"> <br>
+            <input 
+            type="text"
+            class="input_style1"
+            placeholder="Комментарий"
+            name="comment"
+            autocomplete="off"> <br>
+            <div class="nice_button center pointer noselect">
+                <span class="add_address_button">
+                    Добавить
+                </span>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <div class="pform__wrap__close">
+        <i class="gg-close"></i>
+    </div>
+</div>
+
+<div class="pform__wrap__wrapper">
+
+</div>
+
+<script>
+    $(".add_address_button").click(function() {
+        $('.change_error').html('')
+
+        var city = $("input[name='city']").val()
+        var street = $("input[name='street']").val()
+        var house = $("input[name='house']").val()
+        var flat = $("input[name='flat']").val()
+        var comment = $("input[name='comment']").val()
+        var success = true
+        var need_render = false
+        if ($(this).hasClass('need_render')) {
+            need_render = true
+        }
+        msg = ''
+        if (city.length < 1) {
+            success = false
+        }
+        else if (street.length < 1) {
+            success = false
+            msg = 'Укажите улицу'
+        }
+        else if (house.length < 1) {
+            success = false
+            msg = 'Укажите номер дома'
+        }
+        if (success == false) {
+            $('.change_error').html(msg)
+        } else {
+            $.ajax({
+                url: "{% url 'users:address_action_ajax' %}",
+                data: {
+                    'action': 'add',
+                    'city': city,
+                    'street': street,
+                    'house': house,
+                    'flat': flat,
+                    'comment': comment,
+                    'need_render': need_render,
+                }, success: function(data) {
+                    console.log(data)
+                    if (need_render == true) {
+                        $(".cart_delivery_authorized").html(data)
+                        closeAddAddressForm()
+                    }
+                    success = data['success']
+                    if (success) {
+                        window.location.reload()
+                    }
+                }
+            })
+        }
+    })
+     
+</script>
+

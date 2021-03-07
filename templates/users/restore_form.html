@@ -1,0 +1,68 @@
+<div class="nice_title pd15">
+    <span>
+        Восстаноление пароля
+    </span>
+</div>
+
+<div class="login_form">
+    <input class="input_style1"
+    placeholder="Номер телефона"
+    type="text" name="phone" id="phone"
+    autocomplete="off">
+    <div class="register_code">
+    <input class="input_style1"
+    type="text" name="sms_code" 
+    placeholder="Код подтверждения">
+    <br>
+    <span>
+        Отправить код заново
+    </span>
+    </div>
+    <div class="nice_button center pointer">
+        <span class="restore_button_submit">
+            Продолжить
+        </span>
+    </div>
+    <div class="restore_status"></div>
+</div>
+
+
+<script>
+    $("#phone").mask("7(999) 999-99-99");
+$('.restore_button_submit').click(function() {
+    var sms_code = $("input[name='sms_code']").val()
+    if ($('.register_code').hasClass('show')) {
+        var type = 'verify_restore'
+    } else {
+        var type = 'check_account'
+    }
+    var username = $("input[name='phone']").val()
+    username = username.replaceAll('(','').replaceAll(')','').replaceAll('-','').replaceAll(' ', '')
+
+    if (username.length > 0) {
+            $.ajax({
+            url: "{% url 'users:restore_ajax' %}",
+            data: {
+                'username': username,
+                'type': type,
+                'user_code': sms_code,
+            }, success: function(data) {
+                var msg = data['message']
+                var status = data['success']
+                $(".restore_status").html(msg)
+                if (status) {
+                    if (type == 'check_account') {
+                        $('.register_code').addClass("show")
+                    }
+                    if (type == 'verify_restore') {
+                        window.location.href = '/profile/orders'
+                    }
+                }
+            }
+        })
+    } else {
+        var msg = 'Заполните все поля'
+        $(".restore_status").html(msg)
+    }
+}) 
+</script>

@@ -1,0 +1,48 @@
+{% load static %}
+<div class="user_head">
+    <div class="user_head__block user_head__block1">
+        <div class="user_head__block__title">
+            Привет, {{ user.name }}
+        </div>
+        <div class="user_head__block__phone">
+            {{ user.phone }}
+        </div>
+    </div>
+    <div class="user_head__block flex flex-center">
+        <img class="user_head__block__bonusicon"
+        src="{% static 'images/bonus_icon.svg' %}" alt="">
+        <div class="user_head__block__bonusinfo uppercase">
+            <div class="user_head__block__bonuscount">
+                {{ user.get_total_bonus_gained }}
+            </div>
+            бонусов
+        </div>
+    </div>
+</div>
+
+<div class="user_head_links">
+    <div class="user_head_link">
+        <a class="nolink" id="orders_link"
+        href="{% url 'users:orders' %}">
+            Заказы {{ user.order_set.count }}
+        </a>
+    </div>
+    <div class="user_head_link">
+        <a class="nolink" id="promo_link"
+        href="{% url 'users:promo' %}">
+            Промокоды
+        </a>
+    </div>
+    <div class="user_head_link">
+        <a class="nolink" id="address_link"
+        href="{% url 'users:address' %}">
+            Адреса
+        </a>
+    </div>
+    <div class="user_head_link">
+        <a class="nolink" id="settings_link"
+        href="{% url 'users:settings' %}">
+            Настройки
+        </a>
+    </div>
+</div>

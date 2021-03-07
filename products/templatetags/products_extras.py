@@ -2,6 +2,7 @@ from django import template
 
 from products.models import *
 from cart.models import * 
+from users.models import * 
 
 register = template.Library()
 
@@ -28,6 +29,14 @@ def modify_stock_desc(desc):
         return desc[:100] + ' ...'
     else:    
         return desc[:100]
+        
+
+@register.simple_tag
+def get_address_by_id(address_id):
+    address = Address.objects.get(
+        id = address_id
+    )
+    return address
 
 
 

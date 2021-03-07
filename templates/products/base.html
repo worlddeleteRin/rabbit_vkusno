@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Fabrik</title>
+    <title>Доставка еды</title>
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/jquery_mask_input.js' %}"></script>
 
     <script src="{% static 'js/wayp/noframework.waypoints.min.js' %}"></script>
     <script src="{% static 'js/wayp/sticky.min.js' %}"></script>
@@ -64,6 +65,14 @@
 
     {% include './blocks/pr_added_dialog.html' %}
 
+    {% include '../users/change_password_form.html' %}
+
+    {% include '../users/add_address_form.html' %}
+
+    {% comment %} {% include '../users/change_address_form.html' %} {% endcomment %}
+
+    {% include '../users/delete_address_form.html' %}
+
 
     
     <script src="{% static 'slick/slick.js' %}"></script>
@@ -91,8 +100,54 @@ var sticky = new Waypoint.Sticky({
 //   }
 // }
 
+$(".add_address_form_button").click(function() {
+        if ($(this).hasClass('need_render')) {
+            $(".add_address_button").addClass('need_render')
+        }
+        openAddAddressForm()
+    })
 
-
+$(".logout_button_submit").click(function() {
+    $.ajax({
+        url: "{% url 'users:login_out_ajax' %}",
+        data: {
+        }, success: function(data) {
+            window.location.href = '/'
+        }
+    })
+})
+function openChangePasswordForm() {
+            $('#change_password_form').addClass('show')
+            $('.pform__wrap__wrapper').addClass('show')
+        }
+function closeChangePasswordForm() {
+    $('#change_password_form').removeClass('show')
+    $('.pform__wrap__wrapper').removeClass('show')
+}
+function openAddAddressForm() { 
+            $('#add_address_form').addClass('show')
+            $('.pform__wrap__wrapper').addClass('show')
+        }
+function closeAddAddressForm() {
+    $('#add_address_form').removeClass('show')
+    $('.pform__wrap__wrapper').removeClass('show')
+}
+function openChangeAddressForm() {
+            $('#change_address_form').addClass('show')
+            $('.pform__wrap__wrapper').addClass('show')
+        }
+function closeChangeAddressForm() {
+    $('#change_address_form').removeClass('show')
+    $('.pform__wrap__wrapper').removeClass('show')
+}
+function openDeleteAddressForm() {
+        $('#delete_address_form').addClass('show')
+        $('.pform__wrap__wrapper').addClass('show')
+    }
+function closeDeleteAddressForm() {
+    $('#delete_address_form').removeClass('show')
+    $('.pform__wrap__wrapper').removeClass('show')
+}
 
 
 $(".main__header__phone__callme").click(function() {
@@ -280,6 +335,8 @@ $("#pform_button").click(function() {
          accurateTrackBounce:true,
          webvisor:true
     });
+
+
  </script>
  <noscript><div><img src="https://mc.yandex.ru/watch/69688498" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
  <!-- /Yandex.Metrika counter -->

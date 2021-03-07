@@ -13,6 +13,7 @@
   z-index: 9999999999;
   transition: all 0.4s;
 }
+
 .pform__wrap__close {
   cursor: pointer;
   position: absolute;
@@ -22,6 +23,7 @@
   background-color: none;
   color: white;
 }
+
 @media (max-width: 954px) {
   .pform__wrap__close {
     color: black;
@@ -45,6 +47,7 @@
   /* margin: 50px 80px; */
   padding: 50 0;
 }
+
 .pform__container__title {
   text-align: center;
   margin-top: 0px;
@@ -52,10 +55,12 @@
   text-transform: uppercase;
   font-family: "gpro-text-bold";
 }
+
 .pform__container__subtitle {
   text-align: center;
   margin-top: 8px;
 }
+
 .pform__container__form {
   margin-left: 10px;
   margin-right: 10px;
@@ -66,6 +71,7 @@
   flex-direction: column;
   align-items: center;
 }
+
 .pform__container__form .contact__input {
   max-width: 350px;
   width: 90%;
@@ -78,10 +84,12 @@
   font-size: 20px;
   outline: none;
 }
+
 .pform__container__form .contact__input::placeholder {
   color: #15393d;
   font-family: "gpro-text-semilight";
 }
+
 .pform__container__form .pform__button {
   border-radius: 5px;
   min-width: 50px;
@@ -99,6 +107,7 @@
   font-size: 18px;
   transition: all 0.2s;
 }
+
 .pform__container__form .pform__button:hover {
   background-color: red;
 }
@@ -112,11 +121,13 @@
     padding: 25 0;
   }
 }
+
 @media (max-width: 423px) {
   .pform__button {
     padding: 10px 0px;
   }
 }
+
 .pform__wrap__wrapper {
   top: 0;
   left: 0;
@@ -125,7 +136,7 @@
   position: fixed;
   z-index: 499;
   background-color: black;
-  opacity: 0.3;
+  opacity: .3;
   display: none;
 }
 

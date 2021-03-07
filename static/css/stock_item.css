@@ -14,6 +14,7 @@
   position: relative;
   text-align: center;
 }
+
 .stock__item__img img {
   max-height: 400px;
   max-width: 90%;
@@ -25,6 +26,7 @@
   margin: 20 0;
   text-align: center;
 }
+
 .stock__item__desc span {
   font-size: 18px;
 }

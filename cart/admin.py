@@ -17,5 +17,6 @@ admin.site.register(Order, OrderAdmin)
 # admin.site.register(ViewedProduct)
 # admin.site.register(Promocode)
 admin.site.register(Cart)
+admin.site.register(Coupon)
 
 

@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products',
     'cart',
+    'users',
+    'django_sass_compiler',
 ]
 
 MIDDLEWARE = [

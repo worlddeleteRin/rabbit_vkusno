@@ -15,6 +15,8 @@ from django.core import serializers
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
+from users.models import is_authorized, get_user, Address
+
 
 
 def get_session_key(request):
@@ -48,11 +50,12 @@ def index(request):
 def offer(request):
     session_key = get_session_key(request)
     cart = get_or_create_cart(request)
-
+    user = get_user(request)
     categories = Category.objects.all()
     return render(request, 'cart/offer.html', {
         'categories': categories,
         'cart': cart,
+        'user': user,
     })
 
 def order_created(request):
@@ -98,6 +101,7 @@ def add_item_ajax(request):
             price = pr.price,
             sale_price = pr.sale_price,
             imgsrc = pr.imgsrc,
+            category = pr.category
         )
         item.save()
         in_cart = 'yes'
@@ -254,7 +258,7 @@ def create_order_ajax(request):
     session_key = get_session_key(request)
     cart = get_or_create_cart(request)
     cart_total = cart.items_in_cart()
-
+    purchase_amount = cart.get_total()
     # name = urllib.parse.unquote(request.GET['name'])
     # phone = urllib.parse.unquote(request.GET['phone'])
     # delivery = urllib.parse.unquote(request.GET['delivery'])
@@ -266,16 +270,42 @@ def create_order_ajax(request):
     delivery = request.GET['delivery']
     address = request.GET['address']
     payment = request.GET['payment']
-    print(delivery)
+
+    is_auth = is_authorized(request)
+    if (is_auth):
+        user = get_user(request)
+        if delivery == 'Самовывоз':
+            address =  'Самовывоз'
+            pass
+        else:
+            address = Address.objects.get(
+                id = delivery
+            ).get_full()
+            delivery = 'Курьер'
+        bonus_gained = calc_bonus_gained(user, purchase_amount)
+    else:
+        user = None
+        bonus_gained = 0
+    
+
 
     new_order = Order(
+        user = user,
         name = name,
         phone = phone,
         delivery = delivery,
         address = address,
         payment = payment,
+        bonus_gained = bonus_gained,
     )
     new_order.save()
+
+    # add bonus gained to user and save the user
+    # if (is_auth):
+    #     user.bonus += bonus_gained
+    #     user.save()
+
+
     cart_items_mail = []
     order_price_mail = 0
 
@@ -289,33 +319,33 @@ def create_order_ajax(request):
         order_price_mail += price
         cart_items_mail.append([item.name, item.quantity, price])
     all_items = new_order.item_set.all()
-    try:
-        email_context = {
-            'name': name,
-            'phone': phone,
-            'order_price': order_price_mail,
-            'order_items': all_items,
-            'address': address,
-            'delivery': delivery,
-            'payment': payment,
-        }
-        admin_html_message = render_to_string('cart/blocks/mail_template.html', email_context)
-        admin_html_message_plain = strip_tags(admin_html_message)
-        send_mail(
-            'Новый заказ на сайте!',
-            admin_html_message_plain,
-            settings.EMAIL_HOST_USER,
-            [
-            'worlddelete0@mail.ru', 
-            'fudfabrik@gmail.com',
-            '161085ap@mail.ru',
-            # 'worlddelete0@yandex.ru',
-            ],
-            html_message= admin_html_message,
-            # 'fudfabrik@gmail.com'
-            )
-    except:
-        pass
+    # try:
+    #     email_context = {
+    #         'name': name,
+    #         'phone': phone,
+    #         'order_price': order_price_mail,
+    #         'order_items': all_items,
+    #         'address': address,
+    #         'delivery': delivery,
+    #         'payment': payment,
+    #     }
+    #     admin_html_message = render_to_string('cart/blocks/mail_template.html', email_context)
+    #     admin_html_message_plain = strip_tags(admin_html_message)
+    #     send_mail(
+    #         'Новый заказ на сайте!',
+    #         admin_html_message_plain,
+    #         settings.EMAIL_HOST_USER,
+    #         [
+    #         # 'worlddelete0@mail.ru', 
+    #         # 'fudfabrik@gmail.com',
+    #         # '161085ap@mail.ru',
+    #         # 'worlddelete0@yandex.ru',
+    #         ],
+    #         html_message= admin_html_message,
+    #         # 'fudfabrik@gmail.com'
+    #         )
+    # except:
+    #     pass
 
     return JsonResponse({
         'order_created': 'yes',
@@ -323,3 +353,56 @@ def create_order_ajax(request):
 
 
 
+def process_promo_ajax(request):
+    promo = request.GET['promo']
+    success = True
+    print('promo is', promo)
+    promo_exist = Coupon.objects.filter(
+        code = promo
+    ).exists()
+    if promo_exist == False: 
+        success = False
+        msg = 'Промокод не найден'
+        return JsonResponse({
+            'success': success,
+            'msg': msg
+        }, status = 200)
+    else:
+        promo = Coupon.objects.get(code = promo)
+        if promo.active == False:
+            success = False
+            msg = 'В настоящий момент данный промокод не активен'
+            return JsonResponse({
+                'success': success,
+                'msg': msg
+            }, status = 200)
+        else:
+            success = True
+            msg = 'Промокод может быть использован'
+            user_status = promo.check_user(request)
+            if user_status == False:
+                success = False
+                msg = 'пользователь уже использовал этот промокод'
+                return JsonResponse({
+                    'success': success,
+                    'msg': msg
+                }, status = 200)     
+            else:
+                success = True
+                msg = 'пользователь может использовать промокод'
+                return promo.process_cart_coupon(request)
+
+    return JsonResponse({
+        'success': success
+    }, status = 200)
+
+def remove_promo_ajax(request):
+    cart = get_or_create_cart(request)
+    cart.coupon = None
+    cart.save()
+    success = True
+    msg = 'promo deleted'
+    return JsonResponse({
+        'success': success,
+        'msg': msg,
+    }, status = 200)

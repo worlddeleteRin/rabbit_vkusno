@@ -9,7 +9,7 @@ class Category(models.Model):
     imgsrc = models.ImageField(upload_to="static/images/products", default = '')
     def __str__(self):
         return self.name 
-        
+
 # class Destination(models.Model):
 #     name = models.CharField(default = '', max_length = 300)
 #     category = models.ForeignKey(Category,
@@ -33,6 +33,9 @@ class Product(models.Model):
     imgsrc = models.ImageField(upload_to="static/images/products", default = '')
     def __str__(self):
         return self.name 
+
+
+
     def discount_perc(self):
         return int(((self.price - self.sale_price) / self.price) * 100)
     def discount_val(self):
@@ -66,6 +69,9 @@ class Stock(models.Model):
     name = models.CharField(default = '', max_length = 300)
     description = models.CharField(default = '', max_length = 2000)
     imgsrc = models.ImageField(upload_to="static/images/products")
+
+    def __str__(self):
+        return self.name
 
 def deleteall():
     pr = Product.objects.all()

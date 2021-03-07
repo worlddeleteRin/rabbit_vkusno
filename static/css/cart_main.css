@@ -8,11 +8,13 @@
   padding: 30 0;
   width: 100%;
 }
+
 .cart__container__products {
   border-radius: 3px;
   width: 65%;
   background-color: white;
 }
+
 .cart__container__checkout {
   left: 63%;
   right: 20%;
@@ -22,6 +24,7 @@
   width: 35%;
   background-color: white;
 }
+
 .cart__container__checkout__content {
   margin: 30px;
 }
@@ -42,12 +45,14 @@
   align-items: center;
   justify-content: center;
 }
+
 .cart__checkout__button span {
   text-decoration: none;
   font-family: "gpro-text-medium";
   color: white;
   font-size: 16px;
 }
+
 .cart__checkout__button:hover {
   background-color: #33b062;
   text-decoration: none;
@@ -65,36 +70,43 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .your__cart__block__title {
   color: #001a34;
   font-size: 20px;
   font-family: "gpro-text-bold";
 }
+
 .your__cart__block__value {
   color: #808d9a;
   font-family: "gpro-text-light";
   font-size: 14px;
 }
+
 .your__cart__block__title2 {
   font-size: 14px;
   color: #001a34;
   font-family: "gpro-text-semilight";
 }
+
 .your__cart__block__title3 {
   font-size: 20px;
   color: #001a34;
   font-family: "gpro-text-medium";
 }
+
 .your__cart__block__value2 {
   font-size: 14px;
   color: #001a34;
   font-family: "gpro-text-medium";
 }
+
 .your__cart__block__value3 {
   font-size: 14px;
   color: #f91155;
   font-family: "gpro-text-medium";
 }
+
 .your__cart__block__value4 {
   font-size: 20px;
   color: #001a34;
@@ -112,11 +124,13 @@
   display: flex;
   justify-content: space-between;
 }
+
 .cart__container__products__item__img {
   max-width: 100px;
   max-height: 100px;
   object-fit: contain;
 }
+
 .cart__container__products__item__info {
   max-width: 100%;
   display: flex;
@@ -124,6 +138,7 @@
   justify-content: space-between;
   margin: 0 0 0 25;
 }
+
 .cart__container__products__item__info__name a {
   cursor: pointer;
   font-size: 15px;
@@ -131,41 +146,49 @@
   text-decoration: none;
   color: black;
 }
+
 .cart__container__products__item__info__btns {
   display: flex;
 }
+
 .cart__container__products__item__price {
   width: 50%;
   text-align: center;
 }
+
 .cart__container__products__item__price__sale {
   color: #001a34;
   font-size: 15px;
   font-family: "gpro-text-medium";
 }
+
 .cart__container__products__item__price__regular {
   margin: 10 0;
 }
+
 .cart__container__products__item__count {
   width: 50%;
 }
+
 .cart__container__products__item__count__main {
   display: flex;
   align-items: center;
   align-content: center;
   justify-content: center;
 }
+
 .cart__container__products__item__count__main__btn i {
   cursor: pointer;
   color: #fa5523;
   margin: 0 10;
   transition: all 0.2s;
 }
+
 .cart__container__products__item__count__main__btn i:hover {
-  background-color: #004ed6;
+  background-color: red;
   color: white;
   transform: scale(1.1);
-  border: 2px solid #004ed6;
+  border: 2px solid red;
 }
 
 .cart__price__reg1 {
@@ -174,6 +197,7 @@
   font-family: "gpro-text-light";
   color: #808d9a;
 }
+
 .cart__price__reg1::before {
   top: 35%;
   left: 0;
@@ -228,48 +252,44 @@
     right: 0;
   }
 }
+
 @media (max-width: 660px) {
   .cart__container__products__item {
     flex-direction: column;
   }
-
   .cart__container__products__item__info__container {
     width: 100%;
     justify-content: space-between;
   }
-
   .cart__main {
     margin: 0 0;
   }
-
   .cart__container__products__item__second__container {
     margin: 20 0;
     width: 100%;
   }
-
   .cart__container__products__item__info {
     margin-left: 10px;
     width: 75%;
   }
-
   .cart__container__products__item__info__btns {
     text-align: center;
     margin: 10 0;
     flex-direction: column;
   }
-
   .cart__container__products__item__btn {
     font-size: 14px;
     margin: 15 0 0 0;
   }
-
   #divide__delete {
     display: none;
   }
 }
+
 .item__btn__cart i {
   font-size: 20px;
 }
+
 .item__btn__cart span {
   color: white;
   border-radius: 3px;
@@ -281,6 +301,7 @@
   color: #fa5523;
   transition: all 0.2s;
 }
+
 #item_btn_addfavorite span:hover {
   color: white;
   background-color: #fa5523;
@@ -291,6 +312,7 @@
   border: 1px solid #f91155;
   transition: all 0.2s;
 }
+
 #item_btn_deletefromcart span:hover {
   background-color: #f91155;
   color: white;

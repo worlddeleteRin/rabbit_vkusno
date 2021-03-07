@@ -124,12 +124,16 @@
         header__cart"
         href="{% url 'cart:index' %}">
             <i class="fa fa-shopping-basket
-            header__basket"></i>
+            header__basket">cart</i>
             <div class="cart__count__info">
                 <span class="count__label">
                     {{ cart.items_in_cart }}
                 </span>
             </div>
+        </a>
+        <a class="header__second__icons__item nolink"
+        href="{% url 'users:index' %}">
+            <i class="fa fa-user">user</i>
         </a>
 
         <!-- <a class="header__second__icons__item account__big">

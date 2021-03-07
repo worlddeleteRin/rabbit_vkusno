@@ -1,0 +1,110 @@
+{% extends '../products/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="max_width_1">
+        
+    {% include './user_head.html' %}
+
+    {% for order in user.order_set.all  %}
+        <div class="order_item pointer">
+            <div class="order_item_block">
+                <div class="order_id">
+                    # {{ order.id }}
+                </div>
+                <div class="order_status uppercase">
+                    <span value="{{ order.status }}" class="order_status_value">
+                        {{ order.get_status_display }}
+                    </span>
+                </div>
+            </div>
+            <div class="order_item_block order_block_delivery">
+                <div class="delivery_title">
+                    Адрес доставки
+                </div>
+                <div class="delivery_address">
+                    {{ order.address }}
+                </div>
+            </div>
+            <div class="order_item_block order_cost_first">
+                <span>{{ order.payment }}
+                <span class="order_cost">
+                    {{ order.get_order_cost }}&nbsp;₽
+                </span>
+                </span>
+            </div>
+            <div class="order_item_block order_item_block_goods">
+                <div class="order_items_titleh">Состав заказа</div>
+                <div class="order_cost_last">
+                    {{ order.payment }} {{ order.get_order_cost }}&nbsp; ₽
+                </div>
+                <div class="order_items">
+                    {% for item in order.item_set.all %}
+			<img src="{% static 'images/products/' %}{{ item.imgsrc }}" />
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% comment %} 
+    {{ request.session.session_key }}
+
+    {% if authorized %}
+        Вы авторизованы <br>
+        Аккаунт создан: {{ user.created_at }} <br>
+        {{ user.id }}
+        {{ user.phone }}
+        {{ user.password }}
+        {{ user.email }} <br>
+        всего потрачено: {{ user.get_total_spend }} руб. <br>
+        Бонусов на счету: {{ user.get_total_bonus_gained }} руб. <br>
+        Текущий процент кэшбека: {{ user.calc_user_discount }}% <br>
+        {% for order in user.order_set.all  %} 
+            {{ order.id }} {{ order.item_set.all }} {{ order.get_order_cost }} <br>
+            Бонусов с заказа получено: {{ order.bonus_gained }} <br>
+        {% endfor %}
+        <div class="nice_button">
+            <span class="logout_button_submit">
+                Выйти с аккаунта
+            </span>
+        </div>
+        <div class="change_password_button pointer">
+            <i class="fa fa-lock"></i>
+            <span>Изменить пароль</span>
+        </div>
+    {% else %}
+        You are not logged in 
+        {% include './login_form.html' %}
+    {% endif %} {% endcomment %}
+
+    </div>
+
+    <script>
+        setOrderStatusColors()
+        $("#orders_link").parent().addClass('active')
+        $(".change_password_button").click(function() {
+            openChangePasswordForm()
+        })
+
+        function setOrderStatusColors() {
+            orders_status = $(".order_status_value")
+            for(i = 0; i < orders_status.length; i++) {
+                current_status = $(orders_status[i]).attr("value")
+                if (current_status == 'in_progress') {
+                    $(orders_status[i]).parent().addClass('progress')
+                }
+                else if (current_status == 'completed') {
+                    $(orders_status[i]).parent().addClass('completed')
+                }
+                else if (current_status == 'cancelled') {
+                    $(orders_status[i]).parent().addClass('cancelled')
+                }
+                else {
+                    $(orders_status[i]).parent().addClass('regular')
+                }
+            }
+        }
+    </script>
+
+{% endblock content %}

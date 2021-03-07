@@ -1,0 +1,67 @@
+<!-- promo block is here -->
+{% if cart.coupon %}
+    <div class="promo_container">
+    <div>
+    Промокод 
+    <span class="main_color">
+        {{ cart.coupon.code }}
+    </span>
+     успешно использован!
+    </div>
+    <div class="nice_button pointer noselect center">
+        <span class="promo_delete_button">
+            Отменить промокод
+        </span>
+    </div>
+    </div>
+{% else %}
+<div class="promo_msg"></div>
+<div class="input_promo">
+    <input class="input_style1"
+    type="text" 
+    name="promocode_input" 
+    placeholder="Промокод"
+    autocomplete="off">
+    <div class="nice_button font_calc pointer noselect
+    promo_button_submit"
+    style="margin: 13px 0px;">
+        <span>Использовать</span>
+    </div>
+</div>
+<!-- promo block ends here -->
+
+{% endif %}
+
+<script>
+    $(".promo_button_submit").click(function() {
+        var promo = $("input[name='promocode_input']").val()
+        if (promo.length < 1) {
+            var msg = 'Поле промокода пусто'
+            $('.promo_msg').html(msg)
+        } else {
+            console.log('ready to process promo');
+            $.ajax({
+                url: "{% url 'cart:process_promo_ajax' %}",
+                data: { 
+                    'promo': promo,
+                }, success: function(data) {
+                    msg = data['msg']
+                    var status = data['success']
+                    if (status == true) {
+                        window.location.reload()
+                    } else {
+                    $('.promo_msg').html(msg)
+                    }
+                }
+            })
+        }
+    })
+    $(".promo_delete_button").click(function() {
+        $.ajax({
+            url: "{% url 'cart:remove_promo_ajax' %}",
+            data: {}, success: function() {
+                window.location.reload()
+            }
+        })
+    })
+</script>

@@ -21,26 +21,17 @@
 }
 
 .check__blocks {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
 
 .check__block {
   padding: 20 0;
   margin: 0 10;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-content: center;
+  justify-content: center;
   min-width: 150px;
   max-width: 300px;
   border: 1px solid grey;
@@ -67,8 +58,7 @@
 #map_delivery_block img {
   height: 450px;
   width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 #map_delivery_block.show {
@@ -82,4 +72,3 @@
 #map_loc_block.show {
   display: block;
 }
-/*# sourceMappingURL=contact.css.map */

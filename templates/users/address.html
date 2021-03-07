@@ -1,0 +1,62 @@
+{% extends '../products/base.html' %}
+
+{% block content %}
+
+ <div class="max_width_1">
+ 
+    {% include './user_head.html' %}
+
+    <div class="nice_title small pd15">
+        <span>
+            Адреса
+        </span>
+    </div>
+
+    <div class="nice_button pointer noselect">
+        <span class="add_address_form_button">
+            Добавить адрес
+        </span>
+    </div>
+
+    {% for address in user.address_set.all  %}
+        <div class="address_item pd15">
+            <div class="address_item_block">
+                <div class="nice_title small">
+                    {{ address.city }}
+                </div>
+                <div class="address_item_desc">
+                    {{ address.get_full }}
+                </div>
+            </div>
+            <div class="address_item_block">
+                {% comment %} <span class="change_address_button pointer" value="{{ address.id }}">
+                    Изменить
+                </span> {% endcomment %}
+                <i class="delete_address_button pointer fa fa-trash main_color" value="{{ address.id }}">
+                </i>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+
+
+
+<script>
+    $(".delete_address_button").click(function() {
+        var address_id = $(this).attr("value")
+        $("#delete_address_form").attr("value", address_id)
+        openDeleteAddressForm(address_id)
+    })
+    $(".change_address_button").click(function() {
+        openChangeAddressForm()
+    })
+    $(".changepass_button_submit").click(function() {
+        openChangePasswordForm()
+    })
+    $("#address_link").parent().addClass("active")
+</script>
+
+{% endblock content %}
+

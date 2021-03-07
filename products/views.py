@@ -17,7 +17,7 @@ from django.conf import settings
 def get_session_key(request):
     if not request.session.session_key:
         request.session.create()
-    return request.session.session_key
+    return request.session.session_key  
 
 def get_or_create_cart(request):
     session_key = get_session_key(request)

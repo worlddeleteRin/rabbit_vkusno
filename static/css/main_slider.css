@@ -8,10 +8,12 @@
   max-height: 438px;
   /* height: 100%; */
 }
+
 .page__main__slider__img {
   /* max-width: 100%; */
   /* max-height: 100%; */
 }
+
 .page__main__slider__img img {
   object-fit: contain;
   /* width: 100%; */

@@ -6,20 +6,16 @@
   text-decoration: none;
   font-size: 18px;
   padding: 15 50;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
   cursor: pointer;
   border-radius: 3px;
   background-color: #fa5523;
   color: white;
-  -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
 .continue__shopping #continue__shopping:hover {
-  background-color: #004ed6;
+  background-color: red;
 }
 
 .favorite__empty {
@@ -44,4 +40,3 @@
 .favorite__main__block.hide {
   display: none;
 }
-/*# sourceMappingURL=favorite.css.map */
