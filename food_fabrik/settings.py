@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'cart',
     'users',
     'django_sass_compiler',
+    'api',
 ]
 
 MIDDLEWARE = [
