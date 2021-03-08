@@ -24,4 +24,4 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     path('admin/', admin.site.urls),
     path('profile/', include('users.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] 
