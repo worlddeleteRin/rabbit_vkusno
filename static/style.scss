@@ -23,6 +23,18 @@
 @import './css/added_dialog.scss';
 
 
+.regular {
+    font-family: $main-font;
+}
+.grey {
+    color: grey;
+}
+.medium {
+    font-family: $main-medium;
+}
+.pd10 {
+    padding: 10 0;
+}
 .pd15 {
     padding: 15 0;
 }
@@ -321,6 +333,7 @@
 
 body {
     // margin: 0px;
+    background-color: rgb(250,249,247);
     //  background-color: $bg-nice;
     font-family: 'gpro-text-regular';
 }
@@ -446,6 +459,9 @@ body.hidden {
             font-size: 20px;
         }
     }
+}
+.user_head.hide {
+    display: none;
 }
 .user_head__block1 {
     margin-right: 65px;
@@ -661,4 +677,39 @@ input[type="radio"]:checked:after {
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+.order_page {
+    // border: 2px solid red;
+    margin: 10 0;
+    padding: 20 0;
+}
+.order_info {
+}
+.order_items_block {
+}
+.order_block {
+    border-radius: 4px;
+    margin: 15 0;
+    padding: 30px;
+    background-color: white;
+}
+.delivery_info_icon {
+    margin-right: 10px;
+}
+.order_items_block_container {
+    // border: 2px solid red;
+    margin-top: 15px;
+}
+.order_item_single {
+    // border: 2px solid green;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.order_item_single_img {
+    img {
+        width: 80px;
+        height: 53px;
+    }
 }

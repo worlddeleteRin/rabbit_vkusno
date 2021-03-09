@@ -7,6 +7,7 @@ app_name = 'users'
 urlpatterns = [
     path('', views.index, name = 'index'),
     path('orders/', views.orders, name = 'orders'),
+    path('orders/<int:order_id>', views.order_item, name = 'order_item'),
     path('login_ajax', views.login_ajax, name = 'login_ajax'),
     path('login_out_ajax', views.login_out_ajax, name = 'login_out_ajax'),
     path('login', views.login, name = 'login'),

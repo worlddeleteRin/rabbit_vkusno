@@ -71,4 +71,15 @@ def api_get_allcategories(request):
             'categories': categories,
         }, status = 200)
     
-
+def get_stocks(request): 
+    authorized = api_authorize(request)
+    if not authorized:
+        return return_401()
+    else:
+        stocks = Stock.objects.all()
+        stocks = list(stocks.values())
+        status = 'success'
+        return JsonResponse({
+            'status': status,
+            'stocks': stocks,
+        }, status = 200)

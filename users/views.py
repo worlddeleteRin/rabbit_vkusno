@@ -84,6 +84,20 @@ def orders(request):
     }
     return render(request, template, context)
 
+def order_item(request, order_id):
+    authorized = is_authorized(request)
+    if authorized:
+        user = get_user(request)
+    else:
+        user = None
+    template = 'users/order_item.html'
+    context = {
+        'request': request,
+        'authorized': authorized,
+        'user': user,
+    }
+    return render(request, template, context)
+
 def restore(request):
     template = 'users/restore.html'
     context = {

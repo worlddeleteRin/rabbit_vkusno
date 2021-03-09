@@ -4,11 +4,11 @@
 {% block content %}
 
     <div class="max_width_1">
-        
     {% include './user_head.html' %}
 
     {% for order in user.order_set.all  %}
-        <div class="order_item pointer">
+        <a href="{% url 'users:orders'%}{{ order.id }}"
+        class="order_item pointer nolink">
             <div class="order_item_block">
                 <div class="order_id">
                     # {{ order.id }}
@@ -45,7 +45,7 @@
                     {% endfor %}
                 </div>
             </div>
-        </div>
+        </a>
     {% endfor %}
 {% comment %} 
     {{ request.session.session_key }}
