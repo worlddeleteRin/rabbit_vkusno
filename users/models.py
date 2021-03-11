@@ -21,6 +21,11 @@ class User(models.Model):
 
     def __str__(self):
         return self.phone
+    def check_password_correct(self, password):
+        if self.password == password:
+            return True
+        else:
+            return False
     def get_total_spend(self):
         total_spend = 0
         for order in self.order_set.all():
