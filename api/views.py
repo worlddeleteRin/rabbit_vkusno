@@ -195,3 +195,41 @@ def get_user_info(request):
             'status': status,
             'user': user,
         }, status = 200)
+
+def get_user_orders(request):
+    print('get user orders request get')
+    authorized = api_authorize(request)
+    if not authorized:
+        return return_401()
+    else:
+        status = True
+        user_id = request.GET['user_id']
+        user_id = int(user_id)
+        user = User.objects.get(
+            id = user_id
+        )
+        response_orders = []
+        orders = user.order_set.all().order_by('-created_at');
+        for order in orders:
+            order_items = order.item_set.all()
+            order_items = list(order_items.values())
+            current_order = {
+                'id': order.id,
+                'created_at': order.created_at,
+                'name': order.name,
+                'phone': order.phone,
+                'delivery': order.delivery,
+                'address': order.address,
+                'payment': order.payment,
+                'bonus_gained': order.bonus_gained,
+                'coupon': order.coupon,
+                'status': order.status,
+                'status_display': order.get_status_display(),
+                'order_cost': order.get_order_cost(),
+                'order_items': order_items,
+            }
+            response_orders.append(current_order)
+        return JsonResponse({
+            'status': status,
+            'orders': response_orders,
+        }, status = 200)

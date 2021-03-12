@@ -14,4 +14,5 @@ urlpatterns = [
     path('register_user_request', views.register_user_request, name='register_user_request'),
     path('register_user_finish', views.register_user_finish, name='register_user_finish'),
     path('get_user_info', views.get_user_info, name='get_user_info'),
+    path('get_user_orders', views.get_user_orders, name='get_user_orders'),
 ]
