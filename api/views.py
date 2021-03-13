@@ -213,9 +213,11 @@ def get_user_orders(request):
         for order in orders:
             order_items = order.item_set.all()
             order_items = list(order_items.values())
+            date_display = order.created_at.strftime("%Y-%m-%d %H:%M")
             current_order = {
                 'id': order.id,
                 'created_at': order.created_at,
+                'date_display': date_display,
                 'name': order.name,
                 'phone': order.phone,
                 'delivery': order.delivery,

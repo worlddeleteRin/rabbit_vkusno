@@ -3,6 +3,8 @@ from users.models import User
 from products.models import Product, Category
 from users.models import get_user
 from django.http import JsonResponse
+from django.contrib.humanize.templatetags.humanize import naturalday, naturaltime
+import time
 
 # Create your models here.
 
