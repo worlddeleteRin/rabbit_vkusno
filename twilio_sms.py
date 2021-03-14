@@ -1,9 +1,10 @@
 def twilio_send_sms(code, phone):
     import requests
     from requests.auth import HTTPBasicAuth
+    from secure.api_credentials import TWILIO_SID, TWILIO_TOKEN
 
-    sid = 'ACd8e113fdda12f39251ad8f69d6affce7'
-    token = '961c2c37eb841e74c5d13d71ea471a00'
+    sid = TWILIO_SID
+    token = TWILIO_TOKEN 
     main_url = 'https://api.twilio.com/2010-04-01/'
     method = '/Accounts/{}/Messages.json'.format(sid)
     url = main_url + method
