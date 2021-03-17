@@ -213,7 +213,7 @@ def get_user_orders(request):
         for order in orders:
             order_items = order.item_set.all()
             order_items = list(order_items.values())
-            date_display = order.created_at.strftime("%Y-%m-%d %H:%M")
+            date_display = order.created_at.strftime("%Y-%m-%d %H:%M")        
             current_order = {
                 'id': order.id,
                 'created_at': order.created_at,
@@ -235,3 +235,98 @@ def get_user_orders(request):
             'status': status,
             'orders': response_orders,
         }, status = 200)
+
+
+def get_user_addresses(request):
+    authorized = api_authorize(request)
+    if not authorized:
+        return return_401()
+    else:
+        status = 'success'
+        user_id = request.GET['user_id']
+        user_id = int(user_id)
+        user = User.objects.get(
+            id = user_id
+        )
+        addresses = user.address_set.all()
+        addresses = list(addresses.values())
+        return JsonResponse({
+            'status': status,
+            'addresses': addresses,
+        }, status = 200)
+
+def delete_user_address(request):
+    authorized = api_authorize(request)
+    if not authorized:
+        return return_401()
+    else:
+        status = 'success'
+        user_id = request.GET['user_id']
+        user_id = int(user_id)
+        address_id = request.GET['address_id']
+        address_id = int(address_id)
+        user = User.objects.get(
+            id = user_id
+        )
+        address = Address.objects.get(
+            id = address_id
+        )
+        user.address_set.remove(address)
+        address.delete()
+        return JsonResponse({
+            'status': status,
+            # maybe return deleted: yes | no
+        }, status = 200)
+
+def create_user_address(request):
+    authorized = api_authorize(request)
+    if not authorized:
+        return return_401()
+    else:
+        status = 'success'
+        user_id = request.GET['user_id']
+        user_id = int(user_id)
+        user = User.objects.get(
+            id = user_id
+        )
+        city = request.GET['city']
+        street = request.GET['street']
+        house = request.GET['house']
+        flat = request.GET['flat']
+        new_address = Address(
+            user = user,
+            city = city,
+            street = street,
+            house = house,
+            flat = flat,
+        )
+        new_address.save()
+        return JsonResponse({
+            'status': status,
+            # maybe return saved: yes | no
+        }, status = 200)
+
+def change_user_password(request):
+    authorized = api_authorize(request)
+    if not authorized:
+        return return_401()
+    else:
+        status = 'success'
+        user_id = request.GET['user_id']
+        new_password = request.GET['password']
+        user_id = int(user_id)
+        user = User.objects.get(
+            id = user_id
+        )
+        password_changed = True
+        try:
+            user.set_password(new_password)
+            user.save()
+        except: 
+            password_changed = False
+
+        return JsonResponse({
+            'status': status,
+            'password_changed': password_changed,
+        }, status = 200)
+

@@ -9,6 +9,7 @@ def get_session_key(request):
     return request.session.session_key  
 
 
+
 class User(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     phone = models.CharField(default = None, max_length = 50)
@@ -26,6 +27,8 @@ class User(models.Model):
             return True
         else:
             return False
+    def set_password(self, password):
+        self.password = password
     def get_total_spend(self):
         total_spend = 0
         for order in self.order_set.all():

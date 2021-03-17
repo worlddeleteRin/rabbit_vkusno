@@ -14,5 +14,10 @@ urlpatterns = [
     path('register_user_request', views.register_user_request, name='register_user_request'),
     path('register_user_finish', views.register_user_finish, name='register_user_finish'),
     path('get_user_info', views.get_user_info, name='get_user_info'),
+    path('get_user_info', views.get_user_info, name='get_user_info'),
     path('get_user_orders', views.get_user_orders, name='get_user_orders'),
+    path('get_user_addresses', views.get_user_addresses, name='get_user_addresses'),
+    path('delete_user_address', views.delete_user_address, name='delete_user_address'),
+    path('create_user_address', views.create_user_address, name='create_user_address'),
+    path('change_user_password', views.change_user_password, name='change_user_password'),
 ]

@@ -30,7 +30,7 @@ class Coupon(models.Model):
     categories = models.ManyToManyField(Category,
     null = True, blank = True)
     active = models.BooleanField()
-
+    users = models.ManyToManyField(User)
     def __str__(self):
         return self.code
     def get_products_list(self):
