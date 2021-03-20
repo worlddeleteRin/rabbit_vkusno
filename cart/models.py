@@ -163,6 +163,8 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete = models.SET_NULL,
     default = None, blank = True, null = True)
     created_at = models.DateTimeField(auto_now_add = True) 
+    amount = models.IntegerField(default = None,
+    blank = True, null = True)
     name = models.CharField(max_length = 200, default = '')
     phone = models.CharField(max_length = 50, default = '')
     # email = models.CharField(max_length = 200, default = '')

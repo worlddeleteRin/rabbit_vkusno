@@ -4,6 +4,8 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 import urllib
 import os
+import json
+
 from django.core.files.storage import default_storage
 from food_fabrik.settings import * 
 
@@ -11,6 +13,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import redirect, reverse
 import random
+import ast
 
 from twilio_sms import twilio_send_sms
 
@@ -20,6 +23,7 @@ from users.models import *
 
 from .models import * 
 from users.views import generate_code
+
 
 # Create your views here.
 
@@ -141,6 +145,9 @@ def register_user_request(request):
         sms_code = generate_code()
 
         sms_send = True
+        print('phone is ', user_phone)
+        twilio_response = twilio_send_sms(sms_code, user_phone)
+        print(twilio_response)
 
         return JsonResponse({
             'status': status,
@@ -328,5 +335,126 @@ def change_user_password(request):
         return JsonResponse({
             'status': status,
             'password_changed': password_changed,
+        }, status = 200)
+
+def create_order_not_auth(request):
+    authorized = api_authorize(request)
+    if not authorized:
+        return return_401()
+    else:
+        status = 'success'
+
+        # get necessary data
+        delivery_method = request.GET['delivery_method']
+        payment_method = request.GET['payment_method']
+        order_address = request.GET['order_address']
+        user_name = request.GET['user_name']
+        user_phone = request.GET['user_phone']
+
+        cart_items = json.loads(request.body)['cart_items']
+        purchase_amount = json.loads(request.body)['purchase_amount']
+        if int(delivery_method) == 1:
+            delivery = 'Доставка'
+        else:
+            delivery = 'Самовывоз'
+        if int(payment_method) == 1:
+            payment = 'Наличные'
+        else:
+            payment = 'Картой курьеру'
+
+        # start creating an order
+        new_order = Order(
+            amount = purchase_amount,
+            name = user_name,
+            phone = user_phone,
+            delivery = delivery,
+            address = order_address,
+            payment = payment,
+        )
+        new_order.save()
+        for item in cart_items:
+            product = Product.objects.get(id = item['id'])
+            new_item = Item(
+                pr_id = product.id,
+                name = product.name,
+                price = item['price'],
+                sale_price = product.sale_price,
+                category = product.category,
+                quantity = item['quantity'],
+                imgsrc = product.imgsrc,
+            )
+            new_item.save()
+            new_order.item_set.add(new_item)
+        # print('cart items are', cart_items)
+        # print('purchase amount is', purchase_amount)
+
+        return JsonResponse({
+            'status': status,
+            'order_created': True,
+        }, status = 200)
+
+def create_order_auth(request):
+    authorized = api_authorize(request)
+    if not authorized:
+        return return_401()
+    else:
+        status = 'success'
+
+        # get necessary data
+        user_id = int(request.GET['user_id'])
+        delivery_method = request.GET['delivery_method']
+        payment_method = request.GET['payment_method']
+        order_address_id = int(request.GET['order_address_id'])
+
+        cart_items = json.loads(request.body)['cart_items']
+        purchase_amount = json.loads(request.body)['purchase_amount']
+
+        # get current user
+        current_user = User.objects.get(id = user_id)
+
+        if int(delivery_method) == 1:
+            delivery = 'Доставка'
+            address = Address.objects.get(id = order_address_id).get_full()
+        else:
+            delivery = 'Самовывоз'
+            address = ''
+        if int(payment_method) == 1:
+            payment = 'Наличные'
+        else:
+            payment = 'Картой курьеру'
+
+        bonus_gained = bonus_gained = calc_bonus_gained(current_user, purchase_amount)
+
+        # start creating an order
+        new_order = Order(
+            user = current_user,
+            amount = purchase_amount,
+            name = current_user.name,
+            phone = current_user.phone,
+            delivery = delivery,
+            address = address,
+            payment = payment,
+            bonus_gained = bonus_gained,
+        )
+        new_order.save()
+        for item in cart_items:
+            product = Product.objects.get(id = item['id'])
+            new_item = Item(
+                pr_id = product.id,
+                name = product.name,
+                price = item['price'],
+                sale_price = product.sale_price,
+                category = product.category,
+                quantity = item['quantity'],
+                imgsrc = product.imgsrc,
+            )
+            new_item.save()
+            new_order.item_set.add(new_item)
+        # print('cart items are', cart_items)
+        # print('purchase amount is', purchase_amount)
+
+        return JsonResponse({
+            'status': status,
+            'order_created': True,
         }, status = 200)
 

@@ -9,7 +9,7 @@ def twilio_send_sms(code, phone):
     method = '/Accounts/{}/Messages.json'.format(sid)
     url = main_url + method
     data = {
-        'Body': 'ваш код для входа - {}'.format(code),
+        'Body': 'Это Фабрика Еды! Ваш код для входа - {}'.format(code),
         'From': '+17743714137',
         'To': '+' + phone,
     }

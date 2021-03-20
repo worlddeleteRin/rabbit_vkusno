@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from django.views.decorators.csrf import csrf_exempt
 
 app_name = 'api'
 urlpatterns = [
@@ -20,4 +21,6 @@ urlpatterns = [
     path('delete_user_address', views.delete_user_address, name='delete_user_address'),
     path('create_user_address', views.create_user_address, name='create_user_address'),
     path('change_user_password', views.change_user_password, name='change_user_password'),
+    path('create_order_not_auth', csrf_exempt(views.create_order_not_auth), name='create_order_not_auth'),
+    path('create_order_auth', csrf_exempt(views.create_order_auth), name='create_order_auth'),
 ]
