@@ -31,7 +31,7 @@ def get_or_create_cart(request):
 def index(request):
     cart = get_or_create_cart(request)
     session_key = get_session_key(request)
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by('-display_priority')
     # destinations = Destination.objects.all()
     products = Product.objects.all()
     sale_products = Product.objects.filter(

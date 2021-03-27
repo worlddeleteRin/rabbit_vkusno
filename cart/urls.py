@@ -18,4 +18,8 @@ urlpatterns = [
     path('create_order_ajax', views.create_order_ajax, name = 'create_order_ajax'),
     path('process_promo_ajax', views.process_promo_ajax, name = 'process_promo_ajax'),
     path('remove_promo_ajax', views.remove_promo_ajax, name = 'remove_promo_ajax'), 
+    path('process_bonus_use_ajax', views.process_bonus_use_ajax, name = 'process_bonus_use_ajax'), 
+    path('process_bonus_use_cancel_ajax', views.process_bonus_use_cancel_ajax, name = 'process_bonus_use_cancel_ajax'), 
+    path('check_set_delivery_discount_ajax', views.check_set_delivery_discount_ajax, name = 'check_set_delivery_discount_ajax'), 
+    path('check_set_payment_ajax', views.check_set_payment_ajax, name = 'check_set_payment_ajax'), 
 ]

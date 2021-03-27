@@ -10,19 +10,27 @@ django.setup()
 
 from products.models import * 
 
+PRODUCTS_PATH = '/Users/noname/work/fabrika_edi/main_project/goods/goods_main.xlsx'
+
 
 def create_products():
     deleteall()
-    path ='/Users/noname/work/ffabrik/host/goods_main.csv'
-    data = pd.read_csv(path)
+    data = pd.read_excel(PRODUCTS_PATH)
     print('data is ', len(data))
     for index, item in data.iterrows():
         print('start creating product')
-        cat = Category.objects.get_or_create(
-            slug = item['category'],
-            name = item['category'],
-            imgsrc = 'static/images/products/' + item['category_img']
-        )[0]
+        print('product index is', index)
+        print('product name is', item['name'])
+        print('product category is', item['category'])
+        cat_slug = str(item['category'].lower().strip())
+        if not Category.objects.filter(slug = cat_slug).exists():
+            cat = Category.objects.get_or_create(
+                slug = cat_slug,
+                name = item['category'],
+                imgsrc = 'static/images/products/' + item['category_img']
+            )[0]
+        else:
+            cat = Category.objects.get(slug = cat_slug)
         # print('current category', cat)
         if np.isnan(item['sale_price']):
             sale_price = 0

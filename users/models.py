@@ -32,7 +32,8 @@ class User(models.Model):
     def get_total_spend(self):
         total_spend = 0
         for order in self.order_set.all():
-            total_spend += order.get_order_cost()
+            # total_spend += order.get_order_cost()
+            total_spend += order.amount
         return total_spend
     def get_total_bonus_gained(self):
         return self.bonus
@@ -60,7 +61,7 @@ class Address(models.Model):
     null = True, blank = True)
 
     def get_full(self):
-        main = self.street + ' ул. ' +'д. '+ self.house
+        main = self.city + ', ' +  self.street + ' ул. ' +'д. '+ self.house
         if len(self.flat) > 0:
             main += ', кв. ' + self.flat
         return main

@@ -6,6 +6,7 @@ import os
 from django.core.files.storage import default_storage
 from food_fabrik.settings import * 
 from cart.models import * 
+from cart.views import get_or_create_cart
 
 from django.core.mail import send_mail
 from django.conf import settings
@@ -27,16 +28,21 @@ def index(request):
         return redirect(reverse('users:login'))
 
 def login(request):
+    cart = get_or_create_cart(request)
     template  = 'users/login.html'
     context = {
+        'cart': cart,
     }
     return render(request, template, context)
 def register(request):
+    cart = get_or_create_cart(request)
     template  = 'users/register.html'
     context = {
+        'cart': cart,
     }
     return render(request, template, context)
 def address(request):
+    cart = get_or_create_cart(request)
     authorized = is_authorized(request)
     if authorized:
         user = get_user(request)
@@ -44,10 +50,12 @@ def address(request):
         user = None
     template  = 'users/address.html'
     context = {
-        'user': user
+        'user': user,
+        'cart': cart,
     }
     return render(request, template, context)
 def promo(request):
+    cart = get_or_create_cart(request)
     authorized = is_authorized(request)
     if authorized:
         user = get_user(request)
@@ -55,10 +63,12 @@ def promo(request):
         user = None
     template  = 'users/promo.html'
     context = {
-        'user': user
+        'user': user,
+        'cart': cart,
     }
     return render(request, template, context)
 def settings(request):
+    cart = get_or_create_cart(request)
     authorized = is_authorized(request)
     if authorized:
         user = get_user(request)
@@ -66,35 +76,44 @@ def settings(request):
         user = None
     template  = 'users/settings.html'
     context = {
-        'user': user
+        'cart': cart,
+        'user': user,
     }
     return render(request, template, context)
 
 def orders(request):
+    cart = get_or_create_cart(request)
     authorized = is_authorized(request)
     if authorized:
         user = get_user(request)
     else:
         user = None
     template = 'users/orders.html'
+    user_orders = user.order_set.all()
     context = {
+        'cart': cart,
         'request': request,
         'authorized': authorized,
         'user': user,
+        'user_orders': user_orders,
     }
     return render(request, template, context)
 
 def order_item(request, order_id):
+    cart = get_or_create_cart(request)
     authorized = is_authorized(request)
     if authorized:
         user = get_user(request)
     else:
         user = None
+    order = Order.objects.get(id = order_id)
     template = 'users/order_item.html'
     context = {
         'request': request,
         'authorized': authorized,
         'user': user,
+        'order': order,
+        'cart': cart,
     }
     return render(request, template, context)
 

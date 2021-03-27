@@ -62,7 +62,7 @@
                 </div>
             <div class="delivery__block__main">
                 <div class="delivery__block__main__card
-                delivery__method"
+                delivery__method delivery__method__cura"
                 value="курьер"
                 data-toogle="#cart_input_cura">
                     <span>
@@ -70,7 +70,7 @@
                     </span>
                 </div>
                 <div class="delivery__block__main__card
-                delivery__method"
+                delivery__method delivery__method__byclient"
                 value="самовывоз"
                 data-toogle="#cart_input_own">
                     <span>
@@ -132,14 +132,14 @@
 
             <div class="delivery__block__main">
                 <div class="delivery__block__main__card
-                payment__method"
+                payment__method payment__method_cash"
                 value="наличные">
                     <span>
                         Наличными 
                     </span>
                 </div>
                 <div class="delivery__block__main__card
-                payment__method"
+                payment__method payment__method_beznal"
                 value="безнал">
                     <span>
                         Безналичный расчет
@@ -173,12 +173,12 @@
                 <div class="offer__page__block2__content__item__first">
                 
                     <div class="offer__page__block2__content__item__prinfo">
-                        {% modify_imgsrc item.imgsrc as imgsrc %}
+                        {% modify_imgsrc item.product.imgsrc as imgsrc %}
                         <img src="{{ imgsrc }}" alt="">
                         <div class="offer__page__block2__content__item__prinfo__second">
                             <a class="offer__page__block2__content__item__prinfo__second__name"
-                            href="{% url 'products:product' item.pr_id %}">
-                                {{ item.name }}
+                            href="{% url 'products:product' item.product.id %}">
+                                {{ item.product.name }}
                             </a>
                             <span class="offer__page__block2__content__item__prinfo__second__name">
                                 {{ item.quantity }} шт.
@@ -189,11 +189,11 @@
                 <div class="offer__page__block2__content__item__second">
                     {% if item.has_sale %}
                         <span>
-                            {{ item.sale_price }}
+                            {{ item.product.sale_price }}
                         </span>
                         {% else %}
                             <span>
-                                {{ item.price }}
+                                {{ item.product.price }}
                             </span>
                     {% endif %}
                 </div>
@@ -214,7 +214,9 @@
                 </span>
             </div>
         </div> -->
-        {% include './blocks/space20.html' %}
+            {% if user %}
+            {% include './blocks/bonus_use_block.html' %}
+            {% endif %}
         <div class="offer__page__block2__content__item">
             <div class="offer__page__block2__content__item__first">
                 <span class="your__cart__block__title3">
@@ -244,12 +246,57 @@
 
 <script>
     $(".main__site__wrapper__main").addClass("bg1")
+    check_set_delivery_payment()
+    function check_set_delivery_payment() {
+        var delivery_method = "{{ cart.delivery_method }}"
+        var payment_method = "{{ cart.payment_method }}"
+        console.log('delivery method is');
+        console.log(delivery_method);
+        if (delivery_method == 1) {
+            $(".delivery__method__cura").addClass('active')
+            setDeliveryActive($('.delivery__method__cura'))
+        }
+        if (delivery_method == 2) {
+            $(".delivery__method__byclient").addClass('active')
+            setDeliveryActive($('.delivery__method__byclient'))
+        }
+        if (payment_method == 1) {
+            $(".payment__method_cash").addClass("active")
+            setPaymentActive($(".payment__method_cash"))
+        }
+        if (payment_method == 2) {
+            $(".payment__method_beznal").addClass("active")
+            setPaymentActive($(".payment__method_beznal"))
+        }
+    }
 
     $('.delivery__method').click(function() {
+        delivery_method = $(this).attr("value")
+        console.log('start count if need to apply delivery discount')
+        console.log('delivery method is', delivery_method)
+        $.ajax({
+            url: "{% url 'cart:check_set_delivery_discount_ajax' %}",
+            data: {
+                'delivery_method': delivery_method,
+            }, success: function(data) {
+                console.log('response data is', data)
+                window.location.reload()
+            }
+        })
         setDeliveryActive(this)
     })
 
     $(".payment__method").click(function() {
+        payment_method = $(this).attr("value")
+        $.ajax({
+            url: "{% url 'cart:check_set_payment_ajax' %}",
+            data: {
+                'payment_method': payment_method,
+            }, success: function(data) {
+                console.log('response data is', data)
+                window.location.reload()
+            }
+        })
         setPaymentActive(this)
     })
 

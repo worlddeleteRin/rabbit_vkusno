@@ -7,6 +7,7 @@ class Category(models.Model):
     slug = models.CharField(default = '', max_length = 300)
     name = models.CharField(default = '', max_length = 300)
     imgsrc = models.ImageField(upload_to="static/images/products", default = '')
+    display_priority = models.IntegerField(default = 0,)
     def __str__(self):
         return self.name 
 
@@ -21,8 +22,8 @@ class Category(models.Model):
 class Product(models.Model):
     # attributes = models.ManyToManyField(Attributeitem)
     # attributes = models.ManyToManyField(Attribute)
-    category = models.ForeignKey(Category,
-    on_delete=models.CASCADE, default = None,)
+    category = models.ForeignKey(Category,on_delete=models.CASCADE, default = None,
+    null = True, blank = True)
 
     name = models.CharField(default = '', max_length = 300)
     price = models.IntegerField(default = 0)

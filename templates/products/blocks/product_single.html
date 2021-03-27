@@ -52,7 +52,7 @@
             <span class="product__item__addcart
             product__addtocart__global"
             value="{{ product.id }}">
-            {% is_in_cart product.id cart as in_cart %} 
+            {% is_in_cart product cart as in_cart %} 
                 {% if in_cart %}
                 <span class="in__cart__buttonstyle">
                 Удалить с корзины

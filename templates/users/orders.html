@@ -1,12 +1,13 @@
 {% extends '../products/base.html' %}
 {% load static %}
+{% load products_extras %}
 
 {% block content %}
 
     <div class="max_width_1">
     {% include './user_head.html' %}
 
-    {% for order in user.order_set.all  %}
+    {% for order in user_orders  %}
         <a href="{% url 'users:orders'%}{{ order.id }}"
         class="order_item pointer nolink">
             <div class="order_item_block">
@@ -28,9 +29,9 @@
                 </div>
             </div>
             <div class="order_item_block order_cost_first">
-                <span>{{ order.payment }}
+                <span>{{ order.get_payment_display }}
                 <span class="order_cost">
-                    {{ order.get_order_cost }}&nbsp;₽
+                    {{ order.amount }}&nbsp;₽
                 </span>
                 </span>
             </div>
@@ -41,7 +42,8 @@
                 </div>
                 <div class="order_items">
                     {% for item in order.item_set.all %}
-			<img src="{% static 'images/products/' %}{{ item.imgsrc }}" />
+                    {% modify_imgsrc item.product.imgsrc as imgsrc %}
+                        <img src="{{ imgsrc }}" />
                     {% endfor %}
                 </div>
             </div>

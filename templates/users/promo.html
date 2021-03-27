@@ -8,10 +8,35 @@
 
     <div class="nice_title small pd15">
         <span>
-            Промокоды
+            Список использованных промокодов:
         </span>
     </div>
-
+    {% if user.coupon_set.all|length == 0 %}
+        <div>
+            Ваш список использованных промокодов пуст!
+        </div>
+        {% else %}
+        {% for coupon in user.coupon_set.all  %}
+            <div class="promo_item flex">
+                <div>
+                <div class="regular_title">
+                    Промокод:
+                </div>
+                <div class="semibold_title">
+                    {{ coupon.code }}
+                </div>
+                </div>
+                <div class="mglr15">
+                <div class="regular_title">
+                    Тип промокода:
+                </div>
+                <div class="semibold_title">
+                    {{ coupon.get_usage_type_display }}
+                </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
 </div>
 
 

@@ -1,0 +1,90 @@
+<!-- promo block is here -->
+{% if cart.bonus_used %}
+    Вы использовали 
+    <span class="main_color">
+    {{ cart.bonus_used }}
+    </span>
+    бонусов для оплаты заказа
+    <div class="nice_button font_calc pointer noselect
+    bonus_use_button_cancel"
+    style="margin: 13px 0px;">
+        <span>Отменить</span>
+    </div>
+    {% else %}
+        <div class="promo_container">
+        <div>
+        Оплата бонусами 
+        </div>
+        <div>
+        У вас на счету 
+        <span class="main_color">
+        {{ user.bonus }}
+        </span>
+        бонусов 
+        </div>
+        </div>
+<div class="pay_bonus_msg red"></div>
+
+<div class="flex">
+    <input class="input_style1"
+    type="text" 
+    name="bonus_use_input" 
+    placeholder="Введите кол-во бонусов"
+    autocomplete="off">
+    <div class="nice_button font_calc pointer noselect
+    bonus_use_button_submit"
+    style="margin: 13px 0px;">
+        <span>Списать</span>
+    </div>
+</div>
+
+{% endif %}
+
+
+<!-- promo block ends here -->
+
+
+<script>
+    $(".bonus_use_button_submit").click(function() {
+        var bonus_to_use = $("input[name='bonus_use_input']").val()
+        bonus_to_use = parseInt(bonus_to_use)
+        if (bonus_to_use.length < 1) {
+            var msg = 'Введите кол-во бонусов'
+            $('.pay_bonus_msg').html(msg)
+        }
+        else if (isNaN(bonus_to_use)) {
+            var msg = 'Введите число'
+            $('.pay_bonus_msg').html(msg)
+        }
+        else if (bonus_to_use < 1) {
+            var msg = 'Введите положительное число'
+            $('.pay_bonus_msg').html(msg)
+        }
+        else {
+            console.log('ready to process promo');
+            $.ajax({
+                url: "{% url 'cart:process_bonus_use_ajax' %}",
+                data: { 
+                    'bonus_to_use': bonus_to_use,
+                }, success: function(data) {
+                    msg = data['msg']
+                    var status = data['success']
+                    if (status == true) {
+                        window.location.reload()
+                    } else {
+                    $('.pay_bonus_msg').html(msg)
+                    }
+                }
+            })
+        }
+    })
+    $(".bonus_use_button_cancel").click(function() {
+        $.ajax({
+            url: "{% url 'cart:process_bonus_use_cancel_ajax' %}",
+            data: {},
+            success: function(data) {
+                window.location.reload()
+            }
+        })
+    })
+</script>

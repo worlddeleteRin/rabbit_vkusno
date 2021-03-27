@@ -24,6 +24,9 @@ from users.models import *
 from .models import * 
 from users.views import generate_code
 
+# from django.core import serializers
+
+
 
 # Create your views here.
 
@@ -68,7 +71,7 @@ def api_get_allcategories(request):
     if not authorized:
         return return_401()
     else:
-        categories = Category.objects.all()
+        categories = Category.objects.all().order_by('-display_priority')
         categories = list(categories.values())
         status = 'success'
         return JsonResponse({
@@ -219,8 +222,27 @@ def get_user_orders(request):
         orders = user.order_set.all().order_by('-created_at');
         for order in orders:
             order_items = order.item_set.all()
-            order_items = list(order_items.values())
-            date_display = order.created_at.strftime("%Y-%m-%d %H:%M")        
+            # pack orders items
+            order_items_list = []
+            for order_item in order_items:
+                current_item = {
+                    'id': order_item.id,
+                    'quantity': order_item.quantity,
+                    'name': order_item.product.name,
+                    'category_id': order_item.product.category.id,
+                    'price': order_item.product.price,
+                    'sale_price': order_item.product.sale_price,
+                    'imgsrc': order_item.product.imgsrc.name,
+                }
+                order_items_list.append(current_item)
+
+            # order_items = list(order_items.values())
+            print('order items are', order_items_list)
+            date_display = order.created_at.strftime("%Y-%m-%d %H:%M")
+            if (order.coupon):
+                order_coupon = order.coupon.code
+            else:
+                order_coupon = None        
             current_order = {
                 'id': order.id,
                 'created_at': order.created_at,
@@ -231,11 +253,13 @@ def get_user_orders(request):
                 'address': order.address,
                 'payment': order.payment,
                 'bonus_gained': order.bonus_gained,
-                'coupon': order.coupon,
+                'coupon': order_coupon,
                 'status': order.status,
                 'status_display': order.get_status_display(),
-                'order_cost': order.get_order_cost(),
-                'order_items': order_items,
+                # 'order_cost': order.get_order_cost(),
+                'order_cost': order.amount,
+                'order_items': order_items_list,
+                'purchase_amount': order.amount,
             }
             response_orders.append(current_order)
         return JsonResponse({
@@ -353,6 +377,8 @@ def create_order_not_auth(request):
 
         cart_items = json.loads(request.body)['cart_items']
         purchase_amount = json.loads(request.body)['purchase_amount']
+        delivery_discount_use = json.loads(request.body)['delivery_discount_use']
+
         if int(delivery_method) == 1:
             delivery = 'Доставка'
         else:
@@ -370,18 +396,14 @@ def create_order_not_auth(request):
             delivery = delivery,
             address = order_address,
             payment = payment,
+            delivery_discount_use = delivery_discount_use,
         )
         new_order.save()
         for item in cart_items:
             product = Product.objects.get(id = item['id'])
             new_item = Item(
-                pr_id = product.id,
-                name = product.name,
-                price = item['price'],
-                sale_price = product.sale_price,
-                category = product.category,
+                product = product,
                 quantity = item['quantity'],
-                imgsrc = product.imgsrc,
             )
             new_item.save()
             new_order.item_set.add(new_item)
@@ -408,6 +430,12 @@ def create_order_auth(request):
 
         cart_items = json.loads(request.body)['cart_items']
         purchase_amount = json.loads(request.body)['purchase_amount']
+        promo_used = json.loads(request.body)['promo_used']
+        delivery_discount_use = json.loads(request.body)['delivery_discount_use']
+        if not promo_used:
+            promo_used = None
+        else:
+            promo_used = Coupon.objects.get(id = promo_used['id'])
 
         # get current user
         current_user = User.objects.get(id = user_id)
@@ -423,7 +451,7 @@ def create_order_auth(request):
         else:
             payment = 'Картой курьеру'
 
-        bonus_gained = bonus_gained = calc_bonus_gained(current_user, purchase_amount)
+        bonus_gained = calc_bonus_gained(current_user, purchase_amount)
 
         # start creating an order
         new_order = Order(
@@ -435,18 +463,15 @@ def create_order_auth(request):
             address = address,
             payment = payment,
             bonus_gained = bonus_gained,
+            coupon = promo_used,
+            delivery_discount_use = delivery_discount_use,
         )
         new_order.save()
         for item in cart_items:
             product = Product.objects.get(id = item['id'])
             new_item = Item(
-                pr_id = product.id,
-                name = product.name,
-                price = item['price'],
-                sale_price = product.sale_price,
-                category = product.category,
+                product = product,
                 quantity = item['quantity'],
-                imgsrc = product.imgsrc,
             )
             new_item.save()
             new_order.item_set.add(new_item)
@@ -458,3 +483,56 @@ def create_order_auth(request):
             'order_created': True,
         }, status = 200)
 
+def check_promo(request):
+    print('got check promo request')
+    authorized = api_authorize(request)
+    if not authorized:
+        return return_401()
+    else:
+        status = 'success'
+        promo_code = request.GET['promo_code']
+        promo_exist = Coupon.objects.filter(
+            code = promo_code
+        ).exists()
+        if (promo_exist):
+            promo = Coupon.objects.get(
+                code = promo_code
+            )
+            promo_categories = list(promo.categories.all().values())
+            promo_products = list(promo.products.all().values())
+            response_promo = {
+                'id': promo.id,
+                'code': promo.code,
+                'discount': promo.discount,
+                'valid_from': promo.valid_from,
+                'valid_to': promo.valid_to,
+                'usage_type': promo.usage_type,
+                'active': promo.active,
+                'from_amount': promo.from_amount,
+                'promo_categories': promo_categories,
+                'promo_products': promo_products,
+            }
+            return JsonResponse({
+            'promo_status': True,
+            'promo': response_promo,
+            }, status = 200)
+        else:
+            return JsonResponse({
+            'promo_status': False,
+            'msg': 'Введенный промокод не найден',
+            }, status = 200)
+
+
+def get_critical_info(request):
+    authorized = api_authorize(request)
+    if not authorized:
+        return return_401()
+    else:
+        status = 'success'
+        return JsonResponse({
+        'status': status,
+        'delivery_byclient_discount': DELIVERY_BYCLIENT_DISCOUNT,
+        'delivery_byclient_address': DELIVERY_BYCLIENT_ADDRESS,
+        'delivery_phone': DELIVERY_PHONE,
+        'delivery_address_map': DELIVERY_ADDRESS_MAP,
+        }, status = 200)

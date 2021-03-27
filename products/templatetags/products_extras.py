@@ -8,11 +8,11 @@ register = template.Library()
 
 
 @register.simple_tag
-def is_in_cart(pr_id, cart):
+def is_in_cart(product, cart):
     items = cart.item_set.all()
     exist = items.filter(
         cart = cart,
-        pr_id = pr_id,
+        product = product,
     ).exists()
     return exist
     

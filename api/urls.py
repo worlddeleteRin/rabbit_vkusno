@@ -23,4 +23,6 @@ urlpatterns = [
     path('change_user_password', views.change_user_password, name='change_user_password'),
     path('create_order_not_auth', csrf_exempt(views.create_order_not_auth), name='create_order_not_auth'),
     path('create_order_auth', csrf_exempt(views.create_order_auth), name='create_order_auth'),
+    path('check_promo', views.check_promo, name='check_promo'),
+    path('get_critical_info', views.get_critical_info, name='get_critical_info'),
 ]

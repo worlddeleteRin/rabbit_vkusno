@@ -23,11 +23,20 @@
 @import './css/added_dialog.scss';
 
 
+
+.promo_item {
+}
+.semibold_title {
+    font-family: $main-medium;
+}
 .regular {
     font-family: $main-font;
 }
 .grey {
     color: grey;
+}
+.red {
+    color: red;
 }
 .medium {
     font-family: $main-medium;
@@ -40,6 +49,12 @@
 }
 .mg15 {
     padding: 15 0;
+}
+.mglr10 {
+    margin: 0 10;
+}
+.mglr15 {
+    margin: 0 15;
 }
 .main_color {
     color: $main-color;
@@ -709,6 +724,7 @@ input[type="radio"]:checked:after {
 }
 .order_item_single_img {
     img {
+        object-fit: contain;
         width: 80px;
         height: 53px;
     }

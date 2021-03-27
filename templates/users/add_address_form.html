@@ -16,8 +16,7 @@ id="add_address_form">
             type="text"
             placeholder="Город"
             name="city"
-            value="Симферополь"
-            disabled="true"
+            value=""
             autocomplete="off"> <br>
             <input 
             type="text"
@@ -79,6 +78,7 @@ id="add_address_form">
         msg = ''
         if (city.length < 1) {
             success = false
+            msg = 'Укажите название города'
         }
         else if (street.length < 1) {
             success = false

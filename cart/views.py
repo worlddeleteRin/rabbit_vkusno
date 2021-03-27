@@ -76,14 +76,13 @@ def add_item_ajax(request):
     pr = Product.objects.get(
         id = pr_id,
     )
-    product_name = pr.name
     if (Item.objects.filter(
+        product = pr,
         cart = cart,
-        pr_id = pr.id,
     ).exists()):
         item = Item.objects.get(
+           product = pr,
            cart = cart,
-            pr_id = pr.id, 
         )
         item.delete()
         in_cart = 'no'
@@ -95,13 +94,8 @@ def add_item_ajax(request):
         # item.save()
     else:
         item = Item(
+            product = pr,
             cart = cart,
-            pr_id = pr.id,
-            name = pr.name,
-            price = pr.price,
-            sale_price = pr.sale_price,
-            imgsrc = pr.imgsrc,
-            category = pr.category
         )
         item.save()
         in_cart = 'yes'
@@ -109,7 +103,7 @@ def add_item_ajax(request):
     return JsonResponse({
         'is_new': is_new,
         'in_cart': in_cart,
-        'product_name': product_name
+        'product_name': pr.name,
     }, status = 200 )
 
 def delete_from_cart_ajax(request):
@@ -119,7 +113,8 @@ def delete_from_cart_ajax(request):
         cart = cart,
         id = item_id
     )
-    cart.item_set.remove(item)
+    item.delete()
+    # cart.item_set.remove(item)
     return JsonResponse({
         'deleted': 'yes'
     }, status = 200)
@@ -187,7 +182,7 @@ def add_quantity_ajax(request):
         item_id = request.GET['item_id']
         item = Item.objects.get(
             cart = cart,
-            pr_id = item_id,
+            product__id = item_id,
         )
     except:
         item_id = request.GET['item_id']
@@ -196,9 +191,6 @@ def add_quantity_ajax(request):
         id = item_id,
         )
 
-    
-    
-    
     item.quantity += 1
     item.save()
 
@@ -229,11 +221,11 @@ def check_in_cart_ajax(request):
     in_cart = ''
     if (Item.objects.filter(
         cart = cart,
-        pr_id = item_id).exists()):
+        product__id = item_id).exists()):
         in_cart = 'yes'
         current_item = Item.objects.get(
             cart = cart,
-            pr_id = item_id
+            product__id = item_id
         )
         return JsonResponse({
             'in_cart': in_cart,
@@ -259,6 +251,9 @@ def create_order_ajax(request):
     cart = get_or_create_cart(request)
     cart_total = cart.items_in_cart()
     purchase_amount = cart.get_total()
+    coupon = cart.coupon
+    bonus_used = cart.bonus_used
+    delivery_discount_use = cart.delivery_discount_use
     # name = urllib.parse.unquote(request.GET['name'])
     # phone = urllib.parse.unquote(request.GET['phone'])
     # delivery = urllib.parse.unquote(request.GET['delivery'])
@@ -274,6 +269,11 @@ def create_order_ajax(request):
     is_auth = is_authorized(request)
     if (is_auth):
         user = get_user(request)
+        if bonus_used:
+            user.bonus -= bonus_used
+            user.save()
+        if coupon:
+            coupon.users.add(user)
         if delivery == 'Самовывоз':
             address =  'Самовывоз'
             pass
@@ -288,7 +288,6 @@ def create_order_ajax(request):
         bonus_gained = 0
     
 
-
     new_order = Order(
         user = user,
         name = name,
@@ -297,8 +296,14 @@ def create_order_ajax(request):
         address = address,
         payment = payment,
         bonus_gained = bonus_gained,
+        bonus_used = bonus_used,
+        amount = purchase_amount,
+        coupon = coupon,
+        delivery_discount_use = delivery_discount_use,
     )
     new_order.save()
+    cart.coupon = None
+    cart.bonus_used = None
 
     # add bonus gained to user and save the user
     # if (is_auth):
@@ -308,17 +313,18 @@ def create_order_ajax(request):
 
     cart_items_mail = []
     order_price_mail = 0
-
+    cart.save()
     for item in cart.item_set.all():
         new_order.item_set.add(item)
         cart.item_set.remove(item)
         if item.has_sale():
-            price = item.sale_price
+            price = item.product.sale_price
         else:
-            price = item.price
+            price = item.product.price
         order_price_mail += price
-        cart_items_mail.append([item.name, item.quantity, price])
+        cart_items_mail.append([item.product.name, item.quantity, price])
     all_items = new_order.item_set.all()
+    new_order.save()
     # try:
     #     email_context = {
     #         'name': name,
@@ -406,3 +412,70 @@ def remove_promo_ajax(request):
         'success': success,
         'msg': msg,
     }, status = 200)
+
+def process_bonus_use_ajax(request):
+    bonus_to_use = int(request.GET['bonus_to_use'])
+    user = get_user(request)
+    cart = get_or_create_cart(request)
+    if not user:
+        return JsonResponse({
+            'success': False,
+            'msg': 'Пользователь не авторизован',
+        }, status = 200)
+    if user.bonus < bonus_to_use:
+        return JsonResponse({
+            'success': False,
+            'msg': 'На вашем аккаунте недостаточно бонусов'
+        }, status = 200)
+    cart_total = cart.get_total()
+    print('cart total is', cart_total)
+    can_pay_with_bonus = int((cart_total * CAN_PAY_WITH_BONUS_PERCENT) / 100)
+    print(can_pay_with_bonus)
+    if bonus_to_use > can_pay_with_bonus:
+        return JsonResponse({
+            'success': False,
+            'msg': 'Бонусами можно оплатить не больше {}% от суммы заказа! В данном заказе это {} бонусов'.format(CAN_PAY_WITH_BONUS_PERCENT, can_pay_with_bonus),
+        }, status = 200)
+    else:
+        # need to add bonus
+        cart.bonus_used = bonus_to_use
+        cart.save()
+        return JsonResponse({
+            'success': True,
+            'msg': 'Бонусы использованы'
+        }, status = 200)
+        
+def process_bonus_use_cancel_ajax(request):
+    cart = get_or_create_cart(request)
+    cart.bonus_used = None
+    cart.save()
+    return JsonResponse({
+        'success': True,
+    }, status = 200)
+
+def check_set_delivery_discount_ajax(request):
+    cart = get_or_create_cart(request)
+    delivery_method = request.GET['delivery_method']
+    if delivery_method == 'курьер':
+        cart.delivery_method = 1
+        cart.delivery_discount_use = False
+    elif delivery_method == 'самовывоз':
+        cart.delivery_method = 2
+        cart.check_set_delivery_discount()
+    cart.save()
+    return JsonResponse({
+        'success': True,
+    }, status = 200)
+    
+def check_set_payment_ajax(request):
+    cart = get_or_create_cart(request)
+    payment_method = request.GET['payment_method']
+    if payment_method == 'наличные':
+        cart.payment_method = 1
+    elif payment_method == 'безнал':
+        cart.payment_method = 2
+    cart.save()
+    return JsonResponse({
+        'success': True,
+    }, status = 200)
+    
