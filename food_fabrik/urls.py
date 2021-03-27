@@ -22,7 +22,6 @@ urlpatterns = [
     path('', include('products.urls')),
     path('api/', include('api.urls')),
     path('cart/', include('cart.urls')),
-    path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path('admin/', admin.site.urls),
     path('profile/', include('users.urls')),
 ] 
