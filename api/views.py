@@ -86,7 +86,7 @@ def get_stocks(request):
     if not authorized:
         return return_401()
     else:
-        stocks = Stock.objects.all()
+        stocks = Stock.objects.all().order_by('-display_priority')
         stocks = list(stocks.values())
         status = 'success'
         return JsonResponse({

@@ -92,7 +92,7 @@ def category(request, cat_id):
 def stock(request):
     session_key = get_session_key(request)
     cart = get_or_create_cart(request)
-    stocks = Stock.objects.all()
+    stocks = Stock.objects.all().order_by('-display_priority')
     return render(request, 'products/stock.html', {
         'cart': cart,
         'stocks': stocks,

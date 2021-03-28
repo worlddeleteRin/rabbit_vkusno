@@ -70,6 +70,7 @@ class Stock(models.Model):
     name = models.CharField(default = '', max_length = 300)
     description = models.CharField(default = '', max_length = 2000)
     imgsrc = models.ImageField(upload_to="static/images/products")
+    display_priority = models.IntegerField(default = 0,)
 
     def __str__(self):
         return self.name
