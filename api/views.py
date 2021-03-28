@@ -8,6 +8,7 @@ import json
 
 from django.core.files.storage import default_storage
 from food_fabrik.settings import * 
+from food_fabrik.critical_variables import * 
 
 from django.core.mail import send_mail
 from django.conf import settings
@@ -23,6 +24,7 @@ from users.models import *
 
 from .models import * 
 from users.views import generate_code
+
 
 # from django.core import serializers
 

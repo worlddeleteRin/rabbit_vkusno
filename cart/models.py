@@ -4,7 +4,7 @@ from products.models import Product, Category
 from users.models import get_user
 from django.http import JsonResponse
 from django.contrib.humanize.templatetags.humanize import naturalday, naturaltime
-from food_fabrik.settings import DELIVERY_BYCLIENT_DISCOUNT
+from food_fabrik.critical_variables import * 
 import time
 
 # Create your models here.
