@@ -1,0 +1,42 @@
+@import './vars.scss';
+
+
+.products__slider__wrapper {
+    // border: 4px solid red;
+    position: relative;
+    max-height: 440px;
+}
+.products__slider__main {
+    height: 430px;
+    // text-align: center;
+    display: flex;
+    // border: 4px solid green;
+    // margin: 5px 50px;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+
+.prev_pr {
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    transform: scale(1.3);
+}
+.next_pr {
+    cursor: pointer;
+    right: 0;
+    position: absolute;
+    top: 50%;
+    transform: scale(1.3);
+}
+
+.main_slider_arrow2 {
+    color: $main-color;
+}
+
+
+

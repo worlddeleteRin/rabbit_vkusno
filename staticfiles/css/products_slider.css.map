@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "products_slider.scss",
+        "vars.scss"
+    ],
+    "names": [],
+    "file": "products_slider.css"
+}

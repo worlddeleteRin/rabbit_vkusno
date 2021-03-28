@@ -1,0 +1,39 @@
+
+.stock__item__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    min-height: 340px;
+}
+
+
+@import './vars.scss';
+
+.stock__item__container {
+    // border: 2px solid red;
+}
+
+.stock__item__img {
+    width: 100%;
+    max-height: 400px;
+    position: relative;
+    text-align: center;
+    img {
+        // border: 2px solid green;
+        max-height: 400px;
+        max-width: 90%;
+        border-radius: 7px;
+        object-fit: contain;
+    }
+}
+.stock__item__desc {
+    // border: 2px solid red;
+    margin: 20 0;
+    text-align: center;
+    span {
+        font-size: 18px;
+    }
+}

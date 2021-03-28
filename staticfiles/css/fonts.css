@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "gpro-text-semilight";
+  src: url("./fonts/GTEestiProText-Light.ttf");
+}
+
+@font-face {
+  font-family: "gpro-text-light";
+  src: url("./fonts/GTEestiProDisplay-Light.ttf");
+}
+
+@font-face {
+  font-family: "gpro-text-regular";
+  src: url("./fonts/GTEestiProText-Regular.ttf");
+}
+
+@font-face {
+  font-family: "gpro-text-medium";
+  src: url("./fonts/GTEestiProDisplay-Medium.ttf");
+}
+
+@font-face {
+  font-family: "gpro-text-bold";
+  src: url("./fonts/GTEestiProDisplay-Bold.ttf");
+}
