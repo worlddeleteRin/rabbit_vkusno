@@ -266,6 +266,11 @@ class Item(models.Model):
 
     quantity = models.IntegerField(default = 1)
 
+    def __str__(self):
+        if self.product:
+            return self.product.name
+        return self.id
+
     def get_price(self):
         item_price = self.product_get_price() * self.quantity
         if self.cart:
@@ -317,8 +322,6 @@ class Item(models.Model):
             return self.product.sale_price
         else:
             return self.product.price
-    def __str__(self):
-        return self.product.name 
 
     def discount_perc(self):
             return int((self.product.sale_price / self.product.price) * 100)

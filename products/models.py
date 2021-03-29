@@ -34,7 +34,7 @@ class Product(models.Model):
     imgsrc = models.ImageField(upload_to="static/images/products", default = '')
     display_priority = models.IntegerField(default = 0)
     def __str__(self):
-        return self.id, self.name 
+        return self.name
 
 
 

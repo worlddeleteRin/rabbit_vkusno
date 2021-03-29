@@ -15,7 +15,7 @@ class OrderAdmin(admin.ModelAdmin):
   # ]  
 
   inlines = [ItemInline]
-  list_display = ['user', 'amount']
+#   list_display = ['user', 'amount']
 
   def get_form(self, request, obj=None, change=False, **kwargs):
         form = super().get_form(request, obj, change, **kwargs)
