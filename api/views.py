@@ -60,7 +60,7 @@ def api_get_allproducts(request):
     if not authorized:
         return return_401()
     else:
-        products = Product.objects.all()
+        products = Product.objects.all().order_by('-price').order_by('display_priority')
         products = list(products.values())
         status = 'success'
         return JsonResponse({
@@ -73,7 +73,7 @@ def api_get_allcategories(request):
     if not authorized:
         return return_401()
     else:
-        categories = Category.objects.all().order_by('-display_priority')
+        categories = Category.objects.all().order_by('display_priority')
         categories = list(categories.values())
         status = 'success'
         return JsonResponse({

@@ -27,7 +27,8 @@ def create_products():
             cat = Category.objects.get_or_create(
                 slug = cat_slug,
                 name = item['category'],
-                imgsrc = 'static/images/products/' + item['category_img']
+                imgsrc = 'static/images/products/' + item['category_img'].strip(),
+		display_priority = item['category_priority']
             )[0]
         else:
             cat = Category.objects.get(slug = cat_slug)
@@ -43,7 +44,8 @@ def create_products():
             sale_price = sale_price,
             ves = item['ves'],
             description = item['description'],
-            imgsrc = 'static/images/products/' + item['imgsrc'],
+            imgsrc = 'static/images/products/' + item['imgsrc'].strip(),
+	    display_priority = item['display_priority']
         )
         product.save()
 

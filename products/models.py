@@ -32,8 +32,9 @@ class Product(models.Model):
     description = models.CharField(default = '', max_length = 2000)
     # imgsrc = models.ImageField(upload_to='static/images', blank = True, null = True)
     imgsrc = models.ImageField(upload_to="static/images/products", default = '')
+    display_priority = models.IntegerField(default = 0)
     def __str__(self):
-        return self.name 
+        return self.id, self.name 
 
 
 
