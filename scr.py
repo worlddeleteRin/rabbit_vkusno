@@ -10,7 +10,7 @@ django.setup()
 
 from products.models import * 
 
-PRODUCTS_PATH = '/Users/noname/work/fabrika_edi/main_project/goods/goods_main.xlsx'
+PRODUCTS_PATH = '/Users/noname/work/fabrika_edi/main_project/goods/goods_main3.xlsx'
 
 
 def create_products():

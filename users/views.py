@@ -88,8 +88,11 @@ def orders(request):
         user = get_user(request)
     else:
         user = None
+    if user == None:
+        login_out_user(request)
+        return redirect(reverse('users:login'))
     template = 'users/orders.html'
-    user_orders = user.order_set.all()
+    user_orders = user.order_set.all().order_by('-created_at')
     context = {
         'cart': cart,
         'request': request,

@@ -7,15 +7,33 @@ from django.http.response import HttpResponseRedirect
 
 class ItemInline(admin.TabularInline):
     model = Item
+    fields = [
+      ('product', 'quantity'),
+    ]
 
 class OrderAdmin(admin.ModelAdmin):
   change_form_template = 'admin/change_form.html'
-  # fieldsets = [
-  #     ('Покупатель', {'fields': ['name', 'phone',]}),
-  # ]  
-
   inlines = [ItemInline]
-#   list_display = ['user', 'amount']
+  fieldsets = (
+      ('Детали заказа', {'fields': 
+      [
+        ('name' , 'phone', 'address',), 
+        ('delivery', 'payment'),
+        'delivery_discount_use',
+        'coupon',
+        'status', 
+        ('bonus_gained', 'user_append_bonus',),
+        'bonus_used', 
+        'amount', 
+      ]}),
+      ('Покупатель', {'fields': ['user']}),
+  )
+
+  list_display = ['user_info', 'created_at', 'status', 'amount']
+
+  def user_info(self, obj):
+        current_user = obj.user
+        return current_user.name + ', ' + current_user.phone
 
   def get_form(self, request, obj=None, change=False, **kwargs):
         form = super().get_form(request, obj, change, **kwargs)
@@ -28,7 +46,7 @@ class OrderAdmin(admin.ModelAdmin):
         form.base_fields['payment'].label = 'Способ оплаты'
         form.base_fields['bonus_gained'].label = 'Клиент получит бонусов с заказа'
         form.base_fields['bonus_used'].label = 'Оплачено бонусами'
-        form.base_fields['coupon'].label = 'Использовался промокод'
+        form.base_fields['coupon'].label = 'Промокод'
         form.base_fields['status'].label = 'Статус заказа'
         form.base_fields['delivery_discount_use'].label = 'Использовать скидку на доставку'
         form.base_fields['user_append_bonus'].label = 'Начислить бонусы клиенту (по завершению заказа)'

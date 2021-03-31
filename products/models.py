@@ -34,10 +34,14 @@ class Product(models.Model):
     imgsrc = models.ImageField(upload_to="static/images/products", default = '')
     display_priority = models.IntegerField(default = 0)
     def __str__(self):
-        return self.name
+        return self.name + ' ' + str(self.get_price()) + ' ₽'
 
 
-
+    def get_price(self):
+        if self.sale_price > 0:
+            return self.sale_price
+        else:
+            return self.price
     def discount_perc(self):
         return int(((self.price - self.sale_price) / self.price) * 100)
     def discount_val(self):
