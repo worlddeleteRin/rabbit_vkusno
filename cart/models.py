@@ -196,6 +196,7 @@ class Order(models.Model):
         ('cash','Наличными'),
     ]
 
+
     user = models.ForeignKey(User, on_delete = models.SET_NULL,
     default = None, blank = True, null = True)
     created_at = models.DateTimeField(auto_now_add = True) 

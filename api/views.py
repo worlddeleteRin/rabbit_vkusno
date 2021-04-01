@@ -143,16 +143,12 @@ def register_user_request(request):
         user_phone = request.GET['user_phone']
         user_password = request.GET['user_password']
 
-        print('user name: ', user_name, '\n')
-        print('user user_phone: ', user_phone, '\n')
-        print('user_password : ', user_password, '\n')
 
         sms_code = generate_code()
 
         sms_send = True
-        print('phone is ', user_phone)
+        # print('phone is ', user_phone)
         twilio_response = twilio_send_sms(sms_code, user_phone)
-        print(twilio_response)
 
         return JsonResponse({
             'status': status,
@@ -170,9 +166,9 @@ def register_user_finish(request):
         user_phone = request.GET['user_phone']
         user_password = request.GET['user_password']
 
-        print('user name: ', user_name, '\n')
-        print('user user_phone: ', user_phone, '\n')
-        print('user_password : ', user_password, '\n')
+        # print('user name: ', user_name, '\n')
+        # print('user user_phone: ', user_phone, '\n')
+        # print('user_password : ', user_password, '\n')
 
         user = User(
             name = user_name,
@@ -209,7 +205,6 @@ def get_user_info(request):
         }, status = 200)
 
 def get_user_orders(request):
-    print('get user orders request get')
     authorized = api_authorize(request)
     if not authorized:
         return return_401()
@@ -239,7 +234,7 @@ def get_user_orders(request):
                 order_items_list.append(current_item)
 
             # order_items = list(order_items.values())
-            print('order items are', order_items_list)
+            # print('order items are', order_items_list)
             date_display = order.created_at.strftime("%Y-%m-%d %H:%M")
             if (order.coupon):
                 order_coupon = order.coupon.code
@@ -251,9 +246,9 @@ def get_user_orders(request):
                 'date_display': date_display,
                 'name': order.name,
                 'phone': order.phone,
-                'delivery': order.delivery,
+                'delivery': order.get_delivery_display(),
                 'address': order.address,
-                'payment': order.payment,
+                'payment': order.get_payment_display(),
                 'bonus_gained': order.bonus_gained,
                 'coupon': order_coupon,
                 'status': order.status,
@@ -382,12 +377,16 @@ def create_order_not_auth(request):
         delivery_discount_use = json.loads(request.body)['delivery_discount_use']
 
         if int(delivery_method) == 1:
+            delivery_method_display = 'courier'
             delivery = 'Доставка'
         else:
+            delivery_method_display = 'byclient'
             delivery = 'Самовывоз'
         if int(payment_method) == 1:
+            payment_method_display = 'cash'
             payment = 'Наличные'
         else:
+            payment_method_display = 'cart'
             payment = 'Картой курьеру'
 
         # start creating an order
@@ -395,9 +394,9 @@ def create_order_not_auth(request):
             amount = purchase_amount,
             name = user_name,
             phone = user_phone,
-            delivery = delivery,
+            delivery = delivery_method_display,
             address = order_address,
-            payment = payment,
+            payment = payment_method_display,
             delivery_discount_use = delivery_discount_use,
         )
         new_order.save()
@@ -444,13 +443,17 @@ def create_order_auth(request):
 
         if int(delivery_method) == 1:
             delivery = 'Доставка'
+            delivery_method_display = 'courier'
             address = Address.objects.get(id = order_address_id).get_full()
         else:
+            delivery_method_display = 'byclient'
             delivery = 'Самовывоз'
             address = ''
         if int(payment_method) == 1:
+            payment_method_display = 'cash'
             payment = 'Наличные'
         else:
+            payment_method_display = 'cart'
             payment = 'Картой курьеру'
 
         bonus_gained = calc_bonus_gained(current_user, purchase_amount)
@@ -461,9 +464,9 @@ def create_order_auth(request):
             amount = purchase_amount,
             name = current_user.name,
             phone = current_user.phone,
-            delivery = delivery,
+            delivery = delivery_method_display,
             address = address,
-            payment = payment,
+            payment = payment_method_display,
             bonus_gained = bonus_gained,
             coupon = promo_used,
             delivery_discount_use = delivery_discount_use,
@@ -486,7 +489,6 @@ def create_order_auth(request):
         }, status = 200)
 
 def check_promo(request):
-    print('got check promo request')
     authorized = api_authorize(request)
     if not authorized:
         return return_401()
