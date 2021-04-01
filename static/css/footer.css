@@ -1,5 +1,5 @@
 .main__footer {
-  background-color: #fa5523;
+  background-color: #343439;
   margin-top: 20px;
 }
 
@@ -18,19 +18,16 @@
   display: block;
   margin: 0 10 30 0;
 }
-
 .footer__container__block__title {
   margin: 20 0;
   text-transform: uppercase;
   font-size: 22px;
   font-family: "gpro-text-light";
 }
-
 .footer__container__block__menu {
   display: flex;
   flex-direction: column;
 }
-
 .footer__container__block__menu a {
   text-transform: uppercase;
   text-decoration: none;
@@ -39,42 +36,35 @@
   font-weight: 1200;
   margin: 5 0;
 }
-
 .footer__container__block__info {
   display: flex;
   margin: 5 0;
 }
-
 .footer__container__block__info i {
   color: white;
   font-size: 20px;
 }
-
 .footer__container__block__info__tel {
   text-decoration: none;
   color: white;
   font-size: 22px;
   margin: 0 10;
 }
-
 .footer__container__block__info span {
   color: white;
   font-size: 18px;
   margin: 0 10;
   font-family: "gpro-text-light";
 }
-
 .footer__container__block__info__mail {
   color: white;
   text-decoration: none;
   margin: 0 10;
   font-family: "gpro-text-light";
 }
-
 .footer__container__block__socials {
   text-align: center;
 }
-
 .footer__container__block__social {
   color: white;
   border-radius: 50px;
@@ -92,6 +82,7 @@
   .footer__container {
     justify-content: center;
   }
+
   .footer__container__block__title {
     text-align: center;
   }

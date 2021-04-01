@@ -23,7 +23,9 @@
 @import './css/added_dialog.scss';
 
 
-
+.mgb10 {
+    margin-bottom: 10;
+}
 .promo_item {
 }
 .semibold_title {
@@ -728,4 +730,8 @@ input[type="radio"]:checked:after {
         width: 80px;
         height: 53px;
     }
+}
+
+.logoimg {
+    background: white;
 }

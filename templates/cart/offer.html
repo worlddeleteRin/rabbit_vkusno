@@ -247,6 +247,32 @@
 <script>
     $(".main__site__wrapper__main").addClass("bg1")
     check_set_delivery_payment()
+    check_set_user_info()
+
+    function check_set_user_info() {
+        var user_name = "{{ cart.current_name }}"
+        var user_phone = "{{ cart.current_phone }}"
+        // if (user_name) {
+        $("input[name='person_name']").attr('value', user_name)
+        // }
+        // if (user_phone) {
+        $("input[name='person_phone']").attr('value', user_phone)
+        // }
+    }
+    function cart_remember_user_info() {
+        var user_name = $("input[name='person_name']").val()
+        var user_phone = $("input[name='person_phone']").val()
+        console.log(user_name, user_phone);
+        $.ajax({
+            url: "{% url 'cart:remember_user_info_ajax' %}",
+            data: {
+                'user_name': user_name,
+                'user_phone': user_phone,
+            }, success: function() {
+                // need to do something?
+            }
+        })
+    }
     function check_set_delivery_payment() {
         var delivery_method = "{{ cart.delivery_method }}"
         var payment_method = "{{ cart.payment_method }}"
@@ -280,6 +306,7 @@
                 'delivery_method': delivery_method,
             }, success: function(data) {
                 console.log('response data is', data)
+                cart_remember_user_info()
                 window.location.reload()
             }
         })
@@ -294,6 +321,7 @@
                 'payment_method': payment_method,
             }, success: function(data) {
                 console.log('response data is', data)
+                cart_remember_user_info()
                 window.location.reload()
             }
         })

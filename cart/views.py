@@ -479,3 +479,14 @@ def check_set_payment_ajax(request):
         'success': True,
     }, status = 200)
     
+def remember_user_info_ajax(request):
+    cart = get_or_create_cart(request)
+    user_name = request.GET['user_name']
+    user_phone = request.GET['user_phone']
+
+    cart.current_name = user_name
+    cart.current_phone = user_phone
+    cart.save()
+    return JsonResponse({
+        'success': True,
+    }, status = 200)

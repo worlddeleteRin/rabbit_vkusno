@@ -22,4 +22,5 @@ urlpatterns = [
     path('process_bonus_use_cancel_ajax', views.process_bonus_use_cancel_ajax, name = 'process_bonus_use_cancel_ajax'), 
     path('check_set_delivery_discount_ajax', views.check_set_delivery_discount_ajax, name = 'check_set_delivery_discount_ajax'), 
     path('check_set_payment_ajax', views.check_set_payment_ajax, name = 'check_set_payment_ajax'), 
+    path('remember_user_info_ajax', views.remember_user_info_ajax, name = 'remember_user_info_ajax'), 
 ]

@@ -126,6 +126,11 @@ class Cart(models.Model):
     delivery_method = models.IntegerField(default = 1)
     payment_method = models.IntegerField(default = 1)
     delivery_discount_use = models.BooleanField(default = False)
+    current_name = models.CharField(default = None, max_length = 200,
+    blank = True, null = True)
+    current_phone = models.CharField(default = None, max_length = 200,
+    blank = True, null = True)
+
     # def __str__(self):
     #     return self.id
     def check_set_delivery_discount(self):
