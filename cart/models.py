@@ -226,6 +226,9 @@ class Order(models.Model):
     )
     delivery_discount_use = models.BooleanField(default = False)
     user_append_bonus = models.BooleanField(default = True)
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
 
     def __str__(self):
         return self.name + ' ' + self.phone

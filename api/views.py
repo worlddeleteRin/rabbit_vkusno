@@ -539,4 +539,5 @@ def get_critical_info(request):
         'delivery_byclient_address': DELIVERY_BYCLIENT_ADDRESS,
         'delivery_phone': DELIVERY_PHONE,
         'delivery_address_map': DELIVERY_ADDRESS_MAP,
+        'delivery_main_info': DELIVERY_MAIN_INFO,
         }, status = 200)
