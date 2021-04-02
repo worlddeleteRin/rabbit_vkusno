@@ -37,7 +37,7 @@ def index(request):
     sale_products = Product.objects.filter(
         sale_price__gte = 1
     )
-    return HttpResponse('Наша доставка еды скоро откроется!')
+    # return HttpResponse('Наша доставка еды скоро откроется!')
     return render(request, 'products/index.html', {
         'categories': categories,
         'products': products,
