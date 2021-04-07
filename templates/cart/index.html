@@ -144,7 +144,6 @@
 
     $(".cart__removequ").click(function() {
         var item_id = $(this).attr("value")
-        //console.log(item_id)
         $.ajax({
             url: "{% url 'cart:remove_quantity_ajax' %}",
             data: {

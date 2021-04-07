@@ -9,18 +9,6 @@
         src="{% static 'images/main_logo2.jpg' %}" alt="">
     </a>
 
-    <!-- <div class="header__second__search">
-        <form
-        class="header__second__search__form">
-            {% csrf_token %}
-            <input type="text" class="input_search"
-            name="search_input"
-            placeholder="Искать">
-            <button class="input_submit">
-                <i class="gg-search"></i>
-            </button>
-        </form>
-    </div> -->
 
 </div>
 
@@ -46,12 +34,6 @@
         </div>
         <div class="header__second__catalog__items">
             <a
-            href="{% url 'products:index' %}#delivery_info_main">
-                Доставка и оплата
-            </a>
-        </div>
-        <div class="header__second__catalog__items">
-            <a
             href="{% url 'products:index' %}#contact_info_main">
                 Контакты
             </a>
@@ -62,8 +44,8 @@
         <div class="main__header__phone__main">
             <i class="fa fa-phone-alt"></i>
             <div class="main__header__phone__main__text">
-                <a href="tel:+79781161415">
-                    +7 (978) 116-14-15
+                <a href="tel:+78611511254">
+                    +7 (861)-151-12-54
                 </a>
             </div>
         </div>
@@ -87,8 +69,8 @@
         <div class="main__header__phone__main">
             <i class="fa fa-phone-alt"></i>
             <div class="main__header__phone__main__text">
-                <a href="tel:+79781161415">
-                    +7 (978) 116-14-15
+                <a href="tel:+78611511254">
+                    +7 (861) 151-12-54
                 </a>
             </div>
         </div>
@@ -98,25 +80,6 @@
             </span>
         </div>
     </div>
-
-   
-
-
-    <!-- start search bar -->
-    <!-- <div class="header__second__search search__big">
-        <form
-        class="header__second__search__form">
-            {% csrf_token %}
-            <input type="text" class="input_search"
-            name="search_input"
-            placeholder="Искать">
-            <button class="input_submit">
-                <i class="gg-search"></i>
-            </button>
-        </form>
-    </div> -->
-    <!-- end search bar -->
-
 
     <div class="header__second__icons">
 
@@ -137,11 +100,6 @@
         href="{% url 'users:index' %}">
             <i class="fa fa-user"></i>
         </a>
-
-        <!-- <a class="header__second__icons__item account__big">
-            <svg height="24" viewBox="0 0 20 20" width="24"><path d="M16.984 14.506V17H3.016v-2.494C4.47 11.794 6.797 10.438 10 10.438s5.531 1.356 6.984 4.068zM10 11.938c-2.528 0-4.295.958-5.484 2.961v.6h10.968v-.6c-1.19-2.003-2.956-2.961-5.484-2.961zm3.686-6.384a3.686 3.686 0 11-7.372 0 3.686 3.686 0 017.372 0zm-1.5 0a2.186 2.186 0 10-4.372 0 2.186 2.186 0 004.372 0z"></path></svg>
-        </a> -->
-
     </div>
 </div>
 
@@ -163,11 +121,6 @@
                 Акции
             </a>
             <a
-            href="{% url 'products:index' %}#delivery_info_main"
-            class="mobile__nav">
-                Доставка и оплата
-            </a>
-            <a
             href="{% url 'products:index' %}#contact_info_main"
             class="mobile__nav">
                 Контакты
@@ -184,12 +137,6 @@
 
 
 <script>
-    // $(".header__second__catalog").click(function() {
-    //     $(".catalog_open").toggleClass("hide")
-    //     $(".catalog_close").toggleClass("show")
-    //     $(".header__second__catalog").toggleClass("opened")
-    //     $(".header__second__catalog__items").toggleClass("opened")
-    // })
     $(".header__second__catalog__mobile").click(function() {
         openMobileMenu()
     })

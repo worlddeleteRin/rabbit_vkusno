@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Доставка еды</title>
+    <title>Вкусная кухня</title>
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
@@ -63,19 +63,15 @@
 
     {% include './blocks/popup_form.html' %}
 
-    {% include './blocks/pr_added_dialog.html' %}
 
     {% include '../users/change_password_form.html' %}
 
     {% include '../users/add_address_form.html' %}
 
-    {% comment %} {% include '../users/change_address_form.html' %} {% endcomment %}
-
     {% include '../users/delete_address_form.html' %}
 
 
-    
-    <!-- <script src="{% static 'slick/slick.js' %}"></script> -->
+
 
     <script src="{% static 'js/owlcarousel/owl.carousel.js' %}"></script>
 
@@ -85,20 +81,6 @@ var sticky = new Waypoint.Sticky({
     element: $('.main__header__block'), // Add in your CSS selector sticky target
     // direction: 'down right',
   })
-
-// window.onscroll = function() {
-// }
-
-// function checkStickyHeader() {
-//   console.log(window.pageYOffset)
-//   if (window.pageYOffset > 500) {
-//     //   $(".main__header__block").addClass("sticky")
-//     //   $(".header__second__logo").addClass("hide")
-//   } else {
-//     //   $(".main__header__block").removeClass("sticky")
-//     //   $(".header__second__logo").removeClass("hide")
-//   }
-// }
 
 $(".add_address_form_button").click(function() {
         if ($(this).hasClass('need_render')) {
@@ -228,7 +210,6 @@ function updateCartTotal() {
                     var in_cart = data['in_cart']
                     var quantity = data['quantity']
                     updateCartTotal()
-                        // changeButtonCart(in_cart, current_item)
                 }
             });
         }

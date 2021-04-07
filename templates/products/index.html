@@ -2,37 +2,7 @@
 
 {% block content %}
 
-   {% comment %} {{ session_key }} {% endcomment %}
-
    {% include './blocks/main__slider.html' %}
-
-   {% comment %} {% include './blocks/banner1.html' %} {% endcomment %}
-
-   {% include './blocks/space20.html' %}
-
-   {% include './blocks/categories.html' %}
-
-      {% comment %} <div class="hot__container">
-      <div class="cart__main__title">
-
-         {% include './blocks/space20.html' %}
-         <div class="nice__title__center2"
-         id="delivery__menu__title">
-            Горячие предложения
-         </div>
-      </div>
-
-      {% include './blocks/space20.html' %}
-      <div class="products__slider__main owl-carousel owl-theme">
-      {% for product in sale_products  %}
-         <div class="margin__auto">
-         {% include './blocks/product_single.html' %}
-         </div>
-      {% endfor %}
-      </div>
-
-   </div> {% endcomment %}
-
 
    {% comment %} {% include './blocks/space20.html' %}  {% endcomment %}
 
@@ -56,16 +26,13 @@
 
    </div>
 
-   {% comment %} {% include './blocks/products_list.html' %} {% endcomment %}
 
    {% include './blocks/space20.html' %}
 
 {% endfor %}
 
 
-      {% include './blocks/delivery_info.html' %}
-
-      {% include './blocks/contacts.html' %}
+   {% include './blocks/contacts.html' %}
 
 
 

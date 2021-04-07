@@ -6,5 +6,4 @@
 /__pycache__
 __pycache__
 */__pycache__
-db.sqlite3
 food_fabrik/settings.py

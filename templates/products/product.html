@@ -31,22 +31,12 @@
                         </span>
                     </div>
                     {% endif %}
-                    <!-- <div class="popular__block__hint">
-                        <span>
-                            Популярный
-                        </span>
-                    </div> -->
                 </div>
                     <div class="product__page__name">
                     <span>
                         {{ product.name }}
                     </span>
                 </div>
-                <!-- <div class="product__main__container__second__find">
-                    <span id="find_block">
-                        Нашли дешевле?
-                    </span>
-                </div> -->
                 <div class="product__main__container__second__priceblock">
                     {% if product.has_sale %}
                     
@@ -71,23 +61,12 @@
                     {% endif %}
                 </div>
                 
-                <!-- <div class="product__sub__item">
-                    <div>
-                    <i class="gg-bell"></i>
-                    <span id="notifprice_block">
-                        Узнать о снижении цены
-                    </span>
-                    </div>
-                </div> -->
                 <div class="product__main__container__second__addcart
                 product__not__in__cart">
                     <span class="product__page__addcart"
                     id="product__addcart__button" value="{{ product.id }}">
                         Добавить в корзину
                     </span>
-                    <!-- <div class="product__page__favorite">
-                        <i class="far fa-heart"></i>
-                    </div> -->
                 </div>
                 <div class="product__main__container__second__addcart
                 product__in__cart">
@@ -112,9 +91,6 @@
                                 +1 шт.
                             </span>
                         </div>
-                    <!-- <div class="product__page__favorite">
-                        <i class="far fa-heart"></i>
-                    </div> -->
                 </div>
 
                 {% if product.description != 'nan' %}
@@ -134,82 +110,6 @@
             </div>
             
     </div>
-
-    
-
-
-
-<!--     
-    <div class="product__page__features">
-        <div class="nice__title1">
-            Характеристики
-        </div>
-        <div class="product__page__features__block">
-            <div class="product__page__features__item">
-                <div class="product__page__features__item__first">
-                    <span>
-                        Гарантия
-                    </span>
-                </div>
-                <div class="product__page__features__item__second">
-                    <span>
-                        1 год
-                    </span>
-                </div>
-            </div>
-            <div class="product__page__features__item">
-                <div class="product__page__features__item__first">
-                    <span>
-                        Материал раковины:
-                    </span>
-                </div>
-                <div class="product__page__features__item__second">
-                    <span>
-                        Керамика
-                    </span>
-                </div>
-            </div>
-            <div class="product__page__features__item">
-                <div class="product__page__features__item__first">
-                    <span>
-                        Какой-то длинный аттрибут
-                    </span>
-                </div>
-                <div class="product__page__features__item__second">
-                    <span>
-                        какое-то длинное значение
-                    </span>
-                </div>
-            </div>
-            <div class="product__page__features__item">
-                <div class="product__page__features__item__first">
-                    <span>
-                        Какой-то длинный аттрибут
-                    </span>
-                </div>
-                <div class="product__page__features__item__second">
-                    <span>
-                        какое-то длинное значение
-                    </span>
-                </div>
-            </div>
-            <div class="product__page__features__item">
-                <div class="product__page__features__item__first">
-                    <span>
-                        Какой-то длинный аттрибут
-                    </span>
-                </div>
-                <div class="product__page__features__item__second">
-                    <span>
-                        какое-то длинное значение
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% include './blocks/popup_price.html' %}
-    {% include './blocks/popup_find_price.html' %} -->
-    
 </div>
 
 
@@ -254,22 +154,11 @@ function checkProductInCart(product_id) {
     $('.product__subimages__item').click(function() {
         $(".product__subimages__item").removeClass("active")
         $(this).addClass("active")
-        //window.alert($(this).attr("src"))
         var current_src = $(this).attr("src")
         $(".product__mainimage__item").attr("src", current_src)
     }) 
 
     $(".product__mainimage__item").click(function() {
-        // var all_images = $(".product__main__container__subimages").children()
-        // console.log(all_images.length)
-        // var dict_images = {}
-        // for(i = 0; i < all_images.length; i++) {
-
-        //     console.log($(all_images[i]).attr("src"))
-        //     current_src = $(all_images[i]).attr("src")
-        //     dict_images.src = current_src
-        // }
-        // console.log(dict_images)
     })
 
    

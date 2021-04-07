@@ -49,36 +49,6 @@
             </div>
         </a>
     {% endfor %}
-{% comment %} 
-    {{ request.session.session_key }}
-
-    {% if authorized %}
-        Вы авторизованы <br>
-        Аккаунт создан: {{ user.created_at }} <br>
-        {{ user.id }}
-        {{ user.phone }}
-        {{ user.password }}
-        {{ user.email }} <br>
-        всего потрачено: {{ user.get_total_spend }} руб. <br>
-        Бонусов на счету: {{ user.get_total_bonus_gained }} руб. <br>
-        Текущий процент кэшбека: {{ user.calc_user_discount }}% <br>
-        {% for order in user.order_set.all  %} 
-            {{ order.id }} {{ order.item_set.all }} {{ order.get_order_cost }} <br>
-            Бонусов с заказа получено: {{ order.bonus_gained }} <br>
-        {% endfor %}
-        <div class="nice_button">
-            <span class="logout_button_submit">
-                Выйти с аккаунта
-            </span>
-        </div>
-        <div class="change_password_button pointer">
-            <i class="fa fa-lock"></i>
-            <span>Изменить пароль</span>
-        </div>
-    {% else %}
-        You are not logged in 
-        {% include './login_form.html' %}
-    {% endif %} {% endcomment %}
 
     </div>
 

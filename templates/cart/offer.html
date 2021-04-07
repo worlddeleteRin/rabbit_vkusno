@@ -40,10 +40,6 @@
                 autocomplete="off"
                 class="cart__input"
                 name="person_phone">
-                <!-- <input type="text"
-                placeholder="Почта"
-                autocomplete="off"
-                class="cart__input"> -->
                 </div>
 
             </div>
@@ -113,7 +109,7 @@
                         Адрес самовывоза:
                     </span>
                 </div>
-                г. Ялта, Кастрополь, Кипарисная улица, 1к15 
+                г. Краснодар, ул. Монтажников, 12.
             </span>
             </div>
 
@@ -201,19 +197,6 @@
             </div>
 
             {% endfor %}
-<!-- 
-        <div class="offer__page__block2__content__item">
-            <div class="offer__page__block2__content__item__first">
-                <span class="your__cart__block__title2">
-                    Баллов за покупку
-                </span>
-            </div>
-            <div class="offer__page__block2__content__item__second">
-                <span class="your__cart__block__value3">
-                    +581
-                </span>
-            </div>
-        </div> -->
             {% if user %}
             {% include './blocks/bonus_use_block.html' %}
             {% endif %}
@@ -252,12 +235,8 @@
     function check_set_user_info() {
         var user_name = "{{ cart.current_name }}"
         var user_phone = "{{ cart.current_phone }}"
-        // if (user_name) {
         $("input[name='person_name']").attr('value', user_name)
-        // }
-        // if (user_phone) {
         $("input[name='person_phone']").attr('value', user_phone)
-        // }
     }
     function cart_remember_user_info() {
         var user_name = $("input[name='person_name']").val()
@@ -269,7 +248,6 @@
                 'user_name': user_name,
                 'user_phone': user_phone,
             }, success: function() {
-                // need to do something?
             }
         })
     }
