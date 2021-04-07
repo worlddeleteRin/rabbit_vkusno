@@ -120,8 +120,9 @@ def callme_mail_ajax(request):
             'Номер телефона: {} '.format(user_phone),
             settings.EMAIL_HOST_USER,
             [
-            'worlddelete0@mail.ru', 
-            'fudfabrik@gmail.com',
+            # 'worlddelete0@mail.ru', 
+            # 'fudfabrik@gmail.com',
+            'fabrika-edi-crimea@mail.ru',
             # '161085ap@mail.ru',
             # 'worlddelete0@yandex.ru',
             ],
