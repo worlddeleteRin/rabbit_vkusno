@@ -179,16 +179,16 @@
 
 .cart__container__products__item__count__main__btn i {
   cursor: pointer;
-  color: #fa5523;
+  color: #0ade54;
   margin: 0 10;
   transition: all 0.2s;
 }
 
 .cart__container__products__item__count__main__btn i:hover {
-  background-color: red;
+  background-color: #44c10f;
   color: white;
   transform: scale(1.1);
-  border: 2px solid red;
+  border: 2px solid #44c10f;
 }
 
 .cart__price__reg1 {
@@ -227,7 +227,7 @@
   cursor: pointer;
   font-size: 14px;
   font-family: "gpro-text-light";
-  color: #fa5523;
+  color: #0ade54;
   margin-top: 10px;
 }
 
@@ -297,14 +297,14 @@
 }
 
 #item_btn_addfavorite span {
-  border: 1px solid #fa5523;
-  color: #fa5523;
+  border: 1px solid #0ade54;
+  color: #0ade54;
   transition: all 0.2s;
 }
 
 #item_btn_addfavorite span:hover {
   color: white;
-  background-color: #fa5523;
+  background-color: #0ade54;
 }
 
 #item_btn_deletefromcart span {

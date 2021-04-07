@@ -89,7 +89,7 @@
   user-select: none;
   cursor: pointer;
   font-family: "gpro-text-light";
-  color: #fa5523;
+  color: #0ade54;
 }
 
 .delivery__block__main {
@@ -112,8 +112,8 @@
 }
 
 .delivery__block__main__card:hover {
-  border: 2px dashed #fa5523;
-  color: #fa5523;
+  border: 2px dashed #0ade54;
+  color: #0ade54;
 }
 
 .delivery__block__main__card span {
@@ -122,7 +122,7 @@
 }
 
 .delivery__method.active {
-  background-color: #fa5523;
+  background-color: #0ade54;
 }
 
 .delivery__method.active span {
@@ -130,7 +130,7 @@
 }
 
 .payment__method.active {
-  background-color: #fa5523;
+  background-color: #0ade54;
 }
 
 .payment__method.active span {

@@ -97,7 +97,7 @@
   width: 100%;
   display: flex;
   cursor: pointer;
-  background-color: #fa5523;
+  background-color: #0ade54;
   height: 60px;
   text-align: center;
   align-items: center;
@@ -109,7 +109,7 @@
 }
 
 .pform__container__form .pform__button:hover {
-  background-color: red;
+  background-color: #44c10f;
 }
 
 .pform__container.hide {

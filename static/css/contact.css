@@ -17,7 +17,7 @@
 }
 
 .contact__container__phone a {
-  color: #fa5523;
+  color: #0ade54;
 }
 
 .check__blocks {
@@ -46,8 +46,8 @@
 }
 
 .check__block.active {
-  border: 1px solid #fa5523;
-  background-color: #fa5523;
+  border: 1px solid #0ade54;
+  background-color: #0ade54;
   color: white;
 }
 

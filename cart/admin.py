@@ -12,7 +12,7 @@ class ItemInline(admin.TabularInline):
     ]
 
 class OrderAdmin(admin.ModelAdmin):
-  change_form_template = 'admin/change_form.html'
+  # change_form_template = 'admin/change_form.html'
   inlines = [ItemInline]
   fieldsets = (
       ('Детали заказа', {'fields': 
@@ -29,11 +29,11 @@ class OrderAdmin(admin.ModelAdmin):
       ('Покупатель', {'fields': ['user']}),
   )
 
-  list_display = ['user_info', 'created_at', 'status', 'amount']
+  list_display = ['created_at', 'status', 'amount']
 
-  def user_info(self, obj):
-        current_user = obj.user
-        return current_user.name + ', ' + current_user.phone
+  # def user_info(self, obj):
+  #       current_user = obj.user
+  #       return current_user.name + ', ' + current_user.phone
 
   def get_form(self, request, obj=None, change=False, **kwargs):
         form = super().get_form(request, obj, change, **kwargs)

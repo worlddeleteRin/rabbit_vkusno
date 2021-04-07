@@ -9,13 +9,13 @@
   user-select: none;
   cursor: pointer;
   border-radius: 3px;
-  background-color: #fa5523;
+  background-color: #0ade54;
   color: white;
   transition: all 0.2s;
 }
 
 .continue__shopping #continue__shopping:hover {
-  background-color: red;
+  background-color: #44c10f;
 }
 
 .favorite__empty {

@@ -118,7 +118,7 @@
 }
 
 .header__second__catalog__items.opened {
-  color: #fa5523;
+  color: #0ade54;
 }
 
 .header__second__search {
@@ -146,7 +146,7 @@
   padding: 10px 20px;
   height: 100%;
   width: 80%;
-  border: 2px solid #fa5523;
+  border: 2px solid #0ade54;
   border-radius: 4px;
   border-end-end-radius: 0px;
   margin-right: -2px;
@@ -164,7 +164,7 @@
   width: 70px;
   min-width: 30px;
   height: 100%;
-  background-color: #fa5523;
+  background-color: #0ade54;
   border: none;
   color: white;
   display: flex;
@@ -178,7 +178,7 @@
 }
 
 .input_submit:hover {
-  background-color: red;
+  background-color: #44c10f;
 }
 
 .header__second__icons {
@@ -193,7 +193,7 @@
 }
 
 .header__second__icons__item svg:hover {
-  color: #fa5523;
+  color: #0ade54;
 }
 
 .main__header__second__mobile__logo {
@@ -205,7 +205,7 @@
   cursor: pointer;
   transition: all 0.2s;
   border-radius: 4px;
-  background-color: #fa5523;
+  background-color: #0ade54;
   color: white;
   display: none;
   margin-left: 15px;
@@ -231,7 +231,7 @@
 .cart__count__info {
   position: absolute;
   color: white;
-  background-color: #fa5523;
+  background-color: #0ade54;
   text-align: center;
   border-radius: 5px;
   padding: 2px 5px;
@@ -272,8 +272,8 @@
 
 .main__header__phone__callme span {
   cursor: pointer;
-  border-bottom: 2px dashed #fa5523;
-  color: #fa5523;
+  border-bottom: 2px dashed #0ade54;
+  color: #0ade54;
 }
 
 .header__basket {
@@ -283,7 +283,7 @@
 }
 
 .header__basket:hover {
-  color: #fa5523;
+  color: #0ade54;
 }
 
 .main__header__phone__mobile {
@@ -311,8 +311,8 @@
 
 .main__header__phone__mobile__callme span {
   cursor: pointer;
-  border-bottom: 2px dashed #fa5523;
-  color: #fa5523;
+  border-bottom: 2px dashed #0ade54;
+  color: #0ade54;
 }
 
 @media (max-width: 1000px) {
@@ -370,7 +370,7 @@
 }
 
 .main__anchor__header {
-  color: #fa5523 !important;
+  color: #0ade54 !important;
   font-family: "gpro-text-medium";
 }
 
@@ -413,7 +413,7 @@
 .header__popub__mobile__close {
   visibility: hidden;
   cursor: pointer;
-  color: #fa5523;
+  color: #0ade54;
   position: fixed;
   right: 40;
   top: -100;
