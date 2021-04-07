@@ -122,7 +122,7 @@ def callme_mail_ajax(request):
             [
             # 'worlddelete0@mail.ru', 
             # 'fudfabrik@gmail.com',
-            'fabrika-edi-crimea@mail.ru',
+            'fabrika-edi@yandex.ru',
             # '161085ap@mail.ru',
             # 'worlddelete0@yandex.ru',
             ],
